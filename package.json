@@ -1,0 +1,30 @@
+{
+  "name": "@blackbaud/stache",
+  "version": "2.0.0-alpha.1",
+  "description": "Angular 2 components for SKY UX Builder SPAs",
+  "author": "Blackbaud, Inc.",
+  "homepage": "https://github.com/blackbaud/stache2",
+  "license": "MIT",
+  "main": "index.js",
+  "engines": {
+    "node": ">=6.9.1"
+  },
+  "scripts": {
+    "skyux": "skyux"
+  },
+  "keywords": [],
+  "dependencies": {
+    "@blackbaud/skyux": "2.0.0-beta.11"
+  },
+  "devDependencies": {
+    "@blackbaud/skyux-builder": "1.0.0-beta.13",
+    "codelyzer": "2.0.0-beta.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blackbaud/stache2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/blackbaud/stache2/issues"
+  }
+}

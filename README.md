@@ -1,2 +1,1 @@
-# stache2
-Angular 2 components for SKY UX Builder SPAs
+# SKY UX Builder Template for Stache sites
