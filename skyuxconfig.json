@@ -1,5 +1,8 @@
 {
   "name": "stache2",
   "mode": "easy",
-  "compileMode": "aot"
+  "compileMode": "aot",
+  "app": {
+    "title": "Stache 2"
+  }
 }
