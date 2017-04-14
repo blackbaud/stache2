@@ -2,6 +2,9 @@
   "name": "stache2",
   "mode": "easy",
   "compileMode": "aot",
+  "plugins": [
+    "@blackbaud/skyux-builder-plugin-stache-code-block"
+  ],
   "app": {
     "title": "Stache 2"
   }
