@@ -18,6 +18,7 @@ jspm_packages
 
 # SKY UX temp directory
 .skyuxtmp
+.skypagestmp
 
 # SKY UX build directory
 dist
