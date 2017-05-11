@@ -2,6 +2,7 @@
 logs
 *.log
 npm-debug.log*
+yarn.lock
 
 # Coverage directory used by tools like istanbul
 coverage
@@ -19,6 +20,7 @@ jspm_packages
 # SKY UX temp directory
 .skyuxtmp
 .skypagestmp
+.srctmp
 
 # SKY UX build directory
 dist

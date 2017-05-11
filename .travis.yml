@@ -17,7 +17,12 @@ addons:
     packages:
       - g++-4.8
 
-before_install:  
+branches:
+  only:
+    - master
+    - /^[0-9]+\.[0-9]+\.[0-9]+.*/
+
+before_install:
   # http://blog.500tech.com/setting-up-travis-ci-to-run-tests-on-latest-google-chrome-version/
   - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
@@ -28,12 +33,17 @@ before_install:
   - sudo dpkg -i google-chrome*.deb
   - npm install -g @blackbaud/skyux-cli
 
-script:
-  - skyux test
+before_script:
+  - chmod +x ./scripts/travis-after-script.sh
+  - chmod +x ./scripts/travis-after-success.sh
 
-branches:
-  only:
-    - master
+after_script:
+  - ./scripts/travis-after-script.sh
+
+after_success:
+  - ./scripts/travis-after-success.sh
+  - cd dist
+  - bash <(curl -s https://blackbaud.github.io/skyux-travis/after-success.sh)
 
 cache:
   directories:
