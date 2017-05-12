@@ -1,15 +1,9 @@
 # SKY UX Builder Template for Stache sites
 
-Build the library:
+[![npm](https://img.shields.io/npm/v/@blackbaud/stache.svg)](https://www.npmjs.com/package/@blackbaud/stache)
+[![status](https://travis-ci.org/blackbaud/stache2.svg?branch=master)](https://travis-ci.org/blackbaud/stache2)
 
 ```
+npm install
 npm run build
-```
-
-Run the library:
-
-- Build the library, then move the contents of **dist/** to **node_modules/@blackbaud/stache**
-
-```
-skyux serve
 ```
