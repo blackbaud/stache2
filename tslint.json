@@ -1,3 +1,6 @@
 {
-  "extends": "@blackbaud/skyux-builder/tslint"
+  "extends": "@blackbaud/skyux-builder/tslint",
+  "rules": {
+    "no-console": [false]
+  }
 }
