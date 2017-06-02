@@ -5,7 +5,9 @@
   "plugins": [
     "@blackbaud/skyux-builder-plugin-auth-email-whitelist",
     "@blackbaud/skyux-builder-plugin-stache-code-block",
-    "@blackbaud/skyux-builder-plugin-stache-include"
+    "@blackbaud/skyux-builder-plugin-stache-include",
+    "@blackbaud/skyux-builder-plugin-stache-route-metadata/collector",
+    "@blackbaud/skyux-builder-plugin-stache-route-metadata/generator"
   ],
   "app": {
     "title": "Stache 2"

@@ -34,6 +34,7 @@
     "@blackbaud/skyux-builder-plugin-auth-email-whitelist": "1.0.1",
     "@blackbaud/skyux-builder-plugin-stache-code-block": "1.0.0",
     "@blackbaud/skyux-builder-plugin-stache-include": "1.0.0",
+    "@blackbaud/skyux-builder-plugin-stache-route-metadata": "1.0.0",
     "jwt-decode": "2.2.0",
     "prismjs": "1.6.0",
     "smoothscroll-polyfill": "0.3.5"
