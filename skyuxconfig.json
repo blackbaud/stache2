@@ -11,5 +11,14 @@
   ],
   "app": {
     "title": "Stache 2"
+  },
+  "appSettings": {
+    "stache": {
+      "googleAnalytics": {
+        "enabled": "true",
+        "clientId": "UA-2418840-1",
+        "tagManagerContainerId": "GTM-W56QP9"
+      }
+    }
   }
 }
