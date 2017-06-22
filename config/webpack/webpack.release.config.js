@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const helpers = require('../utils/helpers');
 const ngcWebpack = require('ngc-webpack');
 
@@ -41,15 +40,8 @@ module.exports = {
     ]
   },
   plugins: [
-    // The (\\|\/) piece accounts for path separators in *nix and Windows
-    new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-      helpers.root('src'), // location of your src
-      {} // a map of your routes
-    ),
-
     new ngcWebpack.NgcWebpackPlugin({
-      tsConfig: helpers.root('tsconfig-bundle.json')
+      tsConfig: helpers.root('tsconfig.release.json')
     })
   ]
 };

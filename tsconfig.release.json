@@ -8,28 +8,20 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "noImplicitAny": true,
-    "outDir": "./dist",
-    "inlineSources": true,
     "declaration": true,
     "lib": [
       "dom",
-      "es2015"
+      "es6"
     ],
-    "skipLibCheck": true,
     "types": [
       "jasmine",
       "node"
     ],
+    "outDir": "./dist",
     "rootDir": "./.srctmp",
     "baseUrl": "."
   },
   "files": [
     "./.srctmp/index.ts"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true
-  },
-  "angularCompilerOptions": {
-    "strictMetadataEmit": true
-  }
+  ]
 }
