@@ -2,7 +2,6 @@
 logs
 *.log
 npm-debug.log*
-yarn.lock
 package-lock.json
 
 # Coverage directory used by tools like istanbul
