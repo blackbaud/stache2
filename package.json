@@ -1,6 +1,6 @@
 {
   "name": "@blackbaud/stache",
-  "version": "2.0.0-beta.6",
+  "version": "2.0.0-beta.7",
   "description": "Angular 2 components for SKY UX Builder SPAs",
   "author": "Blackbaud, Inc.",
   "keywords": [],
@@ -24,18 +24,10 @@
     "clean:ngc": "rimraf **/*.ngsummary.json **/*.ngfactory.ts **/*.ngstyle.ts",
     "prepare:ts": "npm run clean && node ./scripts/stage-ts.js",
     "prepare:package": "node ./scripts/prepare-package.js",
-    "transpile": "webpack --config ./config/webpack/webpack.release.config.js --progress",
+    "transpile": "./node_modules/.bin/webpack --config ./config/webpack/webpack.release.config.js --progress",
     "build": "npm run clean && npm run prepare:ts && npm run transpile && npm run minify && npm run prepare:package && npm run clean:ngc",
     "minify": "uglifyjs dist/bundles/stache.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/stache.umd.min.js",
     "test": "skyux test"
-  },
-  "peerDependencies": {
-    "codelyzer": "~3.0.1",
-    "fs-extra": "~3.0.1",
-    "glob": "~7.1.2",
-    "node-sass": "~4.5.3",
-    "webpack": "~2.6.1",
-    "typescript": "~2.3.4"
   },
   "dependencies": {
     "@blackbaud/skyux": "2.0.0-rc.1",
@@ -45,8 +37,13 @@
   },
   "devDependencies": {
     "@blackbaud/skyux-builder": "1.0.0-rc.2",
+    "fs-extra": "3.0.1",
+    "glob": "7.1.2",
     "ngc-webpack": "3.0.0",
+    "node-sass": "4.5.3",
     "rimraf": "2.6.1",
-    "uglify-js": "3.0.18"
+    "typescript": "2.3.4",
+    "uglify-js": "3.0.18",
+    "webpack": "2.6.1"
   }
 }
