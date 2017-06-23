@@ -38,7 +38,7 @@
     "typescript": "~2.3.4"
   },
   "dependencies": {
-    "@blackbaud/skyux": "2.0.0-rc.0",
+    "@blackbaud/skyux": "2.0.0-rc.1",
     "@blackbaud/skyux-builder-plugin-stache": "~1.0.0",
     "prismjs": "1.6.0",
     "smoothscroll-polyfill": "0.3.5"
