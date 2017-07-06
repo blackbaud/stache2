@@ -30,14 +30,14 @@
     "test": "skyux test"
   },
   "dependencies": {
-    "@blackbaud/skyux": "2.0.0-rc.2",
+    "@blackbaud/skyux": "2.0.0-rc.4",
     "@blackbaud/skyux-builder-plugin-stache": "~1.0.0",
     "es6-object-assign": "1.1.0",
     "prismjs": "1.6.0",
     "smoothscroll-polyfill": "0.3.5"
   },
   "devDependencies": {
-    "@blackbaud/skyux-builder": "1.0.0-rc.4",
+    "@blackbaud/skyux-builder": "1.0.0-rc.5",
     "fs-extra": "3.0.1",
     "glob": "7.1.2",
     "ngc-webpack": "3.0.0",
