@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 yarn.lock
 package-lock.json
+.idea/
 
 # Coverage directory used by tools like istanbul
 coverage
