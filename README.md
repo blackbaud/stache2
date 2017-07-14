@@ -28,7 +28,7 @@ skyux test
 #### Build the components
 
 ```
-npm run build
+skyux build-public-library
 ```
 
 ## Contributing

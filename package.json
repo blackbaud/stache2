@@ -13,38 +13,25 @@
     "url": "https://github.com/blackbaud/stache2/issues"
   },
   "license": "MIT",
-  "main": "bundles/stache.umd.js",
+  "main": "bundles/bundle.umd.js",
   "module": "index.ts",
   "engines": {
     "node": ">=6.11.1"
   },
   "scripts": {
     "skyux": "skyux",
-    "clean": "rimraf dist .srctmp && npm run clean:ngc",
-    "clean:ngc": "rimraf **/*.ngsummary.json **/*.ngfactory.ts **/*.ngstyle.ts",
-    "prepare:ts": "npm run clean && node ./scripts/stage-ts.js",
-    "prepare:package": "node ./scripts/prepare-package.js",
-    "transpile": "./node_modules/.bin/webpack --config ./config/webpack/webpack.release.config.js --progress",
-    "build": "npm run clean && npm run prepare:ts && npm run transpile && npm run minify && npm run prepare:package && npm run clean:ngc",
-    "minify": "uglifyjs dist/bundles/stache.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/stache.umd.min.js",
-    "test": "skyux test"
+    "test": "skyux test && skyux e2e",
+    "build": "skyux build-public-library",
+    "start": "skyux serve"
   },
   "dependencies": {
-    "@blackbaud/skyux": "2.0.0-rc.4",
+    "@blackbaud/skyux": "2.0.0-rc.5",
     "@blackbaud/skyux-builder-plugin-stache": "~1.0.0",
     "es6-object-assign": "1.1.0",
     "prismjs": "1.6.0",
     "smoothscroll-polyfill": "0.3.5"
   },
   "devDependencies": {
-    "@blackbaud/skyux-builder": "1.0.0-rc.6",
-    "fs-extra": "3.0.1",
-    "glob": "7.1.2",
-    "ngc-webpack": "3.0.0",
-    "node-sass": "4.5.3",
-    "rimraf": "2.6.1",
-    "typescript": "2.3.4",
-    "uglify-js": "3.0.18",
-    "webpack": "2.6.1"
+    "@blackbaud/skyux-builder": "1.0.0-rc.7"
   }
 }
