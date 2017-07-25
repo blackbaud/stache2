@@ -20,18 +20,18 @@
   },
   "scripts": {
     "skyux": "skyux",
-    "test": "skyux test && skyux e2e",
+    "test": "skyux test && skyux e2e && skyux build",
     "build": "skyux build-public-library",
     "start": "skyux serve"
   },
   "dependencies": {
-    "@blackbaud/skyux": "2.0.0-rc.5",
+    "@blackbaud/skyux": "2.0.0-rc.8",
     "@blackbaud/skyux-builder-plugin-stache": "~1.0.0",
     "es6-object-assign": "1.1.0",
     "prismjs": "1.6.0",
     "smoothscroll-polyfill": "0.3.5"
   },
   "devDependencies": {
-    "@blackbaud/skyux-builder": "1.0.0-rc.8"
+    "@blackbaud/skyux-builder": "1.0.0-rc.11"
   }
 }
