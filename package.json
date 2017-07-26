@@ -24,14 +24,17 @@
     "build": "skyux build-public-library",
     "start": "skyux serve"
   },
+  "peerDependencies": {
+    "@blackbaud/skyux": "2.0.0-rc.9"
+  },
   "dependencies": {
-    "@blackbaud/skyux": "2.0.0-rc.9",
     "@blackbaud/skyux-builder-plugin-stache": "~1.0.0",
     "es6-object-assign": "1.1.0",
     "prismjs": "1.6.0",
     "smoothscroll-polyfill": "0.3.5"
   },
   "devDependencies": {
+    "@blackbaud/skyux": "2.0.0-rc.9",
     "@blackbaud/skyux-builder": "1.0.0-rc.12"
   }
 }
