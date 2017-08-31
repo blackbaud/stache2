@@ -25,7 +25,7 @@
     "start": "skyux serve"
   },
   "peerDependencies": {
-    "@blackbaud/skyux": "2.0.0-rc.10"
+    "@blackbaud/skyux": "2.0.0-rc.12"
   },
   "dependencies": {
     "@blackbaud/skyux-builder-plugin-stache": "~1.0.0",
@@ -34,7 +34,7 @@
     "smoothscroll-polyfill": "0.3.5"
   },
   "devDependencies": {
-    "@blackbaud/skyux": "2.0.0-rc.10",
-    "@blackbaud/skyux-builder": "1.0.0-rc.15"
+    "@blackbaud/skyux": "2.0.0-rc.12",
+    "@blackbaud/skyux-builder": "1.0.0-rc.17"
   }
 }
