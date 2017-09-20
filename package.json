@@ -25,7 +25,7 @@
     "start": "skyux serve"
   },
   "peerDependencies": {
-    "@blackbaud/skyux": "2.0.0-rc.12"
+    "@blackbaud/skyux": "2.0.1"
   },
   "dependencies": {
     "@blackbaud/skyux-builder-plugin-stache": "~1.0.0",
@@ -35,7 +35,7 @@
     "swagger-ui-dist": "3.2.0"
   },
   "devDependencies": {
-    "@blackbaud/skyux": "2.0.0-rc.12",
-    "@blackbaud/skyux-builder": "1.0.0-rc.17"
+    "@blackbaud/skyux": "2.0.0",
+    "@blackbaud/skyux-builder": "1.0.0-rc.19"
   }
 }
