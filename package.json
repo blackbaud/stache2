@@ -25,17 +25,24 @@
     "start": "skyux serve"
   },
   "peerDependencies": {
-    "@blackbaud/skyux": "2.0.1"
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/router": "^4.0.0",
+    "@blackbaud/skyux": "^2.0.0"
   },
   "dependencies": {
-    "@blackbaud/skyux-builder-plugin-stache": "~1.0.0",
+    "@blackbaud/skyux-builder-plugin-stache": "^1.0.0",
     "es6-object-assign": "1.1.0",
-    "prismjs": "1.6.0",
-    "smoothscroll-polyfill": "0.3.5",
-    "swagger-ui-dist": "3.2.0"
+    "prismjs": "1.8.1",
+    "smoothscroll-polyfill": "0.4.0",
+    "swagger-ui-dist": "3.2.2"
   },
   "devDependencies": {
-    "@blackbaud/skyux": "2.0.0",
-    "@blackbaud/skyux-builder": "1.0.0-rc.19"
+    "@blackbaud/skyux-builder": "^1.0.0",
+    "@blackbaud/skyux": "^2.0.0"
   }
 }
