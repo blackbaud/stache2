@@ -38,8 +38,7 @@
     "@blackbaud/skyux-builder-plugin-stache": "^1.0.0",
     "es6-object-assign": "1.1.0",
     "prismjs": "1.8.1",
-    "smoothscroll-polyfill": "0.4.0",
-    "swagger-ui-dist": "3.2.2"
+    "smoothscroll-polyfill": "0.4.0"
   },
   "devDependencies": {
     "@blackbaud/skyux-builder": "^1.0.0",
