@@ -2,14 +2,34 @@
   "name": "stache2",
   "mode": "easy",
   "compileMode": "aot",
+  "auth": true,
   "plugins": [
     "@blackbaud/skyux-builder-plugin-stache"
   ],
   "app": {
     "title": "Stache 2"
   },
+  "omnibar": {
+    "experimental": true,
+    "nav": {
+      "services": [
+        {
+          "title": "Stache 2",
+          "items": [
+            {
+              "title": "Home",
+              "route": "/"
+            }
+          ]
+        }
+      ]
+    }
+  },
   "appSettings": {
     "stache": {
+      "searchConfig": {
+
+      },
       "googleAnalytics": {
         "enabled": "true",
         "clientId": "UA-2418840-1",
