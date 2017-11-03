@@ -20,7 +20,7 @@
   },
   "scripts": {
     "skyux": "skyux",
-    "test": "skyux test && skyux e2e && skyux build",
+    "test": "skyux test && skyux e2e && skyux build && npm run build",
     "build": "skyux build-public-library",
     "start": "skyux serve"
   },
