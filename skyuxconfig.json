@@ -28,7 +28,6 @@
   "appSettings": {
     "stache": {
       "searchConfig": {
-
       },
       "googleAnalytics": {
         "enabled": "true",
