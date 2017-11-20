@@ -58,7 +58,7 @@ class MockConfigService {
   };
 }
 
-describe('Stache Search Results Provider', () => {
+fdescribe('Stache Search Results Provider', () => {
   let stacheSearchResultsProvider: StacheSearchResultsProvider;
   let mockHttpService: MockHttpService;
   let mockConfigService: MockConfigService;
@@ -81,28 +81,39 @@ describe('Stache Search Results Provider', () => {
   });
 
   it('should use all defaults if config not provided', () => {
+    const consoleSpy = spyOn(console, 'log');
+
     mockConfigService.skyux.appSettings.stache = undefined;
+
     stacheSearchResultsProvider = new StacheSearchResultsProvider(
       mockHttpService as StacheHttpService,
       mockConfigService as StacheConfigService
     );
-    stacheSearchResultsProvider.getSearchResults(searchObject)
+
+    stacheSearchResultsProvider
+      .getSearchResults(searchObject)
       .then((results: any) => {
-        expect(console.log).toHaveBeenCalledWith('Auth HTTP');
-        expect(console.log).toHaveBeenCalledWith('https://stache-search-query.sky.blackbaud.com/query');
-      });
+        expect(consoleSpy).toHaveBeenCalledWith('Auth HTTP');
+        expect(consoleSpy).toHaveBeenCalledWith(
+          'https://stache-search-query.sky.blackbaud.com/query'
+        );
+      })
+      .catch((err: any) => expect(err).toBeUndefined());
   });
 
   it('should query the internal endpoint by default', () => {
-    spyOn(console, 'log');
+    const consoleSpy = spyOn(console, 'log').and.returnValue('');
     stacheSearchResultsProvider.getSearchResults(searchObject)
       .then((results: any) => {
-        expect(console.log).toHaveBeenCalledWith('https://stache-search-query.sky.blackbaud.com/query');
-      });
+        expect(consoleSpy).toHaveBeenCalledWith(
+          'https://stache-search-query.sky.blackbaud.com/query'
+        );
+      })
+      .catch((err: any) => expect(err).toBeUndefined());
   });
 
   it('should query the public endpoint if is_internal is false', () => {
-    spyOn(console, 'log');
+    const consoleSpy = spyOn(console, 'log').and.returnValue('');
     mockConfigService.skyux.appSettings.stache.searchConfig.is_internal = false;
     stacheSearchResultsProvider = new StacheSearchResultsProvider(
       mockHttpService as StacheHttpService,
@@ -111,16 +122,20 @@ describe('Stache Search Results Provider', () => {
 
     stacheSearchResultsProvider.getSearchResults(searchObject)
       .then((results: any) => {
-        expect(console.log).toHaveBeenCalledWith('https://stache-search-query.sky.blackbaud.com/query-public');
-        expect(console.log).toHaveBeenCalledWith({
+        expect(consoleSpy).toHaveBeenCalledWith(
+          'https://stache-search-query.sky.blackbaud.com/query-public'
+        );
+
+        expect(consoleSpy).toHaveBeenCalledWith({
           site_names: ['stache2'],
           search_string: 'test'
         });
-      });
+      })
+      .catch((err: any) => expect(err).toBeUndefined());
   });
 
   it('should use the custom endpoints if provided', () => {
-    spyOn(console, 'log');
+    const consoleSpy = spyOn(console, 'log').and.returnValue('');
     mockConfigService.skyux.appSettings.stache.searchConfig.endpoints = {
       internal: 'internal-test',
       public: 'public-test'
@@ -132,12 +147,15 @@ describe('Stache Search Results Provider', () => {
 
     stacheSearchResultsProvider.getSearchResults(searchObject)
       .then((results: any) => {
-        expect(console.log).toHaveBeenCalledWith('https://stache-search-query.sky.blackbaud.com/internal-test');
-      });
+        expect(consoleSpy).toHaveBeenCalledWith(
+          'https://stache-search-query.sky.blackbaud.com/internal-test'
+        );
+      })
+      .catch((err: any) => expect(err).toBeUndefined());
   });
 
   it('should use the custom site_names if provided', () => {
-    spyOn(console, 'log');
+    const consoleSpy = spyOn(console, 'log').and.returnValue('');
     mockConfigService.skyux.appSettings.stache.searchConfig.site_names = [
       'test',
       'stache2'
@@ -149,15 +167,16 @@ describe('Stache Search Results Provider', () => {
 
     stacheSearchResultsProvider.getSearchResults(searchObject)
       .then((results: any) => {
-        expect(console.log).toHaveBeenCalledWith({
+        expect(consoleSpy).toHaveBeenCalledWith({
           site_names: ['test', 'stache2'],
           search_string: 'test'
         });
-      });
+      })
+      .catch((err: any) => expect(err).toBeUndefined());
   });
 
   it('should use the custom query url if provided', () => {
-    spyOn(console, 'log');
+    const consoleSpy = spyOn(console, 'log').and.returnValue('');
     mockConfigService.skyux.appSettings.stache.searchConfig.url = 'https://google.com';
     stacheSearchResultsProvider = new StacheSearchResultsProvider(
       mockHttpService as StacheHttpService,
@@ -166,8 +185,9 @@ describe('Stache Search Results Provider', () => {
 
     stacheSearchResultsProvider.getSearchResults(searchObject)
       .then((results: any) => {
-        expect(console.log).toHaveBeenCalledWith('https://google.com/query');
-      });
+        expect(consoleSpy).toHaveBeenCalledWith('https://google.com/query');
+      })
+      .catch((err: any) => expect(err).toBeUndefined());
   });
 
   it('should use the custom results config options if provided', () => {
@@ -189,7 +209,8 @@ describe('Stache Search Results Provider', () => {
         expect(results.moreResults.url).toBe('https://google.com');
         expect(results.htmlFields.length).toBe(2);
         expect(results.htmlFields.title).toBe(true);
-      });
+      })
+      .catch((err: any) => expect(err).toBeUndefined());
   });
 
   it('should handle results with highlights and without highlights', () => {
@@ -198,7 +219,8 @@ describe('Stache Search Results Provider', () => {
         expect(results.items.length).toBe(2);
         expect(results.items[1].description).toContain('Highlight one');
         expect(results.items[0].description).not.toBeDefined();
-      });
+      })
+      .catch((err: any) => expect(err).toBeUndefined());
   });
 
   it('should return a message if there are no search results', () => {
@@ -220,7 +242,8 @@ describe('Stache Search Results Provider', () => {
       .then((results: any) => {
         expect(results.items.length).toBe(1);
         expect(results.items[0].title).toBe('No results found.');
-      });
+      })
+      .catch((err: any) => expect(err).toBeUndefined());
   });
 
   it('should show more search results if the count is greater than 10 and the results url is defined', () => {
@@ -370,11 +393,11 @@ describe('Stache Search Results Provider', () => {
 
     stacheSearchResultsProvider.getSearchResults(searchObject)
       .then((results: any) => {
-        console.log('RESULTS', results);
         expect(results.items.length).toBe(11);
         expect(results.moreResults.label).toBe('Show More');
         expect(results.moreResults.url).toBe('https://google.com');
-      });
+      })
+      .catch((err: any) => expect(err).toBeUndefined());
   });
 
   it('should return an error if there is a problem with the query', () => {
@@ -390,7 +413,8 @@ describe('Stache Search Results Provider', () => {
       mockConfigService as StacheConfigService
     );
 
-    stacheSearchResultsProvider.getSearchResults(searchObject)
+    stacheSearchResultsProvider
+      .getSearchResults(searchObject)
       .catch((error: any) => {
         expect(error).toBeDefined();
       });
