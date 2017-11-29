@@ -2,7 +2,7 @@
   "name": "stache2",
   "mode": "easy",
   "compileMode": "aot",
-  "auth": true,
+  "auth": false,
   "plugins": [
     "@blackbaud/skyux-builder-plugin-stache"
   ],
