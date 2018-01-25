@@ -31,6 +31,9 @@
   },
   "appSettings": {
     "stache": {
+      "editButton": {
+        "url": "https://github.com/blackbaud/stache2"
+      },
       "searchConfig": {
       },
       "googleAnalytics": {
