@@ -37,6 +37,7 @@ describe('StacheWrapperComponent', () => {
   let mockWindowService: any;
   let mockAnchorService: any;
   let mockOmnibarService: any;
+  let mockTextContent: string = '';
 
   class MockActivatedRoute {
     public fragment: Observable<string> = Observable.of('test-route');
@@ -112,6 +113,7 @@ describe('StacheWrapperComponent', () => {
         }),
         querySelector: jasmine.createSpy('querySelector').and.callFake(function(selector: string) {
           return {
+            textContent: mockTextContent,
             classList: {
               add(cssClass: string) { }
             },
@@ -291,6 +293,25 @@ describe('StacheWrapperComponent', () => {
     component.pageTitle = 'Page Title';
     fixture.detectChanges();
     expect(mockTitleService.setTitle).toHaveBeenCalledWith('Page Title');
+  });
+
+  it('should set the nav title', () => {
+    component.pageTitle = 'Nav Title';
+    fixture.detectChanges();
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith('Nav Title');
+  });
+
+  it('should set the Tutorial Header title', () => {
+    mockTextContent = 'Tutorial Header Title';
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith('Tutorial Header Title');
+    mockTextContent = '';
+  });
+
+  it('should not set the Tutorial Header title', () => {
+    fixture.detectChanges();
+    expect(mockTitleService.setTitle).not.toHaveBeenCalledWith('Tutorial Header Title');
   });
 
   it('should set the jsonData property on init', () => {

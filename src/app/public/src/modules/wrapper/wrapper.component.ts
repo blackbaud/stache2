@@ -8,11 +8,9 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { Subscription } from 'rxjs';
-
 import { StacheTitleService } from './title.service';
-import { StacheConfigService, StacheJsonDataService, StacheOmnibarAdapterService } from '../shared';
+import { StacheConfigService, StacheJsonDataService, StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
 import { StacheNavLink, StacheNavService } from '../nav';
 import { StachePageAnchorService } from '../page-anchor/page-anchor.service';
 
@@ -54,6 +52,7 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   @Input()
   public showBackToTop: boolean = true;
 
+  public tutorialHeader: string;
   public jsonData: any;
   public inPageRoutes: StacheNavLink[] = [];
   private pageAnchorSubscription: Subscription;
@@ -66,22 +65,31 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private navService: StacheNavService,
     private anchorService: StachePageAnchorService,
     private cdr: ChangeDetectorRef,
+    private windowRef: StacheWindowRef,
     private omnibarService: StacheOmnibarAdapterService) { }
 
   public ngOnInit(): void {
     this.omnibarService.checkForOmnibar();
-    this.titleService.setTitle(this.windowTitle || this.pageTitle);
     this.jsonData = this.dataService.getAll();
     this.registerPageAnchors();
   }
 
   public ngAfterViewInit() {
+    this.checkForTutorialHeader();
+    this.titleService.setTitle(this.windowTitle || this.pageTitle || this.navTitle || this.tutorialHeader);
     this.checkRouteHash();
     this.cdr.detectChanges();
   }
 
   public ngOnDestroy(): void {
     this.destroyPageAnchorSubscription();
+  }
+
+  private checkForTutorialHeader() {
+    const currentTutorialHeader = this.windowRef.nativeWindow.document.querySelector(`.stache-tutorial-heading`);
+    if (currentTutorialHeader && currentTutorialHeader.textContent) {
+      this.tutorialHeader = currentTutorialHeader.textContent.trim();
+    }
   }
 
   private registerPageAnchors(): void {
