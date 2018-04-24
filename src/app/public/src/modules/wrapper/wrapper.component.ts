@@ -92,8 +92,6 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     const currentTutorialHeader = this.windowRef.nativeWindow.document.querySelector(`.stache-tutorial-heading`);
     if (currentTutorialHeader && currentTutorialHeader.textContent) {
       return currentTutorialHeader.textContent.trim();
-    } else {
-      return '';
     }
   }
 

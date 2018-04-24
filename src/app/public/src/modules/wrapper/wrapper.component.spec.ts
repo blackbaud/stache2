@@ -284,52 +284,58 @@ describe('StacheWrapperComponent', () => {
   });
 
   it('should set the window title', () => {
-    component.windowTitle = 'Test Title';
+    const title = 'Test Title';
+    component.windowTitle = title;
     fixture.detectChanges();
-    expect(mockTitleService.setTitle).toHaveBeenCalledWith('Test Title');
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith(title);
   });
 
   it('should set the window title based on stache pageTitle', () => {
-    component.pageTitle = 'Page Title';
+    const title = 'Page Title';
+    component.pageTitle = title;
     fixture.detectChanges();
-    expect(mockTitleService.setTitle).toHaveBeenCalledWith('Page Title');
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith(title);
   });
 
   it('should set the window title based on stache navTitle', () => {
-    component.navTitle = 'Nav Title';
+    const title = 'Nav Title';
+    component.navTitle = title;
     fixture.detectChanges();
-    expect(mockTitleService.setTitle).toHaveBeenCalledWith('Nav Title');
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith(title);
   });
 
   it('should set the window title based on the Tutorial Header title', () => {
-    mockTextContent = 'Tutorial Header Title';
+    const title = 'Tutorial Header Title';
+    mockTextContent = title;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(mockTitleService.setTitle).toHaveBeenCalledWith('Tutorial Header Title');
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith(title);
     mockTextContent = '';
   });
 
   it('should not set the window title when the Tutorial Header title is absent', () => {
     fixture.detectChanges();
-    expect(mockTitleService.setTitle).not.toHaveBeenCalledWith('Tutorial Header Title');
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith(undefined);
   });
 
   it('should set the window title based on pageTitle with existing navTitle and Tutorial Header', () => {
-    component.pageTitle = 'Page Title';
+    const pageTitle = 'PageTitle';
+    component.pageTitle = pageTitle;
     component.navTitle = 'Nav Title';
     mockTextContent = 'Tutorial Header Title';
     component.ngOnInit();
     fixture.detectChanges();
-    expect(mockTitleService.setTitle).toHaveBeenCalledWith('Page Title');
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith(pageTitle);
     mockTextContent = '';
   });
 
   it('should set the window title based on navTitle with existing Tutorial Header', () => {
-    component.navTitle = 'Nav Title';
+    const navTitle = 'Nav Title';
+    component.navTitle = navTitle;
     mockTextContent = 'Tutorial Header Title';
     component.ngOnInit();
     fixture.detectChanges();
-    expect(mockTitleService.setTitle).toHaveBeenCalledWith('Nav Title');
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith(navTitle);
     mockTextContent = '';
   });
 
