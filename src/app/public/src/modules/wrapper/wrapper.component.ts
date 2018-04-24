@@ -52,7 +52,6 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   @Input()
   public showBackToTop: boolean = true;
 
-  public tutorialHeader: string;
   public jsonData: any;
   public inPageRoutes: StacheNavLink[] = [];
   private pageAnchorSubscription: Subscription;
@@ -75,8 +74,8 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   public ngAfterViewInit() {
-    this.checkForTutorialHeader();
-    this.titleService.setTitle(this.windowTitle || this.pageTitle || this.navTitle || this.tutorialHeader);
+    const preferredWindowHeader = this.setWindowHeader();
+    this.titleService.setTitle(preferredWindowHeader);
     this.checkRouteHash();
     this.cdr.detectChanges();
   }
@@ -85,10 +84,16 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     this.destroyPageAnchorSubscription();
   }
 
-  private checkForTutorialHeader() {
+  private setWindowHeader(): string {
+    return this.windowTitle || this.pageTitle || this.navTitle || this.getTutorialHeader();
+  }
+
+  private getTutorialHeader(): string {
     const currentTutorialHeader = this.windowRef.nativeWindow.document.querySelector(`.stache-tutorial-heading`);
     if (currentTutorialHeader && currentTutorialHeader.textContent) {
-      this.tutorialHeader = currentTutorialHeader.textContent.trim();
+      return currentTutorialHeader.textContent.trim();
+    } else {
+      return '';
     }
   }
 

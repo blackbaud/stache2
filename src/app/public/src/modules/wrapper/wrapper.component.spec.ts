@@ -289,19 +289,19 @@ describe('StacheWrapperComponent', () => {
     expect(mockTitleService.setTitle).toHaveBeenCalledWith('Test Title');
   });
 
-  it('should set the page title', () => {
+  it('should set the window title based on stache pageTitle', () => {
     component.pageTitle = 'Page Title';
     fixture.detectChanges();
     expect(mockTitleService.setTitle).toHaveBeenCalledWith('Page Title');
   });
 
-  it('should set the nav title', () => {
-    component.pageTitle = 'Nav Title';
+  it('should set the window title based on stache navTitle', () => {
+    component.navTitle = 'Nav Title';
     fixture.detectChanges();
     expect(mockTitleService.setTitle).toHaveBeenCalledWith('Nav Title');
   });
 
-  it('should set the Tutorial Header title', () => {
+  it('should set the window title based on the Tutorial Header title', () => {
     mockTextContent = 'Tutorial Header Title';
     component.ngOnInit();
     fixture.detectChanges();
@@ -309,9 +309,28 @@ describe('StacheWrapperComponent', () => {
     mockTextContent = '';
   });
 
-  it('should not set the Tutorial Header title', () => {
+  it('should not set the window title when the Tutorial Header title is absent', () => {
     fixture.detectChanges();
     expect(mockTitleService.setTitle).not.toHaveBeenCalledWith('Tutorial Header Title');
+  });
+
+  it('should set the window title based on pageTitle with existing navTitle and Tutorial Header', () => {
+    component.pageTitle = 'Page Title';
+    component.navTitle = 'Nav Title';
+    mockTextContent = 'Tutorial Header Title';
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith('Page Title');
+    mockTextContent = '';
+  });
+
+  it('should set the window title based on navTitle with existing Tutorial Header', () => {
+    component.navTitle = 'Nav Title';
+    mockTextContent = 'Tutorial Header Title';
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(mockTitleService.setTitle).toHaveBeenCalledWith('Nav Title');
+    mockTextContent = '';
   });
 
   it('should set the jsonData property on init', () => {
