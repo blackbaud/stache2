@@ -74,8 +74,8 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   public ngAfterViewInit() {
-    const preferredWindowHeader = this.setWindowHeader();
-    this.titleService.setTitle(preferredWindowHeader);
+    const preferredDocumentTitle = this.getPreferredDocumentTitle();
+    this.titleService.setTitle(preferredDocumentTitle);
     this.checkRouteHash();
     this.cdr.detectChanges();
   }
@@ -84,7 +84,7 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     this.destroyPageAnchorSubscription();
   }
 
-  private setWindowHeader(): string {
+  private getPreferredDocumentTitle(): string {
     return this.windowTitle || this.pageTitle || this.navTitle || this.getTutorialHeader();
   }
 
