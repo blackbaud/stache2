@@ -32,7 +32,8 @@
   "appSettings": {
     "stache": {
       "editButton": {
-        "url": "https://github.com/blackbaud/stache2"
+        "url": "https://github.com/blackbaud/stache2",
+        "text": "Suggest Edits"
       },
       "searchConfig": {
       },
