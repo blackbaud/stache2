@@ -21,23 +21,29 @@ export class StacheRouterLinkDirective implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    const href = window.location.href;
-    const routerLink = this.stacheRouterLink.substring(this.stacheRouterLink.indexOf('/'));
-    this.renderer.setAttribute(this.el.nativeElement, 'href', `${href}${routerLink}#${this.fragment}`);
+    this.renderer.setAttribute(this.el.nativeElement, 'href', this.generateUrl());
   }
 
   @HostListener('click', ['$event'])
   public navigate(event: MouseEvent): void {
     event.preventDefault();
     if (event.ctrlKey || event.metaKey) {
-      const href = window.location.href;
-      const routerLink = this.stacheRouterLink.substring(this.stacheRouterLink.indexOf('/'));
-      window.open(`${href}${routerLink}#${this.fragment}`);
+      window.open(this.generateUrl());
     } else {
       this.navService.navigate({
         path: this.stacheRouterLink,
         fragment: this.fragment
       });
+    }
+  }
+
+  private generateUrl(): string {
+    const href = window.location.href;
+    if (href.includes(this.stacheRouterLink) || this.stacheRouterLink === '.') {
+      return `${href}#${this.fragment}`;
+    } else {
+      const routerLink = this.stacheRouterLink.substring(this.stacheRouterLink.indexOf('/'));
+      return `${href}${routerLink}#${this.fragment}`;
     }
   }
 }

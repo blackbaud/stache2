@@ -32,8 +32,10 @@ export class StacheNavComponent implements OnInit, StacheNav {
     return Array.isArray(route.children);
   }
 
-  public navigate(route: any): void {
-    this.navService.navigate(route);
+  public navigate(event: MouseEvent, route: any): void {
+    if (!event.ctrlKey && !event.metaKey) {
+      this.navService.navigate(route);
+    }
   }
 
   public ngOnInit(): void {
