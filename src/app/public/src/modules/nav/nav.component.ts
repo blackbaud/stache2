@@ -76,7 +76,7 @@ export class StacheNavComponent implements OnInit, StacheNav {
       path = `/${path}`;
     }
 
-    const isActiveParent = (navDepth > 1  && `${activeUrl}/`.indexOf(`${path}/`) === 0);
+    const isActiveParent = (navDepth > 1 && `${activeUrl}/`.indexOf(`${path}/`) === 0);
 
     return (isActiveParent || activeUrl === path);
   }

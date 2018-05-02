@@ -70,6 +70,17 @@ describe('StacheLinkDirective', () => {
       });
   }));
 
+  it('should open in new window when control clicked', async(() => {
+    spyOn(window, 'open');
+    const event = new KeyboardEvent('keypress', {
+      'key': 'Control'
+    });
+    const link = debugElement.nativeElement.querySelector('a');
+    link.dispatchEvent(event);
+    link.click();
+    expect(window.open()).toHaveBeenCalled();
+  }));
+
   it('should pass the fragment to the navigate method if it exists', () => {
     const event = new Event('click');
     const directiveInstance = directiveElement.injector.get(StacheRouterLinkDirective);
