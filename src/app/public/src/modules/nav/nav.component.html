@@ -7,7 +7,7 @@
         routerLink="{{route.path}}"
         fragment="{{route.fragment}}"
         queryParamsHandling="merge"
-        (click)="navigate($event, route)">{{route.name}}</a>
+        (click)="navigate(route)">{{route.name}}</a>
       <stache-nav
         navType="sidebar stache-nav-sub"
         [routes]="route.children"

@@ -51,7 +51,7 @@ export class StacheRouterLinkDirective implements OnChanges, AfterViewInit {
   @HostListener('click', ['$event'])
   public navigate(event: MouseEvent): void {
     event.preventDefault();
-    if (event.ctrlKey || event.metaKey) {
+    if (event.ctrlKey || event.metaKey || event.shiftKey) {
       window.open(this.href);
     } else {
       this.navService.navigate({

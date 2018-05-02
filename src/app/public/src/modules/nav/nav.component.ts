@@ -33,7 +33,7 @@ export class StacheNavComponent implements OnInit, StacheNav {
   }
 
   public navigate(event: MouseEvent, route: any): void {
-    if (!event.ctrlKey && !event.metaKey) {
+    if (!event.ctrlKey && !event.metaKey && !event.shiftKey) {
       this.navService.navigate(route);
     }
   }
