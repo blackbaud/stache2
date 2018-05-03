@@ -5,6 +5,7 @@ import { StacheNav } from './nav';
 import { StacheNavService } from './nav.service';
 
 import { StacheRouteService } from '../shared';
+import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'stache-nav',
@@ -21,6 +22,7 @@ export class StacheNavComponent implements OnInit, StacheNav {
   public classname: string = '';
 
   public constructor(
+    private locationStrategy: LocationStrategy,
     private routerService: StacheRouteService,
     private navService: StacheNavService) { }
 
@@ -33,7 +35,12 @@ export class StacheNavComponent implements OnInit, StacheNav {
   }
 
   public navigate(event: MouseEvent, route: any): void {
-    if (!event.ctrlKey && !event.metaKey && !event.shiftKey) {
+    console.log(route);
+    if (event.ctrlKey || event.metaKey || event.shiftKey) {
+      event.preventDefault();
+      let path = this.locationStrategy.prepareExternalUrl(`${route.path}#${route.fragment}`);
+      window.open(path);
+    } else {
       this.navService.navigate(route);
     }
   }
