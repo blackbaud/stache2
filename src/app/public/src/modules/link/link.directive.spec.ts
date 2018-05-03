@@ -7,6 +7,8 @@ import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
 import { StacheRouterLinkDirective } from './link.directive';
 import { StacheRouterLinkTestComponent } from './fixtures/link.component.fixture';
 import { StacheNavService } from '../nav';
+import { StacheRouteService } from '../../..';
+import { LocationStrategy } from '@angular/common';
 
 describe('StacheLinkDirective', () => {
   let component: StacheRouterLinkTestComponent;
@@ -27,13 +29,47 @@ describe('StacheLinkDirective', () => {
   beforeEach(() => {
     mockNavService = new MockNavService();
 
+    let mockRoutes = [
+      {
+        path: '',
+        children: [
+          {
+            path: 'parent',
+            children: [
+              {
+                path: 'parent/child',
+                children: [
+                  {
+                    path: 'parent/child/grandchild'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
+    let mockActiveUrl = '';
+
+    class MockRouteService {
+      public getActiveRoutes() {
+        return mockRoutes;
+      }
+      public getActiveUrl() {
+        return mockActiveUrl;
+      }
+    }
+
     TestBed.configureTestingModule({
       declarations: [
         StacheRouterLinkDirective,
         StacheRouterLinkTestComponent
       ],
       providers: [
-        { provide: StacheNavService, useValue: mockNavService }
+        LocationStrategy,
+        { provide: StacheNavService, useValue: mockNavService },
+        { provide: StacheRouteService, useValue: MockRouteService }
       ]
     }).compileComponents();
 
@@ -72,13 +108,29 @@ describe('StacheLinkDirective', () => {
 
   it('should open in new window when control clicked', async(() => {
     spyOn(window, 'open');
-    const event = new KeyboardEvent('keypress', {
-      'key': 'Control'
-    });
+    const event = new KeyboardEvent('click', {ctrlKey : true});
     const link = debugElement.nativeElement.querySelector('a');
     link.dispatchEvent(event);
     link.click();
-    expect(window.open()).toHaveBeenCalled();
+    expect(window.open).toHaveBeenCalled();
+  }));
+
+  it('should open in new window when shift clicked', async(() => {
+    spyOn(window, 'open');
+    const event = new KeyboardEvent('click', {shiftKey : true});
+    const link = debugElement.nativeElement.querySelector('a');
+    link.dispatchEvent(event);
+    link.click();
+    expect(window.open).toHaveBeenCalled();
+  }));
+
+  it('should open in new window when meta (command) clicked', async(() => {
+    spyOn(window, 'open');
+    const event = new KeyboardEvent('click', {metaKey : true});
+    const link = debugElement.nativeElement.querySelector('a');
+    link.dispatchEvent(event);
+    link.click();
+    expect(window.open).toHaveBeenCalled();
   }));
 
   it('should pass the fragment to the navigate method if it exists', () => {

@@ -8,6 +8,7 @@ import { StacheNavComponent } from './nav.component';
 import { StacheNavTestComponent } from './fixtures/nav.component.fixture';
 import { StacheWindowRef, StacheRouteService } from '../shared';
 import { StacheNavService } from './nav.service';
+import { StacheLinkModule } from '../link';
 
 describe('StacheNavComponent', () => {
   let component: StacheNavComponent;
@@ -67,7 +68,8 @@ describe('StacheNavComponent', () => {
         StacheNavTestComponent
       ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        StacheLinkModule
       ],
       providers: [
         { provide: StacheNavService, useValue: mockNavService },
@@ -150,9 +152,10 @@ describe('StacheNavComponent', () => {
     component.routes = [{ name: 'Test Route', path: '/test/route' }];
     const route = component.routes[0];
     const navSpy = spyOn(mockNavService, 'navigate').and.callThrough();
+    const event = new KeyboardEvent('click');
 
     fixture.detectChanges();
-    component.navigate(route);
+    component.navigate(event, route);
 
     expect(navSpy).toHaveBeenCalledWith({path: '/test/route', name: 'Test Route'});
     expect(activeUrl).toBe('/test/route');
@@ -162,12 +165,61 @@ describe('StacheNavComponent', () => {
     component.routes = [{ name: 'Test', path: ['/', 'test'] }];
     const route = component.routes[0];
     const navSpy = spyOn(mockNavService, 'navigate').and.callThrough();
+    const event = new KeyboardEvent('click');
 
     fixture.detectChanges();
-    component.navigate(route);
+    component.navigate(event, route);
 
     expect(navSpy).toHaveBeenCalledWith({path: ['/', 'test'], name: 'Test'});
   });
+
+  it('should navigate to the route if passed an array', () => {
+    component.routes = [{ name: 'Test', path: ['/', 'test'] }];
+    const route = component.routes[0];
+    const navSpy = spyOn(mockNavService, 'navigate').and.callThrough();
+    const event = new KeyboardEvent('click');
+
+    fixture.detectChanges();
+    component.navigate(event, route);
+
+    expect(navSpy).toHaveBeenCalledWith({path: ['/', 'test'], name: 'Test'});
+  });
+
+  it('should open in new window when control clicked', (() => {
+    const navSpy = spyOn(mockNavService, 'navigate').and.callThrough();
+    component.routes = [{ name: 'Test', path: ['/', 'test'] }];
+    const route = component.routes[0];
+    const event = new KeyboardEvent('click', {ctrlKey : true});
+
+    fixture.detectChanges();
+    component.navigate(event, route);
+
+    expect(navSpy).not.toHaveBeenCalled();
+  }));
+
+  it('should open in new window when shift clicked', (() => {
+    const navSpy = spyOn(mockNavService, 'navigate').and.callThrough();
+    component.routes = [{ name: 'Test', path: ['/', 'test'] }];
+    const route = component.routes[0];
+    const event = new KeyboardEvent('click', {shiftKey : true});
+
+    fixture.detectChanges();
+    component.navigate(event, route);
+
+    expect(navSpy).not.toHaveBeenCalled();
+  }));
+
+  it('should open in new window when meta (command) clicked', (() => {
+    const navSpy = spyOn(mockNavService, 'navigate').and.callThrough();
+    component.routes = [{ name: 'Test', path: ['/', 'test'] }];
+    const route = component.routes[0];
+    const event = new KeyboardEvent('click', {metaKey : true});
+
+    fixture.detectChanges();
+    component.navigate(event, route);
+
+    expect(navSpy).not.toHaveBeenCalled();
+  }));
 
   it('should set the classname based on the navType on init', () => {
     component.navType = 'sidebar';

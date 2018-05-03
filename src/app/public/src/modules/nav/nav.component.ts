@@ -5,7 +5,6 @@ import { StacheNav } from './nav';
 import { StacheNavService } from './nav.service';
 
 import { StacheRouteService } from '../shared';
-import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'stache-nav',
@@ -22,7 +21,6 @@ export class StacheNavComponent implements OnInit, StacheNav {
   public classname: string = '';
 
   public constructor(
-    private locationStrategy: LocationStrategy,
     private routerService: StacheRouteService,
     private navService: StacheNavService) { }
 
@@ -34,8 +32,7 @@ export class StacheNavComponent implements OnInit, StacheNav {
     return Array.isArray(route.children);
   }
 
-  public navigate(event: MouseEvent, route: any): void {
-    // Let the browser route to a new tab or window if user uses command/control/shift click option
+  public navigate(event: KeyboardEvent, route: any): void {
     if (!event.ctrlKey && !event.metaKey && !event.shiftKey) {
       this.navService.navigate(route);
     }
