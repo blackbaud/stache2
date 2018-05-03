@@ -38,7 +38,7 @@ export class StacheRouteService {
       .map((route: any) => {
         return {
           segments: route.routePath.split('/'),
-          path: route.routePath
+          path: `/${route.routePath}`
         };
       });
 

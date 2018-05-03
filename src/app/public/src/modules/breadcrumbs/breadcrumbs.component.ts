@@ -37,7 +37,7 @@ export class StacheBreadcrumbsComponent implements StacheNav, OnInit {
 
     breadcrumbRoutes.push({
       name: root.name,
-      path: root.path
+      path: `/${root.path}`
     });
 
     const addRoute = (route: StacheNavLink) => {
@@ -57,7 +57,7 @@ export class StacheBreadcrumbsComponent implements StacheNav, OnInit {
   }
 
   private findActiveBranch(routes: StacheNavLink[], callback: (navLink: StacheNavLink) => void) {
-    const activeUrl = `${this.routeService.getActiveUrl()}/`;
+    const activeUrl = `/${this.routeService.getActiveUrl()}/`;
     routes.forEach((route: StacheNavLink) => {
       if (activeUrl.indexOf(`/${route.path}/`) === 0) {
         callback(route);

@@ -35,12 +35,8 @@ export class StacheNavComponent implements OnInit, StacheNav {
   }
 
   public navigate(event: MouseEvent, route: any): void {
-    console.log(route);
-    if (event.ctrlKey || event.metaKey || event.shiftKey) {
-      event.preventDefault();
-      let path = this.locationStrategy.prepareExternalUrl(`${route.path}#${route.fragment}`);
-      window.open(path);
-    } else {
+    // Let the browser route to a new tab or window if user uses command/control/shift click option
+    if (!event.ctrlKey && !event.metaKey && !event.shiftKey) {
       this.navService.navigate(route);
     }
   }
