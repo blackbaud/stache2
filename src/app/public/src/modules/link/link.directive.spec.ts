@@ -7,8 +7,9 @@ import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
 import { StacheRouterLinkDirective } from './link.directive';
 import { StacheRouterLinkTestComponent } from './fixtures/link.component.fixture';
 import { StacheNavService } from '../nav';
-import { StacheRouteService } from '../../..';
+import { StacheRouteService, StacheWindowRef } from '../../..';
 import { LocationStrategy } from '@angular/common';
+import { StacheRouterLinkTestLocalRouteComponent } from './fixtures/link.component_localroute.fixture';
 
 describe('StacheLinkDirective', () => {
   let component: StacheRouterLinkTestComponent;
@@ -16,6 +17,7 @@ describe('StacheLinkDirective', () => {
   let directiveElement: any;
   let fixture: ComponentFixture<StacheRouterLinkTestComponent>;
   let mockNavService: any;
+  let mockRouteService: any;
   let path: string;
   let fragment: string;
 
@@ -26,50 +28,53 @@ describe('StacheLinkDirective', () => {
     });
   }
 
+  let mockRoutes = [
+    {
+      path: '',
+      children: [
+        {
+          path: 'parent',
+          children: [
+            {
+              path: 'parent/child',
+              children: [
+                {
+                  path: 'parent/child/grandchild'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
+  let mockActiveUrl = '';
+
+  class MockRouteService {
+    public getActiveRoutes() {
+      return mockRoutes;
+    }
+    public getActiveUrl() {
+      return mockActiveUrl;
+    }
+  }
+
   beforeEach(() => {
     mockNavService = new MockNavService();
-
-    let mockRoutes = [
-      {
-        path: '',
-        children: [
-          {
-            path: 'parent',
-            children: [
-              {
-                path: 'parent/child',
-                children: [
-                  {
-                    path: 'parent/child/grandchild'
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ];
-
-    let mockActiveUrl = '';
-
-    class MockRouteService {
-      public getActiveRoutes() {
-        return mockRoutes;
-      }
-      public getActiveUrl() {
-        return mockActiveUrl;
-      }
-    }
+    mockRouteService = new MockRouteService();
 
     TestBed.configureTestingModule({
       declarations: [
         StacheRouterLinkDirective,
-        StacheRouterLinkTestComponent
+        StacheRouterLinkTestComponent,
+        StacheRouterLinkTestLocalRouteComponent
       ],
       providers: [
         LocationStrategy,
+        StacheWindowRef,
         { provide: StacheNavService, useValue: mockNavService },
-        { provide: StacheRouteService, useValue: MockRouteService }
+        { provide: StacheRouteService, useValue: mockRouteService }
       ]
     }).compileComponents();
 
@@ -106,13 +111,14 @@ describe('StacheLinkDirective', () => {
       });
   }));
 
-  it('should open in new window when control clicked', async(() => {
-    spyOn(window, 'open');
-    const event = new KeyboardEvent('click', {ctrlKey : true});
-    const link = debugElement.nativeElement.querySelector('a');
-    link.dispatchEvent(event);
-    link.click();
-    expect(window.open).toHaveBeenCalled();
+  it('should set stacheRouterLink input', async(() => {
+    fixture = TestBed.createComponent(StacheRouterLinkTestLocalRouteComponent);
+    component = fixture.componentInstance;
+    directiveElement = fixture.debugElement.query(By.directive(StacheRouterLinkDirective));
+
+    const directiveInstance = directiveElement.injector.get(StacheRouterLinkDirective);
+    fixture.detectChanges();
+    expect(directiveInstance._stacheRouterLink).toBe('');
   }));
 
   it('should open in new window when shift clicked', async(() => {

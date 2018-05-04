@@ -4,7 +4,7 @@ import { LocationStrategy } from '@angular/common';
 
 import { StacheNavService } from '../nav';
 
-import { StacheRouteService } from '../shared';
+import { StacheRouteService, StacheWindowRef } from '../shared';
 
 @Directive({
   selector: '[stacheRouterLink]'
@@ -15,13 +15,14 @@ export class StacheRouterLinkDirective implements OnChanges, AfterViewInit {
 
   @Input('stacheRouterLink')
   set stacheRouterLink(routerLink: string) {
-    this._stacheRouterLink = routerLink;
+    if (routerLink === '.') {
+      this._stacheRouterLink = this.routerService.getActiveUrl();
+    } else {
+      this._stacheRouterLink = routerLink;
+    }
   }
 
   get stacheRouterLink() {
-    if (this._stacheRouterLink === '.') {
-      return this.routerService.getActiveUrl();
-    }
     return this._stacheRouterLink;
   }
 
@@ -37,7 +38,8 @@ export class StacheRouterLinkDirective implements OnChanges, AfterViewInit {
     private routerService: StacheRouteService,
     private el: ElementRef,
     private locationStrategy: LocationStrategy,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private windowRef: StacheWindowRef
   ) {
     this.renderer.setStyle(this.el.nativeElement, 'cursor', 'pointer');
   }
@@ -52,7 +54,7 @@ export class StacheRouterLinkDirective implements OnChanges, AfterViewInit {
   public navigate(event: MouseEvent): void {
     event.preventDefault();
     if (event.ctrlKey || event.metaKey || event.shiftKey) {
-      window.open(this.href);
+      this.windowRef.nativeWindow.open(this.href);
     } else {
       this.navService.navigate({
         path: this.stacheRouterLink,
