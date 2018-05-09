@@ -20,6 +20,7 @@ export class TutorialSidebarNavComponent implements OnInit {
 
   public ngOnInit(): void {
     if (!this.headings) {
+      // Replace this with trigger to read directive. Mark as nav-trackable
       const activeRoutes = this.routeService.getActiveRoutes();
       this.headings = this.filterRoutes(activeRoutes);
     }

@@ -5,14 +5,14 @@
   margin: 1.2em 0;
 
   .stache-nav-list {
-    list-style-type: decimal !important;
-    margin-left: 15px !important;
-    color: $stache-text-color-default;
+    // list-style-type: decimal !important;
+    // margin-left: 15px !important;
+    // color: $stache-text-color-default;
   }
 
   .stache-nav-list-item {
-    margin: 0 0 .25em;
-    padding-left: .5em;
+    margin: 0 0 .5em;
+    // padding-left: .5em;
     line-height: $stache-line-height-base;
 
     &:last-child {
@@ -21,6 +21,10 @@
   }
 
   .stache-nav-anchor {
+    padding: 1px 5px 1px 0px;
+    color: $stache-text-color-deemphasized;
+    display: block;
+    line-height: $stache-line-height-base;
     &:hover {
       text-decoration: underline;
     }
@@ -33,6 +37,10 @@
 }
 
 .stache-table-of-contents-heading {
-  margin: 0 0 .7em;
-  font-size: 1.1em;
+  margin-top: 0px;
+  font-size: 1.5em;
+  font-weight: 300;
+  color: #282b31;
+  display: inline-block;
+  line-height: 1.1;
 }
