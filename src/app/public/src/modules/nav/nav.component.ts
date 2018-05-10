@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, HostListener, ElementRef } from '@angular/core';
 
 import { StacheNavLink } from './nav-link';
 import { StacheNav } from './nav';
@@ -36,6 +36,8 @@ export class StacheNavComponent implements OnInit, StacheNav {
     if (!event.ctrlKey && !event.metaKey && !event.shiftKey) {
       this.navService.navigate(route);
     }
+    // TODO: Visual bug when clicking to link and then scrolling
+    this.assignActiveStates();
   }
 
   public ngOnInit(): void {
@@ -52,10 +54,14 @@ export class StacheNavComponent implements OnInit, StacheNav {
       this.routes.forEach((route: any) => {
         if (this.isActive(activeUrl, route)) {
           route.isActive = true;
+        } else {
+          route.isActive = false;
         }
 
         if (this.isCurrent(activeUrl, route)) {
           route.isCurrent = true;
+        } else {
+          route.isCurrent = false;
         }
       });
     }
@@ -78,6 +84,10 @@ export class StacheNavComponent implements OnInit, StacheNav {
 
     const isActiveParent = (navDepth > 1 && `${activeUrl}/`.indexOf(`${path}/`) === 0);
 
+    const currentFragment = location.href.substring(location.href.indexOf('#') + 1);
+    if (!!route.fragment) {
+      return (currentFragment === route.fragment);
+    }
     return (isActiveParent || activeUrl === path);
   }
 
@@ -88,6 +98,10 @@ export class StacheNavComponent implements OnInit, StacheNav {
       path = path.join('/');
     }
 
+    const currentFragment = location.href.substring(location.href.indexOf('#') + 1);
+    if (!!route.fragment) {
+      return (currentFragment === route.fragment);
+    }
     return (activeUrl === path);
   }
 }

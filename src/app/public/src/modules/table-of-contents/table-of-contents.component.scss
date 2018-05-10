@@ -12,9 +12,12 @@
 
   .stache-nav-list-item {
     margin: 0 0 .5em;
-    // padding-left: .5em;
+    padding-left: .5em;
     line-height: $stache-line-height-base;
 
+    &.active {
+      border-left: 4px solid $stache-background-color-primary-dark;
+    }
     &:last-child {
       margin-bottom: 0;
     }
@@ -32,7 +35,6 @@
 }
 
 .stache-table-of-contents-wrapper {
-  border-left: 4px solid $stache-background-color-primary-dark;
   padding: 6px 0 12px 19px;
 }
 
