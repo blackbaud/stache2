@@ -32,13 +32,13 @@ export class StacheNavComponent implements OnInit, StacheNav {
     return Array.isArray(route.children);
   }
 
-  public navigate(event: KeyboardEvent, route: any): void {
-    if (!event.ctrlKey && !event.metaKey && !event.shiftKey) {
-      this.navService.navigate(route);
-    }
-    // TODO: Visual bug when clicking to link and then scrolling
-    this.assignActiveStates();
-  }
+  // public navigate(event: KeyboardEvent, route: any): void {
+  //   if (!event.ctrlKey && !event.metaKey && !event.shiftKey) {
+  //     this.navService.navigate(route);
+  //   }
+  //   // TODO: Visual bug when clicking to link and then scrolling
+  //   this.assignActiveStates();
+  // }
 
   public ngOnInit(): void {
     if (this.navType) {

@@ -7,11 +7,16 @@
   }
 }
 
+// /deep/
+// .stache-affix {
+//   max-width: inherit;
+//   // width: 170px;
+// }
+
 /deep/
-.stache-affix {
-  .stache-affix-top {
-    max-width: inherit;
-  }
+.stache-affix-top {
+  max-width: inherit;
+  // width: 170px;
 }
 
 /deep/

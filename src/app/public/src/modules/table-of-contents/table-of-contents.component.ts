@@ -26,22 +26,27 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
   public onScroll(event: Event) {
     console.log('scroll');
     // TODO: Visual bug when clicking to link and then scrolling
-    setTimeout(() => { this.displayActiveAnchor(); }, 0);
+    this.setActiveAnchor();
+    // setTimeout(() => { this.displayActiveAnchor(); }, 0);
   }
 
-  public displayActiveAnchor() {
+  @HostListener('click', ['$event'])
+  public onClick(event: Event) {
+    this.setActiveAnchor();
+    // setTimeout(() => { this.displayActiveAnchor(); }, 200);
+  }
+
+  public setActiveAnchor() {
     // TODO: Use stache window reference
-    this.routes.map(route => {
-      route.isActive = false;
-      if (this.activeAnchor) {
-        if (this.activeAnchor.id === route.fragment) {
-          route.isActive = true;
-        }
-      }
-    });
     Array.from(this.anchors).map((anchor: HTMLElement) => {
-      if (window.pageYOffset >= anchor.offsetParent.offsetTop - 10) {
-        this.activeAnchor = anchor;
+      const offsetTop = anchor.offsetTop >= 0 ? anchor.offsetTop : anchor.offsetParent.offsetTop;
+      if ((window.pageYOffset >= offsetTop - 20)) {
+        this.routes.map(route => {
+          route.isActive = false;
+          if (anchor.id === route.fragment) {
+            route.isActive = true;
+          }
+        });
       }
     });
   }
@@ -49,6 +54,6 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
   public ngAfterViewInit() {
     this.cdr.markForCheck();
     // TODO: Visual bug when clicking to link and then scrolling
-    setTimeout(() => { this.displayActiveAnchor(); }, 0);
+    this.setActiveAnchor();
   }
 }

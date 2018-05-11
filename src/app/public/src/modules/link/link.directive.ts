@@ -38,8 +38,7 @@ export class StacheRouterLinkDirective implements OnChanges, AfterViewInit {
     private routerService: StacheRouteService,
     private el: ElementRef,
     private locationStrategy: LocationStrategy,
-    private renderer: Renderer2,
-    private windowRef: StacheWindowRef
+    private renderer: Renderer2
   ) {
     this.renderer.setStyle(this.el.nativeElement, 'cursor', 'pointer');
   }
@@ -52,15 +51,14 @@ export class StacheRouterLinkDirective implements OnChanges, AfterViewInit {
 
   @HostListener('click', ['$event'])
   public navigate(event: MouseEvent): void {
-    event.preventDefault();
     if (event.ctrlKey || event.metaKey || event.shiftKey) {
-      this.windowRef.nativeWindow.open(this.href);
-    } else {
-      this.navService.navigate({
-        path: this.stacheRouterLink,
-        fragment: this.fragment
-      });
+      return;
     }
+    event.preventDefault();
+    this.navService.navigate({
+      path: this.stacheRouterLink,
+      fragment: this.fragment
+    });
   }
 
   private updateTargetUrlAndHref(): void {
