@@ -91,23 +91,4 @@
       }
     }
   }
-
-  .stache-nav-toc {
-    .stache-nav-sub {
-      padding: 4px 0 4px 15px;
-      display: none;
-
-      .stache-nav-sub {
-        display: none;
-      }
-    }
-
-    .stache-nav-list-item {
-      &.active {
-        > stache-nav > .stache-nav {
-          display: block;
-        }
-      }
-    }
-  }
 }

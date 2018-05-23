@@ -22,6 +22,7 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
   public fragment: string;
   public path: string[];
   public order: number;
+  public offsetTop: number;
 
   public constructor(
     private routerService: StacheRouteService,
@@ -29,8 +30,8 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
     private windowRef: StacheWindowRef,
     private cdRef: ChangeDetectorRef,
     private anchorService: StachePageAnchorService) {
-      this.name = '';
-    }
+    this.name = '';
+  }
 
   public ngOnInit(): void {
     this.name = this.getName();
@@ -46,6 +47,7 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
     this.name = this.getName();
     this.fragment = this.getFragment();
     this.getOrder();
+    this.getOffsetTop();
     this.registerAnchor();
     this.cdRef.detectChanges();
   }
@@ -63,6 +65,7 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
 
   private getOrder(): void {
     let anchors = this.windowRef.nativeWindow.document.querySelectorAll('stache-page-anchor div');
+    console.log('anchors', anchors);
     for (let i = 0; i < anchors.length; i++) {
       if (this.fragment === anchors[i].id) {
         this.order = i;
@@ -70,12 +73,21 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
     }
   }
 
+  private getOffsetTop(): void {
+    const anchor = this.elementRef.nativeElement;
+    this.offsetTop =
+      anchor.offsetTop >= 0 ?
+        anchor.offsetTop :
+        anchor.offsetParent.offsetTop;
+  }
+
   private registerAnchor(): void {
     this.anchorService.addPageAnchor({
       path: this.path,
       name: this.name,
       fragment: this.fragment,
-      order: this.order
+      order: this.order,
+      offsetTop: this.offsetTop
     } as StacheNavLink);
   }
 }

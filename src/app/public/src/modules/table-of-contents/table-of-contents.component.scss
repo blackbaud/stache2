@@ -3,6 +3,7 @@
 /deep/
 .stache-table-of-contents {
   margin: 1.2em 0;
+  width: inherit;
 
   .stache-nav-list {
     // list-style-type: decimal !important;
@@ -15,6 +16,10 @@
     padding-left: .5em;
     line-height: $stache-line-height-base;
 
+    // Stop item from indenting when active
+    &:not(.active) {
+      margin-left: 4px;
+    }
     &.active {
       border-left: 4px solid $stache-background-color-primary-dark;
     }
