@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@blackbaud/skyux-builder": "^1.4.0",
+    "@blackbaud/skyux-lib-testing": "1.0.0",
     "@blackbaud/skyux": "^2.0.0"
   }
 }
