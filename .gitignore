@@ -23,6 +23,7 @@ jspm_packages
 .skyuxtmp
 .skypagestmp
 .srctmp
+.skypageslocales
 
 # SKY UX build directory
 dist

@@ -37,6 +37,20 @@
       },
       "searchConfig": {
       },
+      "footer": {
+        "nav": {
+          "items": [
+            {
+              "title": "Home",
+              "route": "/"
+            },
+            {
+              "title": "Demos",
+              "route": "/demos"
+            }
+          ]
+        }
+      },
       "googleAnalytics": {
         "enabled": "true",
         "clientId": "UA-2418840-1",
