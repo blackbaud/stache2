@@ -47,6 +47,10 @@
             {
               "title": "Demos",
               "route": "/demos"
+            },
+            {
+              "title": "API Terms of Use",
+              "route": "https://developer.sky.blackbaud.com/terms"
             }
           ]
         }
