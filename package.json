@@ -43,8 +43,8 @@
     "prismjs": "1.8.1"
   },
   "devDependencies": {
-    "@blackbaud/skyux": "2.19.0",
-    "@blackbaud/skyux-builder": "1.19.2",
+    "@blackbaud/skyux": "2.22.0",
+    "@blackbaud/skyux-builder": "1.20.2",
     "@blackbaud/skyux-lib-testing": "1.0.0"
   }
 }
