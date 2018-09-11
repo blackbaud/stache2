@@ -1,6 +1,6 @@
 {
   "name": "@blackbaud/stache",
-  "version": "2.11.3",
+  "version": "2.11.4",
   "description": "Angular 2 components for SKY UX Builder SPAs",
   "author": "Blackbaud, Inc.",
   "keywords": [],
@@ -43,7 +43,7 @@
     "prismjs": "1.8.1"
   },
   "devDependencies": {
-    "@blackbaud/skyux": "2.22.0",
+    "@blackbaud/skyux": "2.23.0",
     "@blackbaud/skyux-builder": "1.20.2",
     "@blackbaud/skyux-lib-testing": "1.0.0"
   }
