@@ -40,7 +40,7 @@
     "btoa": "1.1.2",
     "es6-object-assign": "1.1.0",
     "lodash.get": "4.4.2",
-    "prismjs": "1.8.1"
+    "prismjs": "1.15.0"
   },
   "devDependencies": {
     "@blackbaud/skyux": "2.23.0",
