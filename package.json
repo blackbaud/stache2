@@ -35,7 +35,7 @@
     "@blackbaud/skyux": "^2.0.0"
   },
   "dependencies": {
-    "@blackbaud/skyux-builder-plugin-stache": "~1.5.1",
+    "@blackbaud/skyux-builder-plugin-stache": "~1.6.0",
     "@blackbaud/skyux-builder-stache-search": "^1.3.0",
     "btoa": "1.1.2",
     "es6-object-assign": "1.1.0",
@@ -43,8 +43,8 @@
     "prismjs": "1.15.0"
   },
   "devDependencies": {
-    "@blackbaud/skyux": "2.23.0",
-    "@blackbaud/skyux-builder": "1.20.2",
+    "@blackbaud/skyux": "2.25.0",
+    "@blackbaud/skyux-builder": "1.22.0",
     "@blackbaud/skyux-lib-testing": "1.0.0"
   }
 }
