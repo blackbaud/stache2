@@ -4,20 +4,52 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { SkyModule } from '@blackbaud/skyux/dist/core';
 import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
-import { StacheWindowRef } from '../shared';
+import { StacheWindowRef, StacheRouteService } from '../shared';
 
 import { StacheGridModule } from '../grid';
 import { StacheActionButtonsComponent } from './action-buttons.component';
 import { StacheNavService } from '../nav';
+import { StacheLinkModule } from '../link';
 
 describe('StacheActionButtonsComponent', () => {
   class MockNavService {
-    public navigate = jasmine.createSpy('navigate').and.callFake(() => true);
+    public isExternal = jasmine.createSpy('isExternal').and.callFake(() => false);
+  }
+
+  let mockActiveUrl = '';
+  let mockRoutes = [
+    {
+      path: '',
+      children: [
+        {
+          path: 'parent',
+          children: [
+            {
+              path: 'parent/child',
+              children: [
+                {
+                  path: 'parent/child/grandchild'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ];
+  class MockRouteService {
+    public getActiveRoutes() {
+      return mockRoutes;
+    }
+    public getActiveUrl() {
+      return mockActiveUrl;
+    }
   }
 
   let component: StacheActionButtonsComponent;
   let fixture: ComponentFixture<StacheActionButtonsComponent>;
   let mockNavService: MockNavService;
+  let mockRouteService: MockRouteService;
 
   beforeEach(() => {
     mockNavService = new MockNavService();
@@ -25,13 +57,15 @@ describe('StacheActionButtonsComponent', () => {
       imports: [
         SkyModule,
         StacheGridModule,
-        RouterTestingModule
+        RouterTestingModule,
+        StacheLinkModule
       ],
       declarations: [
         StacheActionButtonsComponent
       ],
       providers: [
         StacheWindowRef,
+        { provide: StacheRouteService, useValue: mockRouteService },
         { provide: StacheNavService, useValue: mockNavService }
       ]
     })
@@ -119,10 +153,5 @@ describe('StacheActionButtonsComponent', () => {
     fixture.detectChanges();
 
     expect(component.filteredRoutes.length).toBe(3);
-  });
-
-  it('should call the StacheNavService Navigate method to change routes', () => {
-    component.navigate({name: 'Test', path: '/'});
-    expect(mockNavService.navigate).toHaveBeenCalledWith({name: 'Test', path: '/'});
   });
 });

@@ -28,10 +28,6 @@ export class StacheActionButtonsComponent implements StacheNav, OnInit {
     this.filteredRoutes = this.routes;
   }
 
-  public navigate(route: any) {
-    this.navService.navigate(route);
-  }
-
   public onKeyUp(event: KeyboardEvent) {
     const searchText = (event.target as HTMLInputElement).value;
     this.searchApplied(searchText);
