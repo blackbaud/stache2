@@ -21,6 +21,24 @@ export class HomeComponent {
     {
       name: 'Action Button 3',
       path: 'http://google.com',
+      summary: 'Short summary here.'
+    },
+    {
+      name: 'Action Button 4',
+      path: '/demos/tutorial/tutorial-one',
+      fragment: 'clone-the-repository',
+      summary: 'Short summary here.'
+    },
+    {
+      name: '5',
+      path: '/demos/tutorial/tutorial-one',
+      fragment: 'does-not-exist',
+      icon: 'certificate',
+      summary: 'Short summary here.'
+    },
+    {
+      name: 'Action Button super long and stuff 3',
+      path: 'http://google.com',
       icon: 'certificate',
       summary: 'Short summary here.'
     },
@@ -36,6 +54,25 @@ export class HomeComponent {
       path: '/demos/tutorial/tutorial-one',
       fragment: 'does-not-exist',
       icon: 'certificate',
+      summary: 'Short summary here.'
+    },
+    {
+      name: 'Action Button 3',
+      path: 'http://google.com',
+      icon: 'certificate',
+      summary: 'Short summary here.'
+    },
+    {
+      name: 'Action Button 4',
+      path: '/demos/tutorial/tutorial-one',
+      fragment: 'clone-the-repository',
+      icon: 'certificate',
+      summary: 'Short summary here.'
+    },
+    {
+      name: 'Action Button longer title no icaon 5',
+      path: '/demos/tutorial/tutorial-one',
+      fragment: 'does-not-exist',
       summary: 'Short summary here.'
     }
   ];

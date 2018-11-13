@@ -1,34 +1,52 @@
 @import '../../styles/_variables';
 
-.stache-action-buttons {
-  margin: $stache-margin 0;
-}
+// .stache-action-buttons {
+//   margin: $stache-margin 0;
+// }
 
 .stache-action-button-override {
+  display: block;
   padding: 30px 20px;
   text-align: center;
   border: 1px solid $stache-border-color-neutral-medium;
   margin: 15px 0px;
-  width: 100%;
+  // margin-right: 15px;
+  width: 225px;
+  height: 90%;
 }
 
-.stache-action-button-override:hover {
-  text-decoration: none;
-}
+// .stache-action-button-override:hover {
+//   text-decoration: none;
+// }
 
-.stache-action-buttons-search-container {
-  position: relative;
-  display: flex;
-  min-height: 49px;
-  margin-bottom: $stache-margin;
-}
+// .stache-action-buttons-search-container {
+//   display: flex;
+//   min-height: 49px;
+//   margin-bottom: $stache-margin;
+// }
 
-/deep/
+::ng-deep
 .stache-action-buttons {
+  nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .iamaclass {
+
+  }
+
+  .stache-row {
+
+  }
+
   .stache-column {
     display: inline-flex;
   }
+
   .sky-search-dismiss-absolute {
+    position: relative !important;
     padding: 5px 0 !important;
   }
 }

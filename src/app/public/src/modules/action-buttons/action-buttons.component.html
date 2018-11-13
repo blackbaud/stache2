@@ -6,9 +6,12 @@
       (keyup)="onKeyUp($event)">
     </sky-search>
   </div>
-  <stache-row>
+  <!-- <stache-row> -->
     <nav>
-      <stache-column screenSmall="6" screenMedium="4" screenLarge="3" *ngFor="let route of filteredRoutes">
+      <!-- <stache-column screenSmall="6" screenMedium="4" screenLarge="3" *ngFor="let route of filteredRoutes"> -->
+        <div class="iamaclass" *ngFor="let route of filteredRoutes">
+
+
         <a stacheRouterLink="{{route.path}}" fragment="{{route.fragment}}" class="stache-action-button-override sky-action-button sky-btn-default sky-rounded-corners">
           <sky-action-button-icon *ngIf="route.icon" iconType="{{route.icon}}">
           </sky-action-button-icon>
@@ -19,7 +22,8 @@
             {{route.summary}}
           </sky-action-button-details>
         </a>
-      </stache-column>
+      </div>
+      <!-- </stache-column> -->
     </nav>
-  </stache-row>
+  <!-- </stache-row> -->
 </div>
