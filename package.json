@@ -15,12 +15,9 @@
   "license": "MIT",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",
-  "engines": {
-    "node": ">=6.11.1"
-  },
   "scripts": {
     "skyux": "skyux",
-    "test": "skyux test && skyux e2e && skyux build && npm run build",
+    "test": "skyux test --coverage library",
     "build": "skyux build-public-library",
     "start": "skyux serve"
   },
@@ -43,8 +40,8 @@
     "prismjs": "1.15.0"
   },
   "devDependencies": {
-    "@blackbaud/skyux": "2.25.0",
-    "@blackbaud/skyux-builder": "1.22.0",
+    "@blackbaud/skyux": "2.30.0",
+    "@blackbaud/skyux-builder": "1.29.0",
     "@blackbaud/skyux-lib-testing": "1.0.0"
   }
 }

@@ -1,22 +1,31 @@
 language: node_js
-sudo: required
-dist: trusty
 
 git:
-  depth: 10
+  depth: 5
 
 branches:
   only:
     - master
     - /^[0-9]+\.[0-9]+\.[0-9]+.*/
 
+cache:
+  directories:
+    - node_modules
+
 before_install:
-  - export CHROME_BIN=/usr/bin/google-chrome
-  - export DISPLAY=:99.0
-  - bash <(curl -s https://blackbaud.github.io/skyux-travis/library-before-install.sh)
+  - bash <(curl -s https://blackbaud.github.io/skyux-travis/v3/library-before-install.sh)
+
+install:
+  - bash <(curl -s https://blackbaud.github.io/skyux-travis/v3/library-install.sh)
+
+script:
+  - bash <(curl -s https://blackbaud.github.io/skyux-travis/v3/library-script.sh)
 
 after_script:
-  - bash <(curl -s https://blackbaud.github.io/skyux-travis/library-after-script.sh)
+  - bash <(curl -s https://blackbaud.github.io/skyux-travis/v3/library-after-script.sh)
 
 after_success:
-  - bash <(curl -s https://blackbaud.github.io/skyux-travis/library-after-success.sh)
+  - bash <(curl -s https://blackbaud.github.io/skyux-travis/v3/library-after-success.sh)
+
+after_failure:
+  - bash <(curl -s https://blackbaud.github.io/skyux-travis/v3/library-after-failure.sh)

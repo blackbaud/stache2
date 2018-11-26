@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/@skyux/config/skyuxconfig-schema.json",
   "name": "stache2",
   "mode": "easy",
   "compileMode": "aot",
@@ -60,6 +61,11 @@
         "clientId": "UA-2418840-1",
         "tagManagerContainerId": "GTM-W56QP9"
       }
+    }
+  },
+  "testSettings": {
+    "unit": {
+      "browserSet": "speedy"
     }
   }
 }
