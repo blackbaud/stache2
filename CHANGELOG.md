@@ -1,5 +1,5 @@
 # 2.14.0 (2018-11-29)
-- Added `Hide From Search` component to allow users to exclude content from Stache search results. [#557](https://github.com/blackbaud/stache2/pull/557)
+- Added `stache-hide-from-search` component to allow users to exclude content from Stache search results. [#557](https://github.com/blackbaud/stache2/pull/557)
 - Fixed alignment issue with sidebar and table of contents. [#556](https://github.com/blackbaud/stache2/pull/556)
 - Updated dependencies to use SKY UX components directly. [#553](https://github.com/blackbaud/stache2/pull/553)
   - Updated version of SKY UX Builder.
