@@ -1,11 +1,11 @@
 # 2.14.0 (2018-11-29)
-- Added `stache-hide-from-search` component to allow users to remove content from Stache Search results. [#557](https://github.com/blackbaud/stache2/pull/557)
-- Fixed alignment issue with sidebar and table of contents alignment. [#556](https://github.com/blackbaud/stache2/pull/556)
-- Updated version of `skyux-builder`.
-- Updated Travis build options to enhance test utility.
-- Updated skyux dependencies to depend on components directly. [#553](https://github.com/blackbaud/stache2/pull/553)
-- Updated to allow `Action Button` comopnent to be used without icons.
-- Updated `Action Button` component to be accessible. [#548](https://github.com/blackbaud/stache2/pull/548)
+- Added `Hide From Search` component to allow users to exclude content from Stache search results. [#557](https://github.com/blackbaud/stache2/pull/557)
+- Fixed alignment issue with sidebar and table of contents. [#556](https://github.com/blackbaud/stache2/pull/556)
+- Updated dependencies to use SKY UX components directly. [#553](https://github.com/blackbaud/stache2/pull/553)
+  - Updated version of SKY UX Builder.
+  - Updated Travis build options to enhance test utility.
+- Updated to allow `Action Button` comopnent to be used without icons. [#548](https://github.com/blackbaud/stache2/pull/548)
+  - Updated `Action Button` component to be accessible.
 - Update `Code Block` component to use accessible code highlighting coloring. [#551](https://github.com/blackbaud/stache2/pull/551)
 
 # 2.13.0 (2018-10-23)
