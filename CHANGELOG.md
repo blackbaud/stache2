@@ -4,9 +4,8 @@
 - Updated dependencies to use SKY UX components directly. [#553](https://github.com/blackbaud/stache2/pull/553)
   - Updated version of SKY UX Builder.
   - Updated Travis build options to enhance test utility.
-- Updated to allow `Action Button` comopnent to be used without icons. [#548](https://github.com/blackbaud/stache2/pull/548)
-  - Updated `Action Button` component to be accessible.
-- Update `Code Block` component to use accessible code highlighting coloring. [#551](https://github.com/blackbaud/stache2/pull/551)
+- Updated the `stache-action-buttons` component to improve accessibility and allow action buttons without icons. [#548](https://github.com/blackbaud/stache2/pull/548)
+- Updated `stache-code-block` component to improve accessibility by increasing the color contrast. [#551](https://github.com/blackbaud/stache2/pull/551)
 
 # 2.13.0 (2018-10-23)
 - Updated [skyux-builder-plugin-stache](https://github.com/blackbaud/skyux-builder-plugin-stache/blob/master/CHANGELOG.md#151-2018-08-02) dependency to `~1.7.0`.
