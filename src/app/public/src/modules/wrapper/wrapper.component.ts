@@ -7,8 +7,8 @@ import {
   AfterViewInit,
   ChangeDetectorRef
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription, Subject } from 'rxjs';
 import { StacheTitleService } from './title.service';
 import { StacheConfigService, StacheJsonDataService, StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
 import { StacheNavLink } from '../nav';
@@ -63,7 +63,9 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
 
   public jsonData: any;
   public inPageRoutes: StacheNavLink[] = [];
+  public ngUnsubscribe = new Subject();
   private pageAnchorSubscription: Subscription;
+  private currentRoute: string = '';
 
   public constructor(
     private config: StacheConfigService,
@@ -74,9 +76,11 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private anchorService: StachePageAnchorService,
     private cdr: ChangeDetectorRef,
     private windowRef: StacheWindowRef,
+    private router: Router,
     private omnibarService: StacheOmnibarAdapterService) { }
 
   public ngOnInit(): void {
+    this.currentRoute = this.router.url.split('#')[0];
     this.omnibarService.checkForOmnibar();
     this.jsonData = this.dataService.getAll();
     this.registerPageAnchors();
@@ -107,15 +111,21 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   private registerPageAnchors(): void {
     this.inPageRoutes = [];
     this.destroyPageAnchorSubscription();
-    this.pageAnchorSubscription = this.anchorService.anchorStream.subscribe(
-      link => {
+    // TODO: Add note about what this does
+    this.route.url.subscribe(url => {
+      if (this.router.url.split('#')[0] !== this.currentRoute) {
+        this.inPageRoutes = [];
+      }
+      this.currentRoute = this.router.url.split('#')[0];
+    });
+    this.pageAnchorSubscription = this.anchorService.anchorStream
+      .subscribe(link => {
         if (link.order !== undefined) {
           this.inPageRoutes.splice(link.order, 0, link);
         } else {
           this.inPageRoutes.push(link);
         }
-      }
-    );
+      });
   }
 
   private checkEditButtonUrl(): boolean {
@@ -134,7 +144,7 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
         let url = '';
         this.route.url.subscribe(segments => url = segments.join('/')).unsubscribe();
         if (fragment) {
-          this.navService.navigate({path: url, fragment});
+          this.navService.navigate({ path: url, fragment });
         }
       })
       .unsubscribe();

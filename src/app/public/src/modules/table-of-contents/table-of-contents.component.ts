@@ -2,9 +2,7 @@ import {
   Component,
   Input,
   ChangeDetectorRef,
-  ChangeDetectionStrategy,
-  HostListener
-} from '@angular/core';
+  HostListener} from '@angular/core';
 import {
   StacheNav,
   StacheNavLink
@@ -15,12 +13,11 @@ import { StacheWindowRef } from '../shared';
 @Component({
   selector: 'stache-table-of-contents',
   templateUrl: './table-of-contents.component.html',
-  styleUrls: ['./table-of-contents.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./table-of-contents.component.scss']
 })
 export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit {
   @Input()
-  public routes: StacheNavLink[] = [];
+  public routes: StacheNavLink[];
 
   private headerHeight: any;
   private documentElement: any;
@@ -28,6 +25,8 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
   private pageOffset: number;
   private window: Window;
   private activeRoute: StacheNavLink;
+
+  private _currentBodyHeight: number = 0;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -46,6 +45,16 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
   public onScroll() {
     this.trackPageOffset();
     this.updateView();
+    this.calculatePageAnchorLocations();
+  }
+
+  private calculatePageAnchorLocations() {
+    if (this._currentBodyHeight !== document.body.scrollHeight) {
+      this._currentBodyHeight = document.body.scrollHeight;
+      this.routes.forEach(route => {
+        console.log(route.offsetTop);
+      });
+    }
   }
 
   private trackPageOffset() {
@@ -59,27 +68,27 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
     this.documentBottom = Math.round(this.documentElement.getBoundingClientRect().bottom);
   }
 
-    // Updates ng-class level trigger to show/hide blue border marking location on page
-    private updateView() {
-      this.routes.forEach((route: StacheNavLink, index: number) => {
-        if (this.isActiveRoute(route, index)) {
-          route.isCurrent = true;
-          this.activeRoute = route;
-        } else {
-          route.isCurrent = false;
-        }
-      });
-    }
-
-    private isActiveRoute(route: StacheNavLink, index: number): boolean {
-      if ((this.window.innerHeight + 5) >= this.documentBottom) {
-        this.activeRoute = this.routes[this.routes.length - 1];
-        return route === this.activeRoute;
+  // Updates ng-class level trigger to show/hide blue border marking location on page
+  private updateView() {
+    this.routes.forEach((route: StacheNavLink, index: number) => {
+      if (this.isActiveRoute(route, index)) {
+        route.isCurrent = true;
+        this.activeRoute = route;
+      } else {
+        route.isCurrent = false;
       }
+    });
+  }
 
-      return route.offsetTop <= this.pageOffset
-        && (this.routes[index + 1] === undefined || this.routes[index + 1].offsetTop > this.pageOffset);
+  private isActiveRoute(route: StacheNavLink, index: number): boolean {
+    if ((this.window.innerHeight + 5) >= this.documentBottom) {
+      this.activeRoute = this.routes[this.routes.length - 1];
+      return route === this.activeRoute;
     }
+
+    return route.offsetTop <= this.pageOffset
+      && (this.routes[index + 1] === undefined || this.routes[index + 1].offsetTop > this.pageOffset);
+  }
 
   // Checks to see if stache-wrapper exists and provides offset from top of window
   private getContentOffset() {
