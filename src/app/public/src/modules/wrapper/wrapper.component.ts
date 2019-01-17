@@ -111,7 +111,9 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   private registerPageAnchors(): void {
     this.inPageRoutes = [];
     this.destroyPageAnchorSubscription();
-    // TODO: Add note about what this does
+    // Reset inPageRoutes when the route changes.
+    // This is used when the angular router caches the wrapper component,
+    // causing onDestroy to not be called, which can create duplicate routes.
     this.route.url.subscribe(url => {
       if (this.router.url.split('#')[0] !== this.currentRoute) {
         this.inPageRoutes = [];

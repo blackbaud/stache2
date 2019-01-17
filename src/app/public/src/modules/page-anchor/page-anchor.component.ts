@@ -83,14 +83,4 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
       order: this.order
     } as StacheNavLink);
   }
-
-  private findAncestor(element: HTMLElement, elClass: string): HTMLElement {
-    while (element) {
-      if (element.classList.contains(elClass)) {
-        return element;
-      }
-      element = element.parentElement;
-    }
-    return undefined;
-  }
 }

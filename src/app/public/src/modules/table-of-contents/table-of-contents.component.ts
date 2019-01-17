@@ -51,9 +51,10 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
   // Update the ToC page anchor offsets when the page height updates
   // Keeps the ToC page tracking in sync when page updates dynamically
   private calculatePageAnchorLocations() {
-    if (this._currentBodyHeight !== document.body.scrollHeight) {
-      let visiblePageAnchors = this.windowRef.nativeWindow.document.querySelectorAll('stache-page-anchor');
-      this._currentBodyHeight = document.body.scrollHeight;
+    const _document = this.windowRef.nativeWindow.document;
+    if (this._currentBodyHeight !== _document.body.scrollHeight) {
+      let visiblePageAnchors = _document.querySelectorAll('stache-page-anchor');
+      this._currentBodyHeight = _document.body.scrollHeight;
       this.routes.forEach((route, index) => {
         const newOffset = this.getValidOffsetTop(visiblePageAnchors[index]);
         route.offsetTop = newOffset;
@@ -64,7 +65,7 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
   // Sometimes offsetTop will be a sub-zero number and will ruin page tracking sync
   // This runs up the parent tree until it finds an element that has a useable offset value
   private getValidOffsetTop(element: any): number {
-    if (element.offsetTop < 1) {
+    if (element.offsetTop < 1 && element.parentElement) {
       return this.getValidOffsetTop(element.parentElement);
     }
     return element.offsetTop;

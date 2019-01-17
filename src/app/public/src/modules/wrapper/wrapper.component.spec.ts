@@ -24,7 +24,8 @@ import {
 import { StacheLayoutModule } from '../layout';
 import { StachePageAnchorModule, StachePageAnchorService } from '../page-anchor';
 import { SkyMediaQueryModule } from '@blackbaud/skyux/dist/core';
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Pipe({
   name: 'skyAppResources'
@@ -68,7 +69,7 @@ describe('StacheWrapperComponent', () => {
 
   class MockActivatedRoute {
     public fragment: Observable<string> = Observable.of('test-route');
-    public url: Observable<string[]> = Observable.of(['test', 'routes']);
+    public url: BehaviorSubject<string[]> = new BehaviorSubject(['test', 'route']);
     // snapshot is a required prop on activatedRoute to avoid an error with `'_lastPathIndex' of undefined`
     // https://stackoverflow.com/questions/41245783/angular-testing-router-params-breaks-test-bed
     public snapshot = {};
@@ -459,5 +460,16 @@ describe('StacheWrapperComponent', () => {
     testFixture.detectChanges();
     expect(subscribeSpy).toHaveBeenCalled();
     expect(navSpy).not.toHaveBeenCalled();
+  });
+
+  it('should reset inPageRoutes when current url updates', () => {
+      const testFixture = TestBed.createComponent(StacheWrapperTestComponent);
+      const testComponent = testFixture.componentInstance;
+
+      testFixture.detectChanges();
+      testComponent.testWrapper.currentRoute = '/test';
+      testComponent.testWrapper.route.url.next(['test', 'two']);
+
+      expect(testComponent.testWrapper.inPageRoutes.length).toBe(0);
   });
 });

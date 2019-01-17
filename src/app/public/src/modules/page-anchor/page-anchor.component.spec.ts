@@ -132,8 +132,7 @@ describe('StachePageAnchorComponent', () => {
       path: ['/'],
       name: 'Test Content',
       fragment: 'test-content',
-      order: 1,
-      offsetTop: 0
+      order: 1
     };
 
     component.ngOnInit();
@@ -145,11 +144,5 @@ describe('StachePageAnchorComponent', () => {
     component.scrollToAnchor();
     fixture.detectChanges();
     expect(mockWindowService.testElement.scrollIntoView).toHaveBeenCalled();
-  });
-
-  it('finds a tutorial anchor', () => {
-    fixture.debugElement.nativeElement.classList = ['stache-tutorial-step'];
-    component.ngAfterViewInit();
-    expect(component.offsetTop).not.toBe(undefined);
   });
 });

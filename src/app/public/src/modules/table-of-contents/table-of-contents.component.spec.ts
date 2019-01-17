@@ -21,6 +21,12 @@ describe('StacheTableOfContentsComponent', () => {
           querySelector: () => {
             return this.testElement;
           }
+        },
+        querySelectorAll: () => {
+          return this.testElements;
+        },
+        body: {
+          scrollHeight: 100
         }
       },
       innerHeight: 100,
@@ -30,6 +36,12 @@ describe('StacheTableOfContentsComponent', () => {
     public testElement = {
       offsetTop: 100
     };
+
+    public testElements = [
+      { offsetTop: 100 },
+      { offsetTop: 120 },
+      { offsetTop: 140 }
+    ];
   }
 
   const route: StacheNavLink = {
@@ -102,5 +114,80 @@ describe('StacheTableOfContentsComponent', () => {
     expect(component['window'].innerHeight).toEqual(100);
     expect(component['activeRoute']).toEqual(route);
     expect(route.isCurrent).toBeTruthy();
+  });
+
+  it('should get valid offsetTop, element has valid offset', () => {
+    const testElement = {
+      offsetTop: 30
+    };
+
+    const result = component['getValidOffsetTop'](testElement);
+
+    expect(result).toBe(30);
+  });
+
+  it('should get valid offsetTop, parent has valid offset', () => {
+    const testElement = {
+      offsetTop: 0,
+      parentElement: {
+        offsetTop: 30
+      }
+    };
+
+    const result = component['getValidOffsetTop'](testElement);
+
+    expect(result).toBe(30);
+  });
+
+  // How to best handle this? We need a solution to break out of infinite recursion
+  // Note: this would likely never happen in practice, but luck favors the prepared
+  it('should get invalid offsetTop, parent does not exist', () => {
+    const testElement = {
+      offsetTop: 0
+    };
+
+    const result = component['getValidOffsetTop'](testElement);
+
+    expect(result).toBe(0);
+  });
+
+  const route2: StacheNavLink = {
+    name: 'string',
+    path: '/test',
+    offsetTop: 100,
+    isCurrent: false
+  };
+
+  const route3: StacheNavLink = {
+    name: 'string',
+    path: '/test',
+    offsetTop: 100,
+    isCurrent: false
+  };
+
+  it('should calculate page anchor locations on load', () => {
+    component.routes.push(route2);
+    component.routes.push(route3);
+
+    component['calculatePageAnchorLocations']();
+    const routeOffsets = component.routes.map(r => r.offsetTop);
+
+    expect(routeOffsets.length).toBe(3);
+    expect(routeOffsets[0]).toBe(100);
+    expect(routeOffsets[1]).toBe(120);
+    expect(routeOffsets[2]).toBe(140);
+
+    component.routes = Array.of(component.routes[0]);
+  });
+
+  it('page anchors only update when body height changes', () => {
+    spyOn<any>(component, 'getValidOffsetTop').and.callThrough();
+
+    mockWindowService.nativeWindow.document.body.scrollHeight = 200;
+    component['calculatePageAnchorLocations']();
+    component['calculatePageAnchorLocations']();
+
+    const result = component['getValidOffsetTop'] as any;
+    expect(result.calls.count()).toBe(1);
   });
 });
