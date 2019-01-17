@@ -37,15 +37,17 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
   }
 
   public ngAfterViewInit() {
-    this.cdr.markForCheck();
+    this.updateView();
     this.getContentOffset();
+    this.cdr.markForCheck();
+
   }
 
   @HostListener('window:scroll')
   public onScroll() {
     this.trackPageOffset();
-    this.updateView();
     this.calculatePageAnchorLocations();
+    this.updateView();
   }
 
   // Update the ToC page anchor offsets when the page height updates
