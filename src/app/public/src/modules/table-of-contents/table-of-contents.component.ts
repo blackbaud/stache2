@@ -1,7 +1,6 @@
 import {
   Component,
   Input,
-  ChangeDetectorRef,
   HostListener} from '@angular/core';
 import {
   StacheNav,
@@ -28,19 +27,13 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
 
   private _currentBodyHeight: number = 0;
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private windowRef: StacheWindowRef
-  ) {
+  constructor(private windowRef: StacheWindowRef) {
     this.window = this.windowRef.nativeWindow;
     this.documentElement = this.window.document.documentElement;
   }
 
   public ngAfterViewInit() {
-    this.updateView();
     this.getContentOffset();
-    this.cdr.markForCheck();
-
   }
 
   @HostListener('window:scroll')
