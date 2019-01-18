@@ -79,12 +79,6 @@ describe('StacheTableOfContentsComponent', () => {
     expect(fixture).toExist();
   });
 
-  it('should detect changes after init', () => {
-    const spy = spyOn((component as any).cdr, 'markForCheck');
-    component.ngAfterViewInit();
-    expect(spy).toHaveBeenCalled();
-  });
-
   it('should scroll, route offset <= page offset', () => {
     mockWindowService.nativeWindow.innerHeight = undefined;
     component.ngAfterViewInit();
