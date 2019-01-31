@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { StacheWindowRef } from '../shared';
+import { StacheNavLink } from './nav-link';
 
 @Injectable()
 export class StacheNavService {
+  private headerHeight: number;
+  private pageOffset: number;
+  private documentBottom: number;
+
   public constructor(
     private router: Router,
-    private windowRef: StacheWindowRef) { }
+    private windowRef: StacheWindowRef) {}
 
   public navigate(route: any): void {
     let extras: any = { queryParamsHandling: 'merge'};
@@ -44,6 +49,49 @@ export class StacheNavService {
       return false;
     }
     return /^(https?|mailto|ftp):+|^(www)/.test(path);
+  }
+
+  public updateRoutesOnScroll(routes: StacheNavLink[]) {
+    this.updateView(routes);
+  }
+
+  // Updates ng-class level trigger to show/hide blue border marking location on page
+  public updateView(routes: StacheNavLink[]) {
+    this.trackPageOffset();
+    this.isCurrent(routes);
+  }
+
+  // Checks to see if stache-wrapper exists and provides offset from top of window
+  private getHeaderHeight() {
+    const stacheWrapper = this.windowRef.nativeWindow.document.querySelector('.stache-wrapper');
+
+    if (stacheWrapper) {
+      this.headerHeight = stacheWrapper.offsetTop;
+    }
+  }
+
+  private trackPageOffset() {
+    this.getHeaderHeight();
+
+    // Represents top of page
+    // headerHeight buffer removes discrepency when hero or other 'header' elements exist
+    // 50px buffer aids in click-to-anchor and user visualization
+    this.pageOffset = ((this.windowRef.nativeWindow.pageYOffset - this.headerHeight) + 50);
+
+    // Tracks page bottom so final route can be highlighted if associated anchor provides limited content
+    // (Logic based on Angular implementation)
+    this.documentBottom = Math.round(this.windowRef.nativeWindow.document.documentElement.getBoundingClientRect().bottom);
+  }
+
+  private isCurrent(routes: StacheNavLink[]): void {
+    routes.forEach((route, index) => {
+      if ((this.windowRef.nativeWindow.innerHeight + 5) >= this.documentBottom) {
+        route.isCurrent = route === routes[routes.length - 1];
+      } else {
+        route.isCurrent = route.offsetTop <= this.pageOffset
+         && (routes[index + 1] === undefined || routes[index + 1].offsetTop > this.pageOffset);
+      }
+    });
   }
 
   private isCurrentRoute(routePath: string | string[], currentPath: string): boolean {

@@ -4,7 +4,8 @@ import {
   ElementRef,
   OnInit,
   AfterViewInit,
-  Input
+  Input,
+  HostListener
 } from '@angular/core';
 import {
   StacheWindowRef,
@@ -24,6 +25,9 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
   public fragment: string;
   public path: string[];
   public order: number;
+  public offsetTop: number;
+
+  private currentBodyHeight: number;
 
   @Input()
   public anchorId?: string;
@@ -41,6 +45,7 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
     this.name = this.getName();
     this.fragment = this.getFragment();
     this.path = [this.routerService.getActiveUrl()];
+    this.offsetTop = this.anchorService.getValidOffsetTop(this.elementRef.nativeElement);
   }
 
   public scrollToAnchor(): void {
@@ -80,7 +85,8 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
       path: this.path,
       name: this.name,
       fragment: this.fragment,
-      order: this.order
+      order: this.order,
+      offsetTop: this.offsetTop
     } as StacheNavLink);
   }
 }

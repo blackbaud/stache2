@@ -5,7 +5,8 @@ import {
   OnDestroy,
   Input,
   AfterViewInit,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  HostListener
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, Subject } from 'rxjs';
@@ -70,6 +71,7 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   public constructor(
     private config: StacheConfigService,
     private dataService: StacheJsonDataService,
+    private pageAnchorService: StachePageAnchorService,
     private titleService: StacheTitleService,
     private route: ActivatedRoute,
     private navService: StacheNavService,
@@ -79,14 +81,20 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private router: Router,
     private omnibarService: StacheOmnibarAdapterService) { }
 
+  @HostListener('window:scroll')
+  public onScroll() {
+    this.inPageRoutes = this.pageAnchorService.updatePageAnchorsOnScroll();
+    this.navService.updateRoutesOnScroll(this.inPageRoutes);
+  }
+
   public ngOnInit(): void {
     this.currentRoute = this.router.url.split('#')[0];
     this.omnibarService.checkForOmnibar();
     this.jsonData = this.dataService.getAll();
-    this.registerPageAnchors();
   }
 
   public ngAfterViewInit() {
+    this.inPageRoutes = this.pageAnchorService.pageAnchors;
     const preferredDocumentTitle = this.getPreferredDocumentTitle();
     this.titleService.setTitle(preferredDocumentTitle);
     this.checkRouteHash();
@@ -109,25 +117,30 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   private registerPageAnchors(): void {
-    this.inPageRoutes = [];
-    this.destroyPageAnchorSubscription();
-    // Reset inPageRoutes when the route changes.
-    // This is used when the angular router caches the wrapper component,
-    // causing onDestroy to not be called, which can create duplicate routes.
-    this.route.url.subscribe(url => {
-      if (this.router.url.split('#')[0] !== this.currentRoute) {
-        this.inPageRoutes = [];
-      }
-      this.currentRoute = this.router.url.split('#')[0];
-    });
-    this.pageAnchorSubscription = this.anchorService.anchorStream
-      .subscribe(link => {
-        if (link.order !== undefined) {
-          this.inPageRoutes.splice(link.order, 0, link);
-        } else {
-          this.inPageRoutes.push(link);
-        }
-      });
+    // this.destroyPageAnchorSubscription();
+    // // Reset inPageRoutes when the route changes.
+    // // This is used when the angular router caches the wrapper component,
+    // // causing onDestroy to not be called, which can create duplicate routes.
+    // this.route.url.subscribe(url => {
+    //   if (this.router.url.split('#')[0] !== this.currentRoute) {
+    //     this.inPageRoutes = [];
+    //   }
+    //   this.currentRoute = this.router.url.split('#')[0];
+    // });
+    // this.pageAnchorSubscription = this.anchorService.anchorStream
+    //   .subscribe(link => {
+    //     let existingLink = this.inPageRoutes.filter(route => route.name === link.name)[0];
+    //     if (existingLink) {
+    //       // Allow pageAnchors to be updated dynamically
+    //       existingLink = link;
+    //     } else {
+    //       if (link.order !== undefined) {
+    //         this.inPageRoutes.splice(link.order, 0, link);
+    //       } else {
+    //         this.inPageRoutes.push(link);
+    //       }
+    //     }
+    //   });
   }
 
   private checkEditButtonUrl(): boolean {

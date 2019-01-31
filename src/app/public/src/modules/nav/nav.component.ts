@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, HostListener, ChangeDetectorRef } from '@angular/core';
 
 import { StacheNavLink } from './nav-link';
 import { StacheNav } from './nav';
 
 import { StacheRouteService } from '../shared';
+import { SkyAppWindowRef } from '@skyux/core';
+import { StacheNavService } from './nav.service';
 
 @Component({
   selector: 'stache-nav',
@@ -13,14 +15,15 @@ import { StacheRouteService } from '../shared';
 export class StacheNavComponent implements OnInit, StacheNav {
   @Input()
   public routes: StacheNavLink[];
-
   @Input()
   public navType: string;
-
   public classname: string = '';
 
   public constructor(
-    private routerService: StacheRouteService) { }
+    private routerService: StacheRouteService,
+    private windowRef: SkyAppWindowRef,
+    private navService: StacheNavService
+  ) { }
 
   public hasRoutes(): boolean {
     return (Array.isArray(this.routes) && this.routes.length > 0);
@@ -41,14 +44,12 @@ export class StacheNavComponent implements OnInit, StacheNav {
   private assignActiveStates() {
     const activeUrl = this.routerService.getActiveUrl();
     if (this.hasRoutes()) {
-      this.routes.forEach((route: any) => {
+      this.routes.forEach((route: any, index: number) => {
         if (this.isActive(activeUrl, route)) {
           route.isActive = true;
         }
 
-        if (this.isCurrent(activeUrl, route)) {
-          route.isCurrent = true;
-        }
+        route.isCurrent = this.isCurrent(activeUrl, route, index);
       });
     }
   }
@@ -73,13 +74,17 @@ export class StacheNavComponent implements OnInit, StacheNav {
     return (isActiveParent || activeUrl === path);
   }
 
-  private isCurrent(activeUrl: string, route: any): boolean {
-    let path = route.path;
+  private isCurrent(activeUrl: string, route: any, index): boolean {
+    if (this.navType = "table-of-contents") {
+      let path = route.path;
 
-    if (path.join) {
-      path = path.join('/');
+      if (path.join) {
+        path = path.join('/');
+      }
+
+      return (activeUrl === `/${path}`);
+    } else {
+      return this.navService.isCurrent(route, index);
     }
-
-    return (activeUrl === `/${path}`);
   }
 }
