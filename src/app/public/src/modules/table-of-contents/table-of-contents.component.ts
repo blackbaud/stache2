@@ -1,13 +1,5 @@
-import {
-  Component,
-  Input,
-  HostListener} from '@angular/core';
-import {
-  StacheNav,
-  StacheNavLink
-} from '../nav';
-import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
-import { StacheWindowRef } from '../shared';
+import { Component, Input } from '@angular/core';
+import { StacheNavLink } from '../nav';
 
 @Component({
   selector: 'stache-table-of-contents',

@@ -1,11 +1,7 @@
-import { Component, Input, OnInit, AfterViewInit, HostListener, ChangeDetectorRef } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
 import { StacheNavLink } from './nav-link';
 import { StacheNav } from './nav';
-
 import { StacheRouteService } from '../shared';
-import { SkyAppWindowRef } from '@skyux/core';
-import { StacheNavService } from './nav.service';
 
 @Component({
   selector: 'stache-nav',
@@ -19,11 +15,7 @@ export class StacheNavComponent implements OnInit, StacheNav {
   public navType: string;
   public classname: string = '';
 
-  public constructor(
-    private routerService: StacheRouteService,
-    private windowRef: SkyAppWindowRef,
-    private navService: StacheNavService
-  ) { }
+  public constructor(private routerService: StacheRouteService) { }
 
   public hasRoutes(): boolean {
     return (Array.isArray(this.routes) && this.routes.length > 0);
@@ -48,8 +40,7 @@ export class StacheNavComponent implements OnInit, StacheNav {
         if (this.isActive(activeUrl, route)) {
           route.isActive = true;
         }
-
-        route.isCurrent = this.isCurrent(activeUrl, route, index);
+        route.isCurrent = this.isCurrent(activeUrl, route);
       });
     }
   }
@@ -74,17 +65,13 @@ export class StacheNavComponent implements OnInit, StacheNav {
     return (isActiveParent || activeUrl === path);
   }
 
-  private isCurrent(activeUrl: string, route: any, index): boolean {
-    if (this.navType = "table-of-contents") {
-      let path = route.path;
+  private isCurrent(activeUrl: string, route: any): boolean {
+    let path = route.path;
 
-      if (path.join) {
-        path = path.join('/');
-      }
-
-      return (activeUrl === `/${path}`);
-    } else {
-      return this.navService.isCurrent(route, index);
+    if (path.join) {
+      path = path.join('/');
     }
+
+    return (activeUrl === `/${path}`);
   }
 }

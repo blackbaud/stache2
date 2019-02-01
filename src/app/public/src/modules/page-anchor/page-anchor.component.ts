@@ -4,8 +4,7 @@ import {
   ElementRef,
   OnInit,
   AfterViewInit,
-  Input,
-  HostListener
+  Input
 } from '@angular/core';
 import {
   StacheWindowRef,

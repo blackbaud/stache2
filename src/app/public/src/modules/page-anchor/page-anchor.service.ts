@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StacheNavLink } from '../nav';
 import { SkyAppWindowRef } from '@skyux/core';
-import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 
 @Injectable()
 export class StachePageAnchorService {
