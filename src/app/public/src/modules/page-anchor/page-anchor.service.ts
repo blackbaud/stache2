@@ -35,11 +35,11 @@ export class StachePageAnchorService {
   }
 
   public updatePageAnchorsOnScroll() {
-    const body = this.windowRef.nativeWindow.document;
+    const document = this.windowRef.nativeWindow.document;
     // Update the page anchor offsets when the page height updates
-    if (this.currentBodyHeight !== body.body.scrollHeight) {
-      this.currentBodyHeight = body.body.scrollHeight;
-      const anchors = this.windowRef.nativeWindow.document.querySelectorAll('stache-page-anchor');
+    if (this.currentBodyHeight !== document.body.scrollHeight) {
+      this.currentBodyHeight = document.body.scrollHeight;
+      const anchors = document.querySelectorAll('stache-page-anchor');
       anchors.forEach((anchor: any, index: number) => {
         this.pageAnchors[index].offsetTop = this.getValidOffsetTop(anchor);
         this.addPageAnchor(this.pageAnchors[index]);
