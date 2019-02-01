@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
 import { StacheNavLink } from '../nav';
 import { SkyAppWindowRef } from '@skyux/core';
+import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 @Injectable()
 export class StachePageAnchorService {
   public pageAnchors: any[] = [];
   private currentBodyHeight: number;
 
-  constructor(private windowRef: SkyAppWindowRef) {}
+  constructor(
+    private windowRef: SkyAppWindowRef,
+    private router: Router
+  ) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.pageAnchors = [];
+      }
+    });
+  }
 
   public addPageAnchor(anchor: StacheNavLink) {
     if (anchor.name) {

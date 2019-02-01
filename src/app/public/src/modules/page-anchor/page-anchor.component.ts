@@ -27,8 +27,6 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
   public order: number;
   public offsetTop: number;
 
-  private currentBodyHeight: number;
-
   @Input()
   public anchorId?: string;
 
