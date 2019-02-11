@@ -1,4 +1,7 @@
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import {
+  expect
+} from '@skyux-sdk/testing';
+
 import { StacheHideFromSearchModule } from './hide-from-search.module';
 
 describe('StacheHideFromSearchModule', () => {

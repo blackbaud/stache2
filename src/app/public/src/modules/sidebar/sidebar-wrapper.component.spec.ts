@@ -20,8 +20,14 @@ import {
 
 import { RouterLinkStubDirective } from './fixtures/router-link-stub.directive';
 import { StacheLinkModule } from '../link';
-import { SkyAppResourcesService } from '@blackbaud/skyux-builder/runtime/i18n';
-import { SkyMediaQueryModule } from '@blackbaud/skyux/dist/core';
+
+import {
+  SkyMediaQueryModule
+} from '@skyux/core';
+
+import {
+  SkyAppResourcesService
+} from '@skyux/i18n';
 
 @Pipe({
   name: 'skyAppResources'

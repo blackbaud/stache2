@@ -6,8 +6,14 @@ import { expect } from '@blackbaud/skyux-lib-testing';
 import { StacheFooterComponent } from './footer.component';
 import { StacheNavModule } from '../nav';
 import { StacheConfigService, StacheWindowRef, StacheRouteService } from '../shared';
-import { SkyAppResourcesService } from '@blackbaud/skyux-builder/runtime/i18n';
-import { SkyMediaQueryModule } from '@blackbaud/skyux/dist/core';
+
+import {
+  SkyMediaQueryModule
+} from '@skyux/core';
+
+import {
+  SkyAppResourcesService
+} from '@skyux/i18n';
 
 @Pipe({
   name: 'skyAppResources'
@@ -39,12 +45,7 @@ class MockSkyAppResourcesService {
   }
 }
 
-class MockNavService {
-  public isExternal = jasmine.createSpy('isExternal').and.callFake(() => false);
-}
-
 describe('StacheFooterComponent', () => {
-  let mockNavService: MockNavService;
   let component: StacheFooterComponent;
   let fixture: ComponentFixture<StacheFooterComponent>;
   let mockConfigService: any;
@@ -84,7 +85,6 @@ describe('StacheFooterComponent', () => {
   }
 
   beforeEach(() => {
-    mockNavService = new MockNavService();
     mockConfigService = new MockConfigService();
     mockRouterService = new MockRouterService();
     mockSkyAppResourcesService = new MockSkyAppResourcesService();

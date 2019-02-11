@@ -74,6 +74,9 @@ describe('InputConverter', () => {
         public myArray: number[];
       }
       component = new BadMockComponent();
+
+      // Necessary to keep TS happy
+      component.myArray = [];
     } catch (error) {
       expect(error.message).toBe('There is no converter for the given property type Array.');
     }
@@ -88,6 +91,9 @@ describe('InputConverter', () => {
         public myNumber: number;
       }
       component = new BadMockComponent();
+
+      // Necessary to keep TS happy
+      component.myNumber = 0;
     } catch (error) {
       expect(error.message).toBe('The reflection metadata could not be found.');
     }

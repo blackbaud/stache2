@@ -37,10 +37,13 @@ import { StacheHideFromSearchModule } from './modules/hide-from-search/hide-from
 import { SkyCodeBlockModule } from '@blackbaud/skyux-lib-code-block';
 import { SkyClipboardModule } from '@blackbaud/skyux-lib-clipboard';
 
+import { AppSkyModule } from './app-sky.module';
+
 export * from './modules/shared';
 
 @NgModule({
   exports: [
+    AppSkyModule,
     StacheActionButtonsModule,
     StacheAffixModule,
     StacheAnalyticsModule,

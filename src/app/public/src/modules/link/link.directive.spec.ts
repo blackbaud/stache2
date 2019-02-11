@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { expect, SkyAppTestUtility } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import { expect, SkyAppTestUtility } from '@skyux-sdk/testing';
 
 import { StacheRouterLinkDirective } from './link.directive';
 import { StacheRouterLinkTestComponent } from './fixtures/link.component.fixture';
@@ -12,19 +12,14 @@ import { LocationStrategy } from '@angular/common';
 import { StacheRouterLinkTestLocalRouteComponent } from './fixtures/link.component_localroute.fixture';
 
 describe('StacheLinkDirective', () => {
-  let component: StacheRouterLinkTestComponent;
   let debugElement: DebugElement;
   let directiveElement: any;
   let fixture: ComponentFixture<StacheRouterLinkTestComponent>;
   let mockNavService: any;
   let mockRouteService: any;
-  let path: string;
-  let fragment: string;
 
   class MockNavService {
     public navigate = jasmine.createSpy('navigate').and.callFake((routeObj: any) => {
-      path = routeObj.path;
-      fragment = routeObj.fragment;
     });
 
     public isExternal(route: any): boolean {
@@ -88,7 +83,6 @@ describe('StacheLinkDirective', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(StacheRouterLinkTestComponent);
-    component = fixture.componentInstance;
     directiveElement = fixture.debugElement.query(By.directive(StacheRouterLinkDirective));
     debugElement = fixture.debugElement;
   });
@@ -122,7 +116,6 @@ describe('StacheLinkDirective', () => {
 
   it('should set stacheRouterLink input to internal urls', async(() => {
     fixture = TestBed.createComponent(StacheRouterLinkTestLocalRouteComponent);
-    component = fixture.componentInstance;
     directiveElement = fixture.debugElement.query(By.directive(StacheRouterLinkDirective));
 
     const directiveInstance = directiveElement.injector.get(StacheRouterLinkDirective);
@@ -134,7 +127,6 @@ describe('StacheLinkDirective', () => {
   it('should set stacheRouterLink input to same page urls', async(() => {
     mockActiveUrl = '/test-page';
     fixture = TestBed.createComponent(StacheRouterLinkTestLocalRouteComponent);
-    component = fixture.componentInstance;
     directiveElement = fixture.debugElement.query(By.directive(StacheRouterLinkDirective));
 
     const directiveInstance = directiveElement.injector.get(StacheRouterLinkDirective);
@@ -145,7 +137,6 @@ describe('StacheLinkDirective', () => {
 
   it('should set stacheRouterLink input to external urls', async(() => {
     fixture = TestBed.createComponent(StacheRouterLinkTestLocalRouteComponent);
-    component = fixture.componentInstance;
     directiveElement = fixture.debugElement.query(By.directive(StacheRouterLinkDirective));
 
     const directiveInstance = directiveElement.injector.get(StacheRouterLinkDirective);

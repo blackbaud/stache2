@@ -1,6 +1,10 @@
 import { Component, Input, Renderer2, OnDestroy, AfterViewInit } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { SkyMediaQueryService, SkyMediaBreakpoints } from '@blackbaud/skyux/dist/core';
+import { Subscription } from 'rxjs';
+
+import {
+  SkyMediaBreakpoints,
+  SkyMediaQueryService
+} from '@skyux/core';
 
 import { StacheNavLink } from '../nav';
 import { StacheWindowRef } from '../shared';

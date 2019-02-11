@@ -1,9 +1,12 @@
+
+import { of as observableOf } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Observable } from 'rxjs';
+import {
+  expect
+} from '@skyux-sdk/testing';
 
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { StacheWindowRef, StacheConfigService } from '../shared';
@@ -12,7 +15,6 @@ import { StacheGoogleAnalyticsDirective } from './google-analytics.directive';
 import { StacheGoogleAnalyticsTestComponent } from './fixtures/google-analytics.component.fixture';
 
 describe('StacheGoogleAnalyticsDirective', () => {
-  let component: StacheGoogleAnalyticsTestComponent;
   let fixture: ComponentFixture<StacheGoogleAnalyticsTestComponent>;
   let mockWindowService: any;
   let mockConfigService: any;
@@ -52,7 +54,7 @@ describe('StacheGoogleAnalyticsDirective', () => {
   }
 
   class MockRouter {
-    public events = Observable.of(new NavigationEnd(0, '', ''));
+    public events = observableOf(new NavigationEnd(0, '', ''));
   }
 
   beforeEach(() => {
@@ -74,7 +76,6 @@ describe('StacheGoogleAnalyticsDirective', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(StacheGoogleAnalyticsTestComponent);
-    component = fixture.componentInstance;
     directiveElement = fixture.debugElement.query(By.directive(StacheGoogleAnalyticsDirective));
   });
 

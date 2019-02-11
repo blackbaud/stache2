@@ -1,6 +1,6 @@
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { of as observableOf } from 'rxjs';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 
 import { StacheRouteService } from './route.service';
 import { StacheConfigService } from './config.service';
@@ -88,7 +88,7 @@ class MockStacheConfigService {
 
 class MockRouter {
   public url = '/parent/child/grandchild';
-  public events = Observable.of(new NavigationStart(0, ''));
+  public events = observableOf(new NavigationStart(0, ''));
 }
 
 class MockStacheRouteMetadataService {
@@ -200,7 +200,7 @@ describe('StacheRouteService', () => {
   });
 
   it('should only unset the active routes on NavigationStart', () => {
-    router.events = Observable.of(new NavigationEnd(0, '', ''));
+    router.events = observableOf(new NavigationEnd(0, '', ''));
     spyOn(StacheRouteService.prototype, 'clearActiveRoutes');
     routeService = new StacheRouteService(
       router as Router,

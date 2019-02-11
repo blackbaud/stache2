@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EventManager } from '@angular/platform-browser';
 
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Observable ,  ReplaySubject } from 'rxjs';
 
 function getWindow(): any {
   return window;

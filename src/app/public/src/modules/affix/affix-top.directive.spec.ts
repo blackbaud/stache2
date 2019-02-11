@@ -1,7 +1,9 @@
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, fakeAsync, inject, tick, TestBed } from '@angular/core/testing';
 
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import {
+  expect
+} from '@skyux-sdk/testing';
 
 import { StacheAffixTopDirective } from './affix-top.directive';
 import { AffixTopTestComponent } from './fixtures/affix-top.component.fixture';
@@ -19,7 +21,6 @@ describe('AffixTopTestDirective', () => {
   }
 
   const mockOmnibarService = new MockOmnibarService();
-  let component: AffixTopTestComponent;
   let fixture: ComponentFixture<AffixTopTestComponent>;
   let directiveElements: any[];
   let windowRef: any;
@@ -42,7 +43,6 @@ describe('AffixTopTestDirective', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(AffixTopTestComponent);
-    component = fixture.componentInstance;
     directiveElements = fixture.debugElement.queryAll(By.directive(StacheAffixTopDirective));
   });
 

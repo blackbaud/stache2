@@ -1,9 +1,20 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs/Observable';
-import { SkyAppResourcesService } from '@blackbaud/skyux-builder/runtime/i18n';
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+
+import {
+  expect
+} from '@skyux-sdk/testing';
+
+import {
+  SkyMediaQueryModule
+} from '@skyux/core';
+
+import {
+  SkyAppResourcesService
+} from '@skyux/i18n';
 
 import { StacheWrapperTestComponent } from './fixtures/wrapper.component.fixture';
 import { StacheWrapperComponent } from './wrapper.component';
@@ -23,7 +34,6 @@ import {
 
 import { StacheLayoutModule } from '../layout';
 import { StachePageAnchorModule, StachePageAnchorService } from '../page-anchor';
-import { SkyMediaQueryModule } from '@blackbaud/skyux/dist/core';
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
@@ -67,13 +77,13 @@ describe('StacheWrapperComponent', () => {
   }
 
   class MockActivatedRoute {
-    public fragment: Observable<string> = Observable.of('test-route');
-    public url: Observable<string[]> = Observable.of(['test', 'routes']);
+    public fragment: Observable<string> = observableOf('test-route');
+    public url: Observable<string[]> = observableOf(['test', 'routes']);
     // snapshot is a required prop on activatedRoute to avoid an error with `'_lastPathIndex' of undefined`
     // https://stackoverflow.com/questions/41245783/angular-testing-router-params-breaks-test-bed
     public snapshot = {};
     public setFragment(fragString: any) {
-      this.fragment = Observable.of(fragString);
+      this.fragment = observableOf(fragString);
     }
   }
 
@@ -126,7 +136,7 @@ describe('StacheWrapperComponent', () => {
   }
 
   class MockAnchorService {
-    public anchorStream = Observable.of(
+    public anchorStream = observableOf(
       {
         path: 'Second Path',
         name: 'Second Heading',
@@ -206,11 +216,11 @@ describe('StacheWrapperComponent', () => {
     };
 
     get onResize$() {
-      return Observable.of({});
+      return observableOf({});
     }
 
-    constructor(private eventManager: any) {
-      this.eventManager = {
+    constructor(eventManager: any) {
+      eventManager = {
         addGlobalEventListener: () => {}
       };
     }

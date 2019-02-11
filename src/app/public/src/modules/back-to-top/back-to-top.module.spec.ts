@@ -1,4 +1,6 @@
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import {
+  expect
+} from '@skyux-sdk/testing';
 
 import { StacheBackToTopModule } from './back-to-top.module';
 
