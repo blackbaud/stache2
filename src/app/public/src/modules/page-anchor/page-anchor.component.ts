@@ -25,6 +25,7 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
   public path: string[];
   public order: number;
   public offsetTop: number;
+  public element: HTMLElement;
 
   @Input()
   public anchorId?: string;
@@ -43,6 +44,7 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
     this.fragment = this.getFragment();
     this.path = [this.routerService.getActiveUrl()];
     this.offsetTop = this.anchorService.getValidOffsetTop(this.elementRef.nativeElement);
+    this.element = this.elementRef.nativeElement;
   }
 
   public scrollToAnchor(): void {
@@ -83,7 +85,8 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
       name: this.name,
       fragment: this.fragment,
       order: this.order,
-      offsetTop: this.offsetTop
+      offsetTop: this.offsetTop,
+      element: this.element
     } as StacheNavLink);
   }
 }

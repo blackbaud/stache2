@@ -87,6 +87,7 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   public ngOnInit(): void {
+    this.route.url.subscribe(url => this.inPageRoutes = this.pageAnchorService.pageAnchors);
     this.currentRoute = this.router.url.split('#')[0];
     this.omnibarService.checkForOmnibar();
     this.jsonData = this.dataService.getAll();
