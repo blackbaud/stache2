@@ -1,22 +1,30 @@
 import { Injectable } from '@angular/core';
-import { StacheNavLink } from '../nav';
+import { StacheNavLink, StacheNavService } from '../nav';
 import { SkyAppWindowRef } from '@skyux/core';
 import { Router, NavigationStart } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class StachePageAnchorService {
   public pageAnchors: StacheNavLink[] = [];
-  private currentBodyHeight: number;
+  public currentBodyHeight = new BehaviorSubject<number>(0);
 
   constructor(
     private windowRef: SkyAppWindowRef,
-    private router: Router
+    private router: Router,
+    private navService: StacheNavService
   ) {
     this.windowRef.nativeWindow.addEventListener('scroll', () => {
       if (this.pageAnchors) {
         this.pageAnchors.forEach(anchor => {
-          anchor.offsetTop = anchor.
+          const document = this.windowRef.nativeWindow.document;
+          // Update the page anchor offsets when the page height updates
+          if (this.currentBodyHeight.getValue() !== document.body.scrollHeight) {
+            this.refreshAnchors();
+          }
+          return this.pageAnchors;
         });
+        this.navService.updateRoutesOnScroll(this.pageAnchors);
       }
     });
     this.router.events.subscribe((event) => {
@@ -42,15 +50,6 @@ export class StachePageAnchorService {
     }
   }
 
-  public updatePageAnchorsOnScroll() {
-    const document = this.windowRef.nativeWindow.document;
-    // Update the page anchor offsets when the page height updates
-    if (this.currentBodyHeight !== document.body.scrollHeight) {
-      this.refreshAnchors();
-    }
-    return this.pageAnchors;
-  }
-
   // Sometimes offsetTop will be a sub-zero number and will ruin page tracking sync
   // This runs up the parent tree until it finds an element that has a useable offset value
   public getValidOffsetTop(element: any): number {
@@ -61,13 +60,9 @@ export class StachePageAnchorService {
   }
 
   private refreshAnchors() {
-    const anchors = document.querySelectorAll('stache-page-anchor');
-    this.currentBodyHeight = document.body.scrollHeight;
-    anchors.forEach((anchor: any, index: number) => {
-      if (this.pageAnchors[index]) {
-        this.pageAnchors[index].offsetTop = this.getValidOffsetTop(anchor);
-        this.addPageAnchor(this.pageAnchors[index]);
-      }
+    this.currentBodyHeight.next(document.body.scrollHeight);
+    this.pageAnchors.forEach(anchor => {
+      anchor.offsetTop = this.getValidOffsetTop(anchor.element);
     });
   }
 }

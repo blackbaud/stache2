@@ -13,7 +13,6 @@ import { StachePageAnchorService } from './page-anchor.service';
   ],
   imports: [
     CommonModule,
-    StacheLinkModule,
     RouterModule
   ],
   providers: [

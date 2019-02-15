@@ -42,8 +42,6 @@ describe('StacheTableOfContentsService', () => {
   });
 
   it('should reset anchor list on route change', () => {
-    tocService.pageAnchors = [ { name: 'test' } ];
-    tocService.updatePageAnchorsOnScroll();
     expect(tocService.pageAnchors.length).toBe(0);
   });
 });
