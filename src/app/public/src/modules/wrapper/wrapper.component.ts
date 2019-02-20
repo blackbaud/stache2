@@ -5,8 +5,7 @@ import {
   OnDestroy,
   Input,
   AfterViewInit,
-  ChangeDetectorRef,
-  HostListener
+  ChangeDetectorRef
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, Subject } from 'rxjs';
@@ -79,12 +78,6 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private windowRef: StacheWindowRef,
     private router: Router,
     private omnibarService: StacheOmnibarAdapterService) { }
-
-  // @HostListener('window:scroll')
-  // public onScroll() {
-  //   this.inPageRoutes = this.pageAnchorService.updatePageAnchorsOnScroll();
-  //   this.navService.updateRoutesOnScroll(this.inPageRoutes);
-  // }
 
   public ngOnInit(): void {
     this.route.url.subscribe(url => this.inPageRoutes = this.pageAnchorService.pageAnchors);

@@ -1,14 +1,12 @@
 import {
-  ChangeDetectorRef,
   Component,
   ElementRef,
-  OnInit,
   AfterViewInit,
-  Input
+  Input,
+  ChangeDetectorRef
 } from '@angular/core';
 import {
-  StacheWindowRef,
-  StacheRouteService
+  StacheWindowRef
 } from '../shared';
 import { StacheNavLink } from '../nav';
 import { StachePageAnchorService } from './page-anchor.service';
@@ -18,75 +16,29 @@ import { StachePageAnchorService } from './page-anchor.service';
   templateUrl: './page-anchor.component.html',
   styleUrls: ['./page-anchor.component.scss']
 })
-export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterViewInit {
-
-  public name: string;
+export class StachePageAnchorComponent implements StacheNavLink, AfterViewInit {
+  public name: string = '';
   public fragment: string;
   public path: string[];
-  public order: number;
-  public offsetTop: number;
-  public element: HTMLElement;
 
   @Input()
   public anchorId?: string;
 
   public constructor(
-    private routerService: StacheRouteService,
     private elementRef: ElementRef,
     private windowRef: StacheWindowRef,
-    private cdRef: ChangeDetectorRef,
-    private anchorService: StachePageAnchorService) {
-    this.name = '';
-  }
-
-  public ngOnInit(): void {
-    this.name = this.getName();
-    this.fragment = this.getFragment();
-    this.path = [this.routerService.getActiveUrl()];
-    this.offsetTop = this.anchorService.getValidOffsetTop(this.elementRef.nativeElement);
-    this.element = this.elementRef.nativeElement;
-  }
+    private anchorService: StachePageAnchorService,
+    private cdr: ChangeDetectorRef) {}
 
   public scrollToAnchor(): void {
     this.windowRef.nativeWindow.document.querySelector(`#${this.fragment}`).scrollIntoView();
   }
 
   public ngAfterViewInit(): void {
-    this.name = this.getName();
-    this.fragment = this.getFragment();
-    this.getOrder();
-    this.registerAnchor();
-    this.cdRef.detectChanges();
-  }
-
-  private getName(): string {
-    return this.elementRef.nativeElement.textContent.trim();
-  }
-
-  private getFragment(): string {
-    return this.anchorId || this.name
-      .toLowerCase()
-      .replace(/ /g, '-')
-      .replace(/[^\w-]+/g, '');
-  }
-
-  private getOrder(): void {
-    let anchors = this.windowRef.nativeWindow.document.querySelectorAll('stache-page-anchor div');
-    for (let i = 0; i < anchors.length; i++) {
-      if (this.fragment === anchors[i].id) {
-        this.order = i;
-      }
-    }
-  }
-
-  private registerAnchor(): void {
-    this.anchorService.addPageAnchor({
-      path: this.path,
-      name: this.name,
-      fragment: this.fragment,
-      order: this.order,
-      offsetTop: this.offsetTop,
-      element: this.element
-    } as StacheNavLink);
+    const anchor = this.anchorService.generateAnchor(this.elementRef.nativeElement, this.anchorId);
+    this.name = anchor.name;
+    this.fragment = anchor.fragment;
+    this.path = anchor.path as any;
+    this.cdr.detectChanges();
   }
 }

@@ -15,7 +15,7 @@ export class StacheNavComponent implements OnInit, StacheNav {
   public navType: string;
   public classname: string = '';
 
-  public constructor(private routerService: StacheRouteService) { }
+  public constructor(private routerService: StacheRouteService) {}
 
   public hasRoutes(): boolean {
     return (Array.isArray(this.routes) && this.routes.length > 0);

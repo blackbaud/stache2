@@ -51,7 +51,9 @@ export class StacheNavService {
   }
 
   public updateRoutesOnScroll(routes: StacheNavLink[]) {
-    this.updateView(routes);
+    if (routes) {
+      this.updateView(routes);
+    }
   }
 
   // Updates ng-class level trigger to show/hide blue border marking location on page

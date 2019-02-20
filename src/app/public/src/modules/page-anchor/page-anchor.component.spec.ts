@@ -31,7 +31,11 @@ describe('StachePageAnchorComponent', () => {
   }
 
   class MockAnchorService {
-    public addPageAnchor = jasmine.createSpy('addPageAnchor').and.callFake((anchor: any) => {});
+    public generateAnchor = jasmine.createSpy('generateAnchor').and.returnValue({
+      name: 'Test Content',
+      fragment: 'test-content',
+      path: []
+    });
   }
 
   class MockWindowService {
@@ -77,72 +81,29 @@ describe('StachePageAnchorComponent', () => {
 
     fixture = TestBed.createComponent(StachePageAnchorComponent);
     component = fixture.componentInstance;
-    spyOn((component as any).cdRef, 'detectChanges').and.callFake(() => {});
+    spyOn(component['cdr'], 'detectChanges').and.callFake(() => {});
     fixture.debugElement.nativeElement.textContent = 'Test Content';
   });
 
   it('should add the name from the element text content', () => {
-    component.ngOnInit();
+    component.ngAfterViewInit();
     fixture.detectChanges();
     expect(component.name).toBe('Test Content');
   });
 
   it('should add the fragment from the component name', () => {
-    component.ngOnInit();
+    component.ngAfterViewInit();
     fixture.detectChanges();
     expect(component.fragment).toBe('test-content');
   });
 
-  it('should add the fragment from the anchorId input', () => {
-    component.anchorId = 'input-anchor-id';
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(component.fragment).toBe('input-anchor-id');
-  });
-
-  it('should add the path from the route service', () => {
-    const routeSpy = spyOn(mockRouteService, 'getActiveUrl').and.callThrough();
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(routeSpy).toHaveBeenCalled();
-    expect(component.path).toEqual(['/']);
-  });
-
-  it('should add an order to the anchor based on it\'s order with other anchors', () => {
-    component.ngAfterViewInit();
-    fixture.detectChanges();
-    expect(component.order).toBe(0);
-
-    mockPageAnchors = [
-      {
-        id: 'one'
-      },
-      {
-        id: 'test-content'
-      }
-    ];
-
-    component.ngAfterViewInit();
-    fixture.detectChanges();
-    expect(component.order).toBe(1);
-  });
-
   it('should register the page anchor with the page anchor service', () => {
-    let expectedAnchor = {
-      path: ['/'],
-      name: 'Test Content',
-      fragment: 'test-content',
-      order: 1
-    };
-
-    component.ngOnInit();
     component.ngAfterViewInit();
-    expect(mockAnchorService.addPageAnchor).toHaveBeenCalledWith(expectedAnchor);
+    expect(mockAnchorService.generateAnchor).toHaveBeenCalled();
   });
 
   it('scroll to anchor should call the elements scroll to anchor method', () => {
     component.scrollToAnchor();
-    fixture.detectChanges();
     expect(mockWindowService.testElement.scrollIntoView).toHaveBeenCalled();
   });
 });
