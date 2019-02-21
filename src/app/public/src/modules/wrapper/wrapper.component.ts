@@ -61,8 +61,10 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   @Input()
   public showInNav: boolean = true;
 
+  @Input()
+  public inPageRoutes: StacheNavLink[];
+
   public jsonData: any;
-  public inPageRoutes: StacheNavLink[] = [];
   public ngUnsubscribe = new Subject();
   private pageAnchorSubscription: Subscription;
   private currentRoute: string = '';
@@ -80,14 +82,15 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private omnibarService: StacheOmnibarAdapterService) { }
 
   public ngOnInit(): void {
-    this.route.url.subscribe(url => this.inPageRoutes = this.pageAnchorService.pageAnchors);
     this.currentRoute = this.router.url.split('#')[0];
     this.omnibarService.checkForOmnibar();
     this.jsonData = this.dataService.getAll();
   }
 
   public ngAfterViewInit() {
-    this.inPageRoutes = this.pageAnchorService.pageAnchors;
+    if (!this.inPageRoutes) {
+      this.inPageRoutes = this.pageAnchorService.pageAnchors;
+    }
     const preferredDocumentTitle = this.getPreferredDocumentTitle();
     this.titleService.setTitle(preferredDocumentTitle);
     this.checkRouteHash();

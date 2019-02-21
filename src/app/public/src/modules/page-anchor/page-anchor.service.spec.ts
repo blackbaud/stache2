@@ -1,11 +1,11 @@
 import { StachePageAnchorService } from './page-anchor.service';
 import { StacheNavLink } from '../nav';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { NavigationStart } from '@angular/router';
 
 class MockRouter {
   public url = '/internal#element-id';
-  public events = Observable.of({
+  public events = new BehaviorSubject({
     url: '/test'
   } as NavigationStart);
   public navigate = (path: any, extras: any) => true;
@@ -28,7 +28,7 @@ class MockWindowRef {
         scrollHeight: 5
       }
     },
-    addEventListener: (eventType: string, func: Function) => {
+    addEventListener: (eventType: string, func: any) => {
       func();
     }
   };
@@ -45,10 +45,10 @@ class MockRouteService {
 }
 
 class MockNavService {
-  public updateRoutesOnScroll = () => true;
+  public updateRoutesOnScroll = (pageAnchors: any) => true;
 }
 
-fdescribe('PageAnchorService', () => {
+describe('PageAnchorService', () => {
   let service: StachePageAnchorService;
   let windowRef = new MockWindowRef();
   let router = new MockRouter();
@@ -64,9 +64,58 @@ fdescribe('PageAnchorService', () => {
     );
   });
 
-  it('should update offset top on page height change', () => {
-    window.scrollBy(0, 1);
+  it('should update offset top on page height change, no page anchors', () => {
+    spyOn(service['navService'], 'updateRoutesOnScroll');
+    service['onScroll']();
+    expect(service['navService'].updateRoutesOnScroll).toHaveBeenCalled();
+  });
 
+  it('should update offset top on page height change', () => {
+    spyOn(service['navService'], 'updateRoutesOnScroll');
+    service.pageAnchors = [
+      {
+        element: {
+          offsetTop: 5
+        }
+      } as StacheNavLink
+    ];
+    service['onScroll']();
+    expect(service.pageAnchors[0].offsetTop).toEqual(5);
+    expect(service['navService'].updateRoutesOnScroll).toHaveBeenCalled();
+  });
+
+  it('should update offset top on page height change, constant height', () => {
+    spyOn(service['navService'], 'updateRoutesOnScroll');
+    service.pageAnchors = [
+      {
+        element: {
+          offsetTop: 5
+        }
+      } as StacheNavLink
+    ];
+    service.currentBodyHeight.next(5);
+    service['onScroll']();
+    expect(service.pageAnchors[0].offsetTop).toEqual(undefined);
+    expect(service['navService'].updateRoutesOnScroll).toHaveBeenCalled();
+  });
+
+  it('should navigate to a new page', () => {
+    service['onNavigate'](new NavigationStart(0, '/test2#testFragment'));
+
+    expect(service['currentPageUrl']).toEqual('/test2');
+    expect(service.pageAnchors).toEqual([]);
+    expect(service.currentBodyHeight.getValue()).toEqual(5);
+  });
+
+  it('should navigate, in page navigation', () => {
+    service.pageAnchors = [{
+      name: 'anchor'
+    } as StacheNavLink ];
+    service['onNavigate'](new NavigationStart(0, '/internal#testFragment'));
+
+    expect(service['currentPageUrl']).toEqual('/internal');
+    expect(service.pageAnchors.length).toEqual(1);
+    expect(service.currentBodyHeight.getValue()).toEqual(0);
   });
 
   it('should generate anchor, with anchorId', () => {
@@ -126,7 +175,6 @@ fdescribe('PageAnchorService', () => {
 
     service.generateAnchor(element1);
 
-    console.log(service.pageAnchors);
     expect(service.pageAnchors).toEqual([
       {
         path: ['/test'],

@@ -1,34 +1,23 @@
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-
 import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
-
 import { StachePageAnchorComponent } from './page-anchor.component';
 import { StachePageAnchorService } from './page-anchor.service';
-
-import { StacheWindowRef, StacheRouteService } from '../shared';
+import { StacheWindowRef } from '../shared';
 
 describe('StachePageAnchorComponent', () => {
   let component: StachePageAnchorComponent;
   let fixture: ComponentFixture<StachePageAnchorComponent>;
-  let mockRouteService: any;
   let mockWindowService: any;
   let mockAnchorService: any;
-
-  let activeUrl: string = '/';
+  let mockElementRef: any;
 
   let mockPageAnchors = [
     {
       id: 'test-content'
     }
   ];
-
-  class MockRouteService {
-    public getActiveUrl() {
-      return activeUrl;
-    }
-  }
 
   class MockAnchorService {
     public generateAnchor = jasmine.createSpy('generateAnchor').and.returnValue({
@@ -58,10 +47,14 @@ describe('StachePageAnchorComponent', () => {
     };
   }
 
+  class MockElementRef {
+    public nativeElement = {};
+  }
+
   beforeEach(() => {
     mockWindowService = new MockWindowService();
-    mockRouteService = new MockRouteService();
     mockAnchorService = new MockAnchorService();
+    mockElementRef = new MockElementRef();
 
     TestBed.configureTestingModule({
       declarations: [
@@ -71,8 +64,8 @@ describe('StachePageAnchorComponent', () => {
         RouterTestingModule
       ],
       providers: [
+        { provide: ElementRef, useValue: mockElementRef},
         { provide: StacheWindowRef, useValue: mockWindowService },
-        { provide: StacheRouteService, useValue: mockRouteService },
         { provide: StachePageAnchorService, useValue: mockAnchorService },
         ChangeDetectorRef
       ]
@@ -85,25 +78,15 @@ describe('StachePageAnchorComponent', () => {
     fixture.debugElement.nativeElement.textContent = 'Test Content';
   });
 
-  it('should add the name from the element text content', () => {
-    component.ngAfterViewInit();
-    fixture.detectChanges();
-    expect(component.name).toBe('Test Content');
-  });
-
-  it('should add the fragment from the component name', () => {
-    component.ngAfterViewInit();
-    fixture.detectChanges();
-    expect(component.fragment).toBe('test-content');
-  });
-
-  it('should register the page anchor with the page anchor service', () => {
-    component.ngAfterViewInit();
-    expect(mockAnchorService.generateAnchor).toHaveBeenCalled();
-  });
-
-  it('scroll to anchor should call the elements scroll to anchor method', () => {
+  it('should scroll to anchor', () => {
     component.scrollToAnchor();
-    expect(mockWindowService.testElement.scrollIntoView).toHaveBeenCalled();
+    expect(component['windowRef'].nativeWindow.document.querySelector).toHaveBeenCalled();
+  });
+
+  it('should populate data after view init', () => {
+    component.ngAfterViewInit();
+    expect(component.name).toEqual('Test Content');
+    expect(component.fragment).toEqual('test-content');
+    expect(component.path).toEqual([]);
   });
 });

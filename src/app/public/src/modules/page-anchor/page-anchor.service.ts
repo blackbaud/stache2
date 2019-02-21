@@ -19,26 +19,10 @@ export class StachePageAnchorService {
   ) {
     this.currentPageUrl = this.router.url.split('#')[0];
     this.windowRef.nativeWindow.addEventListener('scroll', () => {
-      if (this.pageAnchors.length) {
-        if (this.currentBodyHeight.getValue() !== document.body.scrollHeight) {
-          this.pageAnchors.forEach(anchor => {
-            const document = this.windowRef.nativeWindow.document;
-              // Update the page anchor offsets when the page height updates
-              this.currentBodyHeight.next(document.body.scrollHeight);
-              anchor.offsetTop = this.getValidOffsetTop(anchor.element);
-          });
-        }
-      }
-      this.navService.updateRoutesOnScroll(this.pageAnchors);
+      this.onScroll();
     });
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        if (event.url.split('#')[0] !== this.currentPageUrl) {
-          this.currentPageUrl = event.url.split('#')[0];
-          this.pageAnchors = [];
-          this.currentBodyHeight.next(document.body.scrollHeight);
-        }
-      }
+      this.onNavigate(event);
     });
   }
 
@@ -66,6 +50,30 @@ export class StachePageAnchorService {
     this.pageAnchors.push(anchor);
     this.sortPageAnchors();
     return anchor;
+  }
+
+  private onScroll() {
+    let document = this.windowRef.nativeWindow.document;
+    if (this.pageAnchors.length) {
+      if (this.currentBodyHeight.getValue() !== document.body.scrollHeight) {
+        this.pageAnchors.forEach(anchor => {
+            // Update the page anchor offsets when the page height updates
+            this.currentBodyHeight.next(document.body.scrollHeight);
+            anchor.offsetTop = this.getValidOffsetTop(anchor.element);
+        });
+      }
+    }
+    this.navService.updateRoutesOnScroll(this.pageAnchors);
+  }
+
+  private onNavigate(event: any) {
+    if (event instanceof NavigationStart) {
+      if (event.url.split('#')[0] !== this.currentPageUrl) {
+        this.currentPageUrl = event.url.split('#')[0];
+        this.pageAnchors = [];
+        this.currentBodyHeight.next(this.windowRef.nativeWindow.document.body.scrollHeight);
+      }
+    }
   }
 
   private getName(element: any): string {
