@@ -1,6 +1,6 @@
 import { StachePageAnchorService } from './page-anchor.service';
 import { StacheNavLink } from '../nav';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { NavigationStart } from '@angular/router';
 
 class MockRouter {

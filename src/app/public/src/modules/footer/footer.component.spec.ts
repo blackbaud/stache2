@@ -129,10 +129,13 @@ describe('StacheFooterComponent', () => {
     let mappedFooterLinks = footerConfig.nav.items.map((navItem: any) => {
       return {
         name: navItem.title,
-        path: navItem.route
+        path: navItem.route,
+        isCurrent: false
       };
     });
 
+    console.log(component.footerLinks);
+    console.log(mappedFooterLinks);
     expect(component.footerLinks).toEqual(mappedFooterLinks);
   });
 

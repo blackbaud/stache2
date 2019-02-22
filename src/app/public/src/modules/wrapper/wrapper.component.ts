@@ -2,13 +2,12 @@
 import {
   Component,
   OnInit,
-  OnDestroy,
   Input,
   AfterViewInit,
   ChangeDetectorRef
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { StacheTitleService } from './title.service';
 import { StacheConfigService, StacheJsonDataService, StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
 import { StacheNavLink } from '../nav';
@@ -23,7 +22,7 @@ const _get = require('lodash.get');
   templateUrl: './wrapper.component.html',
   styleUrls: ['./wrapper.component.scss']
 })
-export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
+export class StacheWrapperComponent implements OnInit, AfterViewInit {
   @Input()
   public pageTitle: string;
 
@@ -66,8 +65,6 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
 
   public jsonData: any;
   public ngUnsubscribe = new Subject();
-  private pageAnchorSubscription: Subscription;
-  private currentRoute: string = '';
 
   public constructor(
     private config: StacheConfigService,
@@ -82,7 +79,6 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     private omnibarService: StacheOmnibarAdapterService) { }
 
   public ngOnInit(): void {
-    this.currentRoute = this.router.url.split('#')[0];
     this.omnibarService.checkForOmnibar();
     this.jsonData = this.dataService.getAll();
   }
@@ -95,10 +91,6 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
     this.titleService.setTitle(preferredDocumentTitle);
     this.checkRouteHash();
     this.cdr.detectChanges();
-  }
-
-  public ngOnDestroy(): void {
-    this.destroyPageAnchorSubscription();
   }
 
   private getPreferredDocumentTitle(): string {
@@ -132,12 +124,5 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
         }
       })
       .unsubscribe();
-  }
-
-  private destroyPageAnchorSubscription(): void {
-    if (this.pageAnchorSubscription) {
-      this.pageAnchorSubscription.unsubscribe();
-      this.pageAnchorSubscription = undefined;
-    }
   }
 }
