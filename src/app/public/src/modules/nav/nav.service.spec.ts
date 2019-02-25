@@ -1,4 +1,5 @@
 import { StacheNavService } from './nav.service';
+import { StacheNavLink } from './nav-link';
 
 class MockRouter {
   public url = '/internal#element-id';
@@ -8,29 +9,39 @@ class MockRouter {
 let elementScrollCalled: boolean = false;
 
 class MockWindowService {
+  public testElement = {
+    offsetTop: 20,
+    getBoundingClientRect() {
+      return {
+        y: 0,
+        bottom: 0
+      };
+    },
+    scrollIntoView() {
+      elementScrollCalled = true;
+      return;
+    }
+  };
+
   public nativeWindow = {
+    pageYOffset: 0,
+    innerHeight: 0,
     document: {
       getElementById: jasmine.createSpy('getElementById').and.callFake((id: any) => {
-          if (id === 'element-id') {
-            return this.testElement;
-          }
-          return false;
-        })
+        if (id === 'element-id') {
+          return this.testElement;
+        }
+        return false;
+      }),
+      querySelector: jasmine.createSpy('querySelector').and.callFake((selector: any) => {
+        return this.testElement;
+      }),
+      documentElement: this.testElement
     },
     location: {
       href: ''
     },
     scroll: jasmine.createSpy('scroll')
-  };
-
-  public testElement = {
-    getBoundingClientRect() {
-      return { y: 0 };
-    },
-    scrollIntoView() {
-      elementScrollCalled = true;
-      return;
-     }
   };
 }
 
@@ -128,5 +139,158 @@ describe('StacheNavService', () => {
    () => {
     navService.navigate({path: 'internal', fragment: 'does-not-exist'});
     expect(windowRef.nativeWindow.scroll).toHaveBeenCalled();
+  });
+
+  it('should update routes on scroll, undefined routes', () => {
+    spyOn(navService, 'updateView');
+    navService.updateRoutesOnScroll([]);
+    expect(navService.updateView).not.toHaveBeenCalled();
+  });
+
+  it('should update routes on scroll, no routes', () => {
+    spyOn(navService, 'updateView');
+    navService.updateRoutesOnScroll([]);
+    expect(navService.updateView).not.toHaveBeenCalled();
+  });
+
+  it('should update routes on scroll', () => {
+    spyOn(navService, 'updateView');
+    navService.updateRoutesOnScroll([
+      {
+        name: 'testRoute',
+        path: [],
+        offsetTop: 0
+      } as StacheNavLink
+    ]);
+    expect(navService.updateView).toHaveBeenCalled();
+  });
+
+  it('should update the view', () => {
+    const routes = [
+      {
+        name: 'testRoute',
+        path: [],
+        offsetTop: 0
+      } as StacheNavLink
+    ];
+
+    navService.updateView(routes);
+
+    expect(routes[0].isCurrent).toBeTruthy();
+    expect(navService['pageOffset']).toBe(30);
+    expect(navService['documentBottom']).toBe(0);
+  });
+
+  it('should update the view, no stache wrapper', () => {
+    const test: any = undefined;
+    windowRef = {
+      testElement: test,
+      nativeWindow: {
+        pageYOffset: 0,
+        innerHeight: 0,
+        document: {
+          getElementById: jasmine.createSpy('getElementById').and.callFake((id: any) => {
+            if (id === 'element-id') {
+              return test;
+            }
+            return false;
+          }),
+          querySelector: jasmine.createSpy('querySelector').and.callFake((selector: any) => {
+            return test;
+          }),
+          documentElement: {
+            offsetTop: 20,
+            getBoundingClientRect() {
+              return {
+                y: 0,
+                bottom: 0
+              };
+            },
+            scrollIntoView() {
+              elementScrollCalled = true;
+              return;
+            }
+          }
+        },
+        location: {
+          href: ''
+        },
+        scroll: jasmine.createSpy('scroll')
+      }
+    };
+
+    navService = new StacheNavService(router as any, windowRef as any);
+
+    const routes = [
+      {
+        name: 'testRoute',
+        path: [],
+        offsetTop: 0
+      } as StacheNavLink
+    ];
+
+    navService.updateView(routes);
+
+    expect(navService['headerHeight']).toBe(undefined);
+    expect(routes[0].isCurrent).toBeTruthy();
+  });
+
+  it('should update the view, first route is current', () => {
+    const test = {
+      offsetTop: 20,
+      getBoundingClientRect() {
+        return {
+          y: 0,
+          bottom: 150
+        };
+      },
+      scrollIntoView() {
+        elementScrollCalled = true;
+        return;
+      }
+    };
+    windowRef = {
+      testElement: test,
+      nativeWindow: {
+        pageYOffset: 0,
+        innerHeight: 0,
+        document: {
+          getElementById: jasmine.createSpy('getElementById').and.callFake((id: any) => {
+            if (id === 'element-id') {
+              return test;
+            }
+            return false;
+          }),
+          querySelector: jasmine.createSpy('querySelector').and.callFake((selector: any) => {
+            return test;
+          }),
+          documentElement: test
+        },
+        location: {
+          href: ''
+        },
+        scroll: jasmine.createSpy('scroll')
+      }
+    };
+
+    navService = new StacheNavService(router as any, windowRef as any);
+
+    const routes = [
+      {
+        name: 'testRoute0',
+        path: [],
+        offsetTop: 10
+      } as StacheNavLink,
+      {
+        name: 'testRoute1',
+        path: [],
+        offsetTop: 100
+      } as StacheNavLink
+    ];
+
+    navService.updateView(routes);
+
+    expect(routes[0].isCurrent).toBeTruthy();
+    expect(routes[1].isCurrent).not.toBeTruthy();
   });
 });

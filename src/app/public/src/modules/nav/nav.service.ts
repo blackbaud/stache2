@@ -51,7 +51,7 @@ export class StacheNavService {
   }
 
   public updateRoutesOnScroll(routes: StacheNavLink[]) {
-    if (routes) {
+    if (routes && routes.length) {
       this.updateView(routes);
     }
   }
@@ -81,14 +81,18 @@ export class StacheNavService {
 
     // Tracks page bottom so final route can be highlighted if associated anchor provides limited content
     // (Logic based on Angular implementation)
+    console.log(this.windowRef.nativeWindow.document);
     this.documentBottom = Math.round(this.windowRef.nativeWindow.document.documentElement.getBoundingClientRect().bottom);
   }
 
   private isCurrent(routes: StacheNavLink[]): void {
     routes.forEach((route, index) => {
+      console.log((this.windowRef.nativeWindow.innerHeight + 5));
+      console.log(this.documentBottom);
       if ((this.windowRef.nativeWindow.innerHeight + 5) >= this.documentBottom) {
         route.isCurrent = route === routes[routes.length - 1];
       } else {
+        console.log('else');
         route.isCurrent = route.offsetTop <= this.pageOffset
           && (routes[index + 1] === undefined || routes[index + 1].offsetTop > this.pageOffset);
       }

@@ -6,7 +6,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { StacheTitleService } from './title.service';
 import { StacheConfigService, StacheJsonDataService, StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
@@ -75,7 +75,6 @@ export class StacheWrapperComponent implements OnInit, AfterViewInit {
     private navService: StacheNavService,
     private cdr: ChangeDetectorRef,
     private windowRef: StacheWindowRef,
-    private router: Router,
     private omnibarService: StacheOmnibarAdapterService) { }
 
   public ngOnInit(): void {
