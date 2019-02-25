@@ -134,8 +134,6 @@ describe('StacheFooterComponent', () => {
       };
     });
 
-    console.log(component.footerLinks);
-    console.log(mappedFooterLinks);
     expect(component.footerLinks).toEqual(mappedFooterLinks);
   });
 
