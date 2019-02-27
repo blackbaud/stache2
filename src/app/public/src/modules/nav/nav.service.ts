@@ -85,6 +85,7 @@ export class StacheNavService {
   }
 
   private isCurrent(routes: StacheNavLink[]): void {
+    console.log(routes);
     routes.forEach((route, index) => {
       if ((this.windowRef.nativeWindow.innerHeight + 5) >= this.documentBottom) {
         route.isCurrent = route === routes[routes.length - 1];

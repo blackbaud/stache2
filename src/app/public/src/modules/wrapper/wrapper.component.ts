@@ -85,6 +85,9 @@ export class StacheWrapperComponent implements OnInit, AfterViewInit {
   public ngAfterViewInit() {
     if (!this.inPageRoutes) {
       this.inPageRoutes = this.pageAnchorService.pageAnchors;
+    } else {
+      console.log('routes', this.inPageRoutes);
+      this.pageAnchorService.setCustomPageAnchors(this.inPageRoutes);
     }
     const preferredDocumentTitle = this.getPreferredDocumentTitle();
     this.titleService.setTitle(preferredDocumentTitle);

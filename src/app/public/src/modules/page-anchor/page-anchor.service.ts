@@ -8,6 +8,7 @@ import { StacheRouteService } from '../shared';
 @Injectable()
 export class StachePageAnchorService {
   public pageAnchors: StacheNavLink[] = [];
+  public customPageAnchors: StacheNavLink[] = [];
   public currentBodyHeight = new BehaviorSubject<number>(0);
   private currentPageUrl: string;
 
@@ -52,6 +53,10 @@ export class StachePageAnchorService {
     return anchor;
   }
 
+  public setCustomPageAnchors(pageAnchors: StacheNavLink[]) {
+    this.customPageAnchors = pageAnchors;
+  }
+
   private onScroll() {
     let document = this.windowRef.nativeWindow.document;
     if (this.pageAnchors.length) {
@@ -63,7 +68,7 @@ export class StachePageAnchorService {
         });
       }
     }
-    this.navService.updateRoutesOnScroll(this.pageAnchors);
+    this.navService.updateRoutesOnScroll(this.customPageAnchors.length ? this.customPageAnchors : this.pageAnchors);
   }
 
   private onNavigate(event: any) {
@@ -71,6 +76,7 @@ export class StachePageAnchorService {
       if (event.url.split('#')[0] !== this.currentPageUrl) {
         this.currentPageUrl = event.url.split('#')[0];
         this.pageAnchors = [];
+        this.customPageAnchors = [];
         this.currentBodyHeight.next(this.windowRef.nativeWindow.document.body.scrollHeight);
       }
     }
