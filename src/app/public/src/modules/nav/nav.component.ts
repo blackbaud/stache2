@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { StacheNavLink } from './nav-link';
 import { StacheNav } from './nav';
 import { StacheRouteService } from '../shared';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'stache-nav',
@@ -15,7 +16,12 @@ export class StacheNavComponent implements OnInit, StacheNav {
   public navType: string;
   public classname: string = '';
 
-  public constructor(private routerService: StacheRouteService) {}
+  public constructor(private routerService: StacheRouteService, private cdr: ChangeDetectorRef) {
+    window.addEventListener('scroll', () => {
+      // console.log(this.routes);
+      this.cdr.detectChanges();
+    });
+  }
 
   public hasRoutes(): boolean {
     return (Array.isArray(this.routes) && this.routes.length > 0);
@@ -37,6 +43,9 @@ export class StacheNavComponent implements OnInit, StacheNav {
     const activeUrl = this.routerService.getActiveUrl();
     if (this.hasRoutes()) {
       this.routes.forEach((route: any, index: number) => {
+        if (route instanceof BehaviorSubject) {
+          route = route.getValue();
+        }
         if (this.isActive(activeUrl, route)) {
           route.isActive = true;
         }

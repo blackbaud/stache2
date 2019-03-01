@@ -7,7 +7,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { StacheTitleService } from './title.service';
 import { StacheConfigService, StacheJsonDataService, StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
 import { StacheNavLink } from '../nav';
@@ -84,9 +84,11 @@ export class StacheWrapperComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit() {
     if (!this.inPageRoutes) {
-      this.inPageRoutes = this.pageAnchorService.pageAnchors;
+      this.pageAnchorService.pageAnchors.subscribe((anchors: any) => {
+        this.inPageRoutes = anchors.map((anchor: BehaviorSubject<StacheNavLink>) => anchor.getValue());
+        console.log(this.inPageRoutes);
+      });
     } else {
-      console.log('routes', this.inPageRoutes);
       this.pageAnchorService.setCustomPageAnchors(this.inPageRoutes);
     }
     const preferredDocumentTitle = this.getPreferredDocumentTitle();

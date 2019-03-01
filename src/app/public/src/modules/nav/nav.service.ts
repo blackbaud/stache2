@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { StacheWindowRef } from '../shared';
 import { StacheNavLink } from './nav-link';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class StacheNavService {
@@ -50,7 +51,7 @@ export class StacheNavService {
     return /^(https?|mailto|ftp):+|^(www)/.test(path);
   }
 
-  public updateRoutesOnScroll(routes: StacheNavLink[]) {
+  public updateRoutesOnScroll(routes: any[]) {
     if (routes && routes.length) {
       this.updateView(routes);
     }
@@ -84,15 +85,21 @@ export class StacheNavService {
     this.documentBottom = Math.round(this.windowRef.nativeWindow.document.documentElement.getBoundingClientRect().bottom);
   }
 
-  private isCurrent(routes: StacheNavLink[]): void {
-    console.log(routes);
+  private isCurrent(routes: any[]): void {
+    let updatedRoute;
     routes.forEach((route, index) => {
       if ((this.windowRef.nativeWindow.innerHeight + 5) >= this.documentBottom) {
-        route.isCurrent = route === routes[routes.length - 1];
+        let currentRoute = route.getValue();
+        currentRoute.isCurrent = route === routes[routes.length - 1];
+        updatedRoute = currentRoute;
       } else {
-        route.isCurrent = route.offsetTop <= this.pageOffset
-          && (routes[index + 1] === undefined || routes[index + 1].offsetTop > this.pageOffset);
+        let currentRoute = route.getValue();
+        currentRoute.isCurrent = route.getValue().offsetTop <= this.pageOffset
+          && (routes[index + 1] === undefined || routes[index + 1].getValue().offsetTop > this.pageOffset);
+        updatedRoute = currentRoute;
       }
+      // console.log(updatedRoute);
+      route.next(updatedRoute as StacheNavLink);
     });
   }
 
