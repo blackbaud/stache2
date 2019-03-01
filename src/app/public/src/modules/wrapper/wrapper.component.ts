@@ -86,7 +86,6 @@ export class StacheWrapperComponent implements OnInit, AfterViewInit {
     if (!this.inPageRoutes) {
       this.pageAnchorService.pageAnchors.subscribe((anchors: any) => {
         this.inPageRoutes = anchors.map((anchor: BehaviorSubject<StacheNavLink>) => anchor.getValue());
-        console.log(this.inPageRoutes);
       });
     } else {
       this.pageAnchorService.setCustomPageAnchors(this.inPageRoutes);

@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { StacheNavLink, StacheNavService } from '../nav';
 import { SkyAppWindowRef } from '@skyux/core';
 import { Router, NavigationStart } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class StachePageAnchorService {
   // public pageAnchors: StacheNavLink[] = [];
   public pageAnchors = new BehaviorSubject<BehaviorSubject<StacheNavLink>[]>([]);
-  public customPageAnchors: StacheNavLink[] = [];
+  public customPageAnchors = new BehaviorSubject<BehaviorSubject<StacheNavLink>[]>([]);
   public currentBodyHeight = new BehaviorSubject<number>(0);
   private currentPageUrl: string;
 
@@ -18,26 +18,28 @@ export class StachePageAnchorService {
     private navService: StacheNavService
   ) {
     this.currentPageUrl = this.router.url.split('#')[0];
-    this.windowRef.nativeWindow.addEventListener('scroll', () => {
-      this.onScroll();
-    });
+    Observable
+      .fromEvent(this.windowRef.nativeWindow, 'scroll')
+      .map(e => this.windowRef.nativeWindow.document.body.scrollHeight)
+      .pairwise()
+      .subscribe(height => {
+        if (height[0] !== height[1]) {
+          this.currentBodyHeight.next(height[1]);
+        }
+        this.onScroll();
+      });
     this.router.events.subscribe((event) => {
       this.onNavigate(event);
     });
   }
 
   public setCustomPageAnchors(pageAnchors: StacheNavLink[]) {
-    this.customPageAnchors = pageAnchors;
+    this.customPageAnchors.next(pageAnchors.map(anchor => new BehaviorSubject<StacheNavLink>(anchor)));
   }
 
   private onScroll() {
-    let document = this.windowRef.nativeWindow.document;
-    if (this.currentBodyHeight.getValue() !== document.body.scrollHeight) {
-      // Update the page anchor offsets when the page height updates
-      this.currentBodyHeight.next(document.body.scrollHeight);
-    }
-    if (this.customPageAnchors.length) {
-      this.navService.updateRoutesOnScroll(this.customPageAnchors);
+    if (this.customPageAnchors.getValue().length) {
+      this.navService.updateRoutesOnScroll(this.customPageAnchors.getValue());
     } else {
       this.navService.updateRoutesOnScroll(this.pageAnchors.getValue());
     }
@@ -49,7 +51,7 @@ export class StachePageAnchorService {
       if (event.url.split('#')[0] !== this.currentPageUrl) {
         this.currentPageUrl = event.url.split('#')[0];
         this.pageAnchors.next([]);
-        this.customPageAnchors = [];
+        this.customPageAnchors.next([]);
         this.currentBodyHeight.next(this.windowRef.nativeWindow.document.body.scrollHeight);
       }
     }

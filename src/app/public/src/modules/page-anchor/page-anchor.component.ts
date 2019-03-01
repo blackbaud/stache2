@@ -60,6 +60,8 @@ export class StachePageAnchorComponent implements StacheNavLink, AfterViewInit {
 
     const pageAnchors = this.anchorService.pageAnchors.getValue();
     pageAnchors.push(this.anchor);
+    this.sortPageAnchors(pageAnchors);
+    this.anchorService.pageAnchors.next(pageAnchors);
   }
 
   private updatePageAnchor() {
