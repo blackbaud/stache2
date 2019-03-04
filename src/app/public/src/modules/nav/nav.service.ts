@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { StacheWindowRef } from '../shared';
+import { StacheWindowRef, StacheOmnibarAdapterService } from '../shared';
 import { StacheNavLink } from './nav-link';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class StacheNavService {
-  private headerHeight: number;
-  private pageOffset: number;
+  private headerHeight: number = 0;
+  private viewTop: number;
   private documentBottom: number;
 
   public constructor(
     private router: Router,
-    private windowRef: StacheWindowRef) {}
+    private windowRef: StacheWindowRef,
+    private omnibarService: StacheOmnibarAdapterService) {}
 
   public navigate(route: any): void {
     let extras: any = { queryParamsHandling: 'merge' };
@@ -59,7 +59,7 @@ export class StacheNavService {
 
   // Updates ng-class level trigger to show/hide blue border marking location on page
   public updateView(routes: StacheNavLink[]) {
-    this.trackPageOffset();
+    this.trackViewTop();
     this.isCurrent(routes);
   }
 
@@ -72,13 +72,10 @@ export class StacheNavService {
     }
   }
 
-  private trackPageOffset() {
+  private trackViewTop() {
     this.getHeaderHeight();
 
-    // Represents top of page
-    // headerHeight buffer removes discrepency when hero or other 'header' elements exist
-    // 50px buffer aids in click-to-anchor and user visualization
-    this.pageOffset = ((this.windowRef.nativeWindow.pageYOffset - this.headerHeight) + 50);
+    this.viewTop = ((this.windowRef.nativeWindow.pageYOffset - this.headerHeight) + this.omnibarService.getHeight());
 
     // Tracks page bottom so final route can be highlighted if associated anchor provides limited content
     // (Logic based on Angular implementation)
@@ -94,11 +91,10 @@ export class StacheNavService {
         updatedRoute = currentRoute;
       } else {
         let currentRoute = route.getValue();
-        currentRoute.isCurrent = route.getValue().offsetTop <= this.pageOffset
-          && (routes[index + 1] === undefined || routes[index + 1].getValue().offsetTop > this.pageOffset);
+        currentRoute.isCurrent = route.getValue().offsetTop <= this.viewTop
+          && (routes[index + 1] === undefined || routes[index + 1].getValue().offsetTop > this.viewTop);
         updatedRoute = currentRoute;
       }
-      // console.log(updatedRoute);
       route.next(updatedRoute as StacheNavLink);
     });
   }

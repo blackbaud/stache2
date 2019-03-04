@@ -16,7 +16,7 @@ export class StacheNavComponent implements OnInit, StacheNav {
   public navType: string;
   public classname: string = '';
 
-  public constructor(private routerService: StacheRouteService) {}
+  public constructor(private routeService: StacheRouteService) {}
 
   public hasRoutes(): boolean {
     return (Array.isArray(this.routes) && this.routes.length > 0);
@@ -35,15 +35,13 @@ export class StacheNavComponent implements OnInit, StacheNav {
   }
 
   private assignActiveStates() {
-    const activeUrl = this.routerService.getActiveUrl();
+    const activeUrl = this.routeService.getActiveUrl();
     if (this.hasRoutes()) {
-      this.routes.forEach((route: any, index: number) => {
+      this.routes.forEach((route: any) => {
         if (route instanceof BehaviorSubject) {
           route = route.getValue();
         }
-        if (this.isActive(activeUrl, route)) {
-          route.isActive = true;
-        }
+        route.isActive = this.isActive(activeUrl, route);
         route.isCurrent = this.isCurrent(activeUrl, route);
       });
     }

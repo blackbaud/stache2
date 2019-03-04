@@ -76,10 +76,26 @@ export class StachePageAnchorComponent implements StacheNavLink, AfterViewInit {
   // Sometimes offsetTop will be a sub-zero number and will ruin page tracking sync
   // This function runs up the parent tree until it finds an element that has a useable offset value
   private getValidOffsetTop(element: any): number {
-    if (element.offsetTop < 1 && element.parentElement) {
-      return this.getValidOffsetTop(element.parentElement);
+    const tutorialOffsetTop = this.getTutorialOffsetTop(element);
+    if (tutorialOffsetTop) {
+      return tutorialOffsetTop;
+    } else {
+      if (element.offsetTop < 1 && element.parentElement) {
+        return this.getValidOffsetTop(element.parentElement);
+      }
+      return element.offsetTop;
     }
-    return element.offsetTop;
+  }
+
+  // The Tutorial components have styles that alter how offsetTop is calculated on elements.
+  // This step checks to see if an anchor is sitting in a tutorial block and gets the offsetTop of
+  // that element, which is accurate.
+  private getTutorialOffsetTop(element: any): number {
+    if (!element.classList.contains('stache-tutorial-step') && element.parentElement) {
+      return this.getTutorialOffsetTop(element.parentElement);
+    } else if (element.classList.contains('stache-tutorial-step')) {
+      return element.offsetTop;
+    }
   }
 
   private getName(element: any): string {
