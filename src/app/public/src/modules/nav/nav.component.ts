@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { StacheNavLink } from './nav-link';
 import { StacheNav } from './nav';
 import { StacheRouteService } from '../shared';
