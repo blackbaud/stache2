@@ -31,7 +31,7 @@ export class StachePageAnchorComponent implements StacheNavLink, AfterViewInit {
     private windowRef: StacheWindowRef,
     private anchorService: StachePageAnchorService,
     private cdr: ChangeDetectorRef,
-    private routerService: StacheRouteService) {
+    private routeService: StacheRouteService) {
       this.anchorService.currentBodyHeight.subscribe(() => {
         this.updatePageAnchor();
       });
@@ -49,7 +49,7 @@ export class StachePageAnchorComponent implements StacheNavLink, AfterViewInit {
   public generateAnchor(element: any, anchorId: any = undefined) {
     this.name = this.getName(element);
     this.fragment = this.getFragment(this.name, anchorId);
-    this.path = [this.routerService.getActiveUrl()];
+    this.path = [this.routeService.getActiveUrl()];
 
     this.anchor.next({
       path: this.path,

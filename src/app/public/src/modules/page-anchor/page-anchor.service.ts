@@ -6,7 +6,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class StachePageAnchorService {
-  // public pageAnchors: StacheNavLink[] = [];
   public pageAnchors = new BehaviorSubject<BehaviorSubject<StacheNavLink>[]>([]);
   public customPageAnchors = new BehaviorSubject<BehaviorSubject<StacheNavLink>[]>([]);
   public currentBodyHeight = new BehaviorSubject<number>(0);
@@ -14,8 +13,7 @@ export class StachePageAnchorService {
 
   constructor(
     private windowRef: SkyAppWindowRef,
-    private router: Router,
-    private navService: StacheNavService
+    private router: Router
   ) {
     this.currentPageUrl = this.router.url.split('#')[0];
     Observable

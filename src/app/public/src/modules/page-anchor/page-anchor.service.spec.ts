@@ -59,7 +59,6 @@ describe('PageAnchorService', () => {
     service = new StachePageAnchorService(
       (windowRef as any),
       (router as any),
-      (routeService as any),
       (navService as any)
     );
   });

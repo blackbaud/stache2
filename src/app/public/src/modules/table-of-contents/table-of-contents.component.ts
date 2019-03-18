@@ -32,7 +32,7 @@ export class StacheTableOfContentsComponent {
   }
 
   // Updates ng-class level trigger to show/hide blue border marking location on page
-  public updateView(routes: StacheNavLink[]) {
+  public updateView(routes: any[]) {
     this.trackViewTop();
     this.isCurrent(routes);
   }
@@ -40,6 +40,7 @@ export class StacheTableOfContentsComponent {
   private isCurrent(routes: any[]): void {
     let updatedRoute;
     routes.forEach((route, index) => {
+      console.log(route);
       if ((this.windowRef.nativeWindow.innerHeight + 5) >= this.documentBottom) {
         let currentRoute = route.getValue();
         currentRoute.isCurrent = route === routes[routes.length - 1];
