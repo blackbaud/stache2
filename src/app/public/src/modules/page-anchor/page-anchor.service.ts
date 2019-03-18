@@ -38,12 +38,13 @@ export class StachePageAnchorService {
   }
 
   private onScroll() {
+    let anchors: any;
     if (this.customPageAnchors.getValue().length) {
-      this.navService.updateRoutesOnScroll(this.customPageAnchors.getValue());
+      anchors = this.customPageAnchors.getValue();
     } else {
-      this.navService.updateRoutesOnScroll(this.pageAnchors.getValue());
+      anchors = this.pageAnchors.getValue();
     }
-    this.pageAnchors.next(this.pageAnchors.getValue());
+    this.pageAnchors.next(anchors);
   }
 
   private onNavigate(event: any) {
