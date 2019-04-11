@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StacheNavModule } from '../nav';
 import { StacheTableOfContentsComponent } from './table-of-contents.component';
 import { StacheTableOfContentsWrapperComponent } from './table-of-contents-wrapper.component';
-import { SkyAppRuntimeModule } from '@blackbaud/skyux-builder/runtime';
+import { SkyAppRuntimeModule } from '@skyux-sdk/builder/runtime';
 import { StacheAffixModule } from '../affix';
 
 @NgModule({

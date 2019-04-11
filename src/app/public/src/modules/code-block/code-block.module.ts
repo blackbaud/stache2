@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 
 import { StacheCodeBlockComponent } from './code-block.component';
 import { SkyClipboardModule } from '@blackbaud/skyux-lib-clipboard';
-import { SkyAppRuntimeModule } from '@blackbaud/skyux-builder/runtime';
+import { SkyAppRuntimeModule } from '@skyux-sdk/builder/runtime';
 
 @NgModule({
   declarations: [

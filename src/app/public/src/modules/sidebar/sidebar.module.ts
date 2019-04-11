@@ -7,7 +7,7 @@ import { StacheSidebarWrapperComponent } from './sidebar-wrapper.component';
 import { StacheLinkModule } from '../link';
 import {
   SkyAppRuntimeModule
-} from '@blackbaud/skyux-builder/runtime';
+} from '@skyux-sdk/builder/runtime';
 
 @NgModule({
   declarations: [

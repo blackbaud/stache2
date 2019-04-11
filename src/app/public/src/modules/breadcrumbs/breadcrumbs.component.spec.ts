@@ -3,7 +3,9 @@ import { By } from '@angular/platform-browser';
 
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import {
+  expect
+} from '@skyux-sdk/testing';
 
 import { StacheBreadcrumbsComponent } from './breadcrumbs.component';
 import { StacheNavComponent } from '../nav';

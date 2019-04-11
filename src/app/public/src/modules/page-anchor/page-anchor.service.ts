@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { StacheNavLink } from '../nav';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { pairwise, map, takeUntil } from 'rxjs/operators';
 import { StacheWindowRef } from '../shared';
 
 @Injectable()
@@ -11,15 +12,15 @@ export class StachePageAnchorService implements OnDestroy {
   private ngUnsubscribe: Subject<any> = new Subject();
 
   constructor(private windowRef: StacheWindowRef) {
-    this.windowRef.scrollEventStream
-      .takeUntil(this.ngUnsubscribe)
-      .map(e => this.windowRef.nativeWindow.document.body.scrollHeight)
-      .pairwise()
-      .subscribe(height => {
-        if (height[0] !== height[1]) {
-          this.refreshAnchors();
-        }
-      });
+    this.windowRef.scrollEventStream.pipe(
+      takeUntil(this.ngUnsubscribe),
+      map(e => this.windowRef.nativeWindow.document.body.scrollHeight),
+      pairwise()
+    ).subscribe(height => {
+      if (height[0] !== height[1]) {
+        this.refreshAnchors();
+      }
+    });
   }
 
   public addAnchor(anchorStream: BehaviorSubject<StacheNavLink>) {

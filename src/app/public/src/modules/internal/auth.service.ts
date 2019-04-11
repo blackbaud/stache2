@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BBAuthGetTokenArgs } from '@blackbaud/auth-client';
 import { BehaviorSubject } from 'rxjs';
-import { SkyAuthTokenProvider } from '@blackbaud/skyux-builder/runtime';
+import { SkyAuthTokenProvider } from '@skyux/http';
 
 @Injectable()
 export class StacheAuthService  {

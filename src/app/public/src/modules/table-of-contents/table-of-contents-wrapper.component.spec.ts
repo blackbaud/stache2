@@ -1,10 +1,13 @@
 import { StacheTableOfContentsWrapperComponent } from './table-of-contents-wrapper.component';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { PipeTransform, Pipe, Renderer2 } from '@angular/core';
-import { SkyModule } from '@blackbaud/skyux/dist/core';
 import { expect } from '@blackbaud/skyux-lib-testing';
-import { SkyAppResourcesService } from '@blackbaud/skyux-builder/runtime/i18n';
 import { StacheWindowRef, StacheRouteService, StacheOmnibarAdapterService } from '../shared';
+
+import {
+  SkyAppResourcesService
+} from '@skyux/i18n';
+
 import { StacheTableOfContentsComponent } from './table-of-contents.component';
 import { StacheNavModule, StacheNavLink } from '../nav';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -78,7 +81,6 @@ describe('Table of Contents Wrapper Component', () => {
 
   let mockSkyAppResourcesService: any;
   let mockWindowService: any;
-  let mockWindowRef: any;
   let mockStacheRouteService: any;
   let mockRenderer: any;
   let mockOmnibarAdapterService: any;
@@ -86,14 +88,12 @@ describe('Table of Contents Wrapper Component', () => {
   beforeEach(() => {
     mockWindowService = new MockWindowService();
     mockSkyAppResourcesService = new MockSkyAppResourcesService();
-    mockWindowRef = new MockWindowService();
     mockStacheRouteService = new MockStacheRouteService();
     mockRenderer = new MockRenderer();
     mockOmnibarAdapterService = new MockOmnibarService();
 
     TestBed.configureTestingModule({
       imports: [
-        SkyModule,
         StacheNavModule,
         RouterTestingModule
       ],

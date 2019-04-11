@@ -2,7 +2,10 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { SkyModule } from '@blackbaud/skyux/dist/core';
+import {
+  SkyActionButtonModule
+} from '@skyux/layout';
+
 import { expect } from '@blackbaud/skyux-lib-testing';
 import { StacheWindowRef, StacheRouteService } from '../shared';
 
@@ -49,7 +52,7 @@ describe('StacheActionButtonsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        SkyModule,
+        SkyActionButtonModule,
         StacheGridModule,
         RouterTestingModule,
         StacheLinkModule

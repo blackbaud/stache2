@@ -5,8 +5,14 @@ import { expect } from '@blackbaud/skyux-lib-testing';
 
 import { StacheWindowRef, TestUtility } from '../shared';
 import { StacheBackToTopComponent } from './back-to-top.component';
-import { SkyAppResourcesService } from '@blackbaud/skyux-builder/runtime/i18n';
-import { SkyMediaQueryModule } from '@blackbaud/skyux/dist/core';
+
+import {
+  SkyMediaQueryModule
+} from '@skyux/core';
+
+import {
+  SkyAppResourcesService
+} from '@skyux/i18n';
 
 @Pipe({
   name: 'skyAppResources'

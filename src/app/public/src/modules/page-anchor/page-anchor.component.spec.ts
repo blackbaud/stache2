@@ -1,14 +1,48 @@
-import { ChangeDetectorRef } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
-import { StachePageAnchorTestComponent } from './fixtures/page-anchor.component.fixture';
-import { StachePageAnchorComponent } from './page-anchor.component';
-import { StachePageAnchorModule } from './page-anchor.module';
-import { StachePageAnchorService } from './page-anchor.service';
-import { StacheWindowRef, StacheRouteService } from '../shared';
-import { Subject } from 'rxjs';
-import { By } from '@angular/platform-browser';
+import {
+  ChangeDetectorRef
+} from '@angular/core';
+
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  RouterTestingModule
+} from '@angular/router/testing';
+
+import {
+  Subject
+} from 'rxjs';
+
+import {
+  By
+} from '@angular/platform-browser';
+
+import {
+  expect
+} from '@skyux-sdk/testing';
+
+import {
+  StachePageAnchorTestComponent
+} from './fixtures/page-anchor.component.fixture';
+
+import {
+  StachePageAnchorComponent
+} from './page-anchor.component';
+
+import {
+  StachePageAnchorModule
+} from './page-anchor.module';
+
+import {
+  StachePageAnchorService
+} from './page-anchor.service';
+
+import {
+  StacheWindowRef,
+  StacheRouteService
+} from '../shared';
 
 describe('StachePageAnchorComponent', () => {
   let fixtureComponent: StachePageAnchorTestComponent;

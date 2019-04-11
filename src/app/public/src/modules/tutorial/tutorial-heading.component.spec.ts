@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import {
+  expect
+} from '@skyux-sdk/testing';
 
 import { StacheTutorialHeadingComponent } from './tutorial-heading.component';
 
 describe('StacheTutorialHeadingComponent', () => {
-  let component: StacheTutorialHeadingComponent;
   let fixture: ComponentFixture<StacheTutorialHeadingComponent>;
 
   beforeEach(() => {
@@ -17,7 +18,6 @@ describe('StacheTutorialHeadingComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(StacheTutorialHeadingComponent);
-    component = fixture.componentInstance;
   });
 
   it('should render the component', () => {

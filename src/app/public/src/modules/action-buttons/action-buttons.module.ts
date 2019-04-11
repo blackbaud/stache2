@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SkyActionButtonModule } from '@blackbaud/skyux/dist/modules/action-button';
-import { SkySearchModule } from '@blackbaud/skyux/dist/modules/search';
+import {
+  SkyActionButtonModule
+} from '@skyux/layout';
+
+import {
+  SkySearchModule
+} from '@skyux/lookup';
 
 import { StacheGridModule } from '../grid';
 import { StacheActionButtonsComponent } from './action-buttons.component';

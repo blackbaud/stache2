@@ -4,10 +4,14 @@ import {
 } from '@blackbaud/skyux-lib-testing';
 import { StacheCodeBlockTestComponent } from './fixtures/code-block.component.fixture';
 import { StacheCodeBlockComponent } from './code-block.component';
-import { SkyAppRuntimeModule } from '@blackbaud/skyux-builder/runtime';
+import { SkyAppRuntimeModule } from '@skyux-sdk/builder/runtime';
 import { HttpModule } from '@angular/http';
 import { PipeTransform, Pipe } from '@angular/core';
-import { SkyAppResourcesService } from '@blackbaud/skyux-builder/runtime/i18n';
+
+import {
+  SkyAppResourcesService
+} from '@skyux/i18n';
+
 import { SkyClipboardModule, SkyCopyToClipboardService } from '@blackbaud/skyux-lib-clipboard';
 import { StacheWindowRef } from '../shared';
 

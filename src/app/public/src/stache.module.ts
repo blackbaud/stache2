@@ -38,10 +38,13 @@ import { SkyCodeBlockModule } from '@blackbaud/skyux-lib-code-block';
 import { SkyClipboardModule } from '@blackbaud/skyux-lib-clipboard';
 import { StacheInternalModule } from './modules/internal';
 
+import { AppSkyModule } from './app-sky.module';
+
 export * from './modules/shared';
 
 @NgModule({
   exports: [
+    AppSkyModule,
     StacheActionButtonsModule,
     StacheAffixModule,
     StacheAnalyticsModule,

@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
 
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import {
+  expect
+} from '@skyux-sdk/testing';
 
 import { StacheImageComponent } from './image.component';
 
 describe('StacheImageComponent', () => {
   let component: StacheImageComponent;
   let fixture: ComponentFixture<StacheImageComponent>;
-  let debugElement: DebugElement;
   let imageSource = 'https://this.is.fake.com/image.png';
   let caption = 'This is a caption';
 
@@ -22,7 +22,6 @@ describe('StacheImageComponent', () => {
 
     fixture = TestBed.createComponent(StacheImageComponent);
     component = fixture.componentInstance;
-    debugElement = fixture.debugElement;
   });
 
   it('should render the component', () => {

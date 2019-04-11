@@ -1,9 +1,21 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs/Observable';
-import { SkyAppResourcesService } from '@blackbaud/skyux-builder/runtime/i18n';
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+
+import {
+  expect
+} from '@skyux-sdk/testing';
+
+import {
+  SkyMediaQueryModule
+} from '@skyux/core';
+
+import {
+  SkyAppResourcesService
+} from '@skyux/i18n';
+
 import { StacheWrapperTestComponent } from './fixtures/wrapper.component.fixture';
 import { StacheWrapperComponent } from './wrapper.component';
 import { StacheFooterModule } from '../footer';
@@ -23,6 +35,7 @@ import { StachePageAnchorModule } from '../page-anchor';
 import { SkyMediaQueryModule } from '@blackbaud/skyux/dist/core';
 import { Pipe, PipeTransform } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { StachePageAnchorModule, StachePageAnchorService } from '../page-anchor';
 
 @Pipe({
   name: 'skyAppResources'
@@ -64,13 +77,13 @@ describe('StacheWrapperComponent', () => {
   }
 
   class MockActivatedRoute {
-    public fragment: Observable<string> = Observable.of('test-route');
-    public url: BehaviorSubject<string[]> = new BehaviorSubject(['test', 'route']);
+    public fragment: Observable<string> = observableOf('test-route');
+    public url: Observable<string[]> = observableOf(['test', 'routes']);
     // snapshot is a required prop on activatedRoute to avoid an error with `'_lastPathIndex' of undefined`
     // https://stackoverflow.com/questions/41245783/angular-testing-router-params-breaks-test-bed
     public snapshot = {};
     public setFragment(fragString: any) {
-      this.fragment = Observable.of(fragString);
+      this.fragment = observableOf(fragString);
     }
   }
 
@@ -120,6 +133,23 @@ describe('StacheWrapperComponent', () => {
 
   class MockTitleService {
     public setTitle = jasmine.createSpy('setTitle');
+  }
+
+  class MockAnchorService {
+    public anchorStream = observableOf(
+      {
+        path: 'Second Path',
+        name: 'Second Heading',
+        fragment: 'Second Fragment'
+      } as StacheNavLink,
+      {
+        path: 'First Path',
+        name: 'First Heading',
+        fragment: 'First Fragment',
+        order: 0
+      } as StacheNavLink
+    );
+    public addPageAnchor = function() {};
   }
 
   class MockWindowService {
@@ -187,12 +217,12 @@ describe('StacheWrapperComponent', () => {
 
     public scrollEventStream = Observable.of(true);
 
-    get onResize$() {
-      return Observable.of({});
+    get onResize() {
+      return observableOf({});
     }
 
-    constructor(private eventManager: any) {
-      this.eventManager = {
+    constructor(eventManager: any) {
+      eventManager = {
         addGlobalEventListener: () => {}
       };
     }
