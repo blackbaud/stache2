@@ -8,20 +8,42 @@
   </div>
   <stache-row>
     <nav class="stache-action-buttons-nav-container">
-      <stache-column screenSmall="6" screenMedium="4" screenLarge="3" *ngFor="let route of filteredRoutes">
-        <a stacheRouterLink="{{route.path}}" fragment="{{route.fragment}}" class="stache-action-button-override sky-action-button sky-btn-default sky-rounded-corners">
-          <div>
-            <sky-action-button-icon *ngIf="route.icon" iconType="{{route.icon}}">
-            </sky-action-button-icon>
-            <sky-action-button-header>
-              {{route.name}}
-            </sky-action-button-header>
-          </div>
-          <sky-action-button-details>
-            {{route.summary}}
-          </sky-action-button-details>
-        </a>
-      </stache-column>
+      <div *ngFor="let route of filteredRoutes">
+        <div *ngIf="route.isInternal">
+          <stache-internal>
+          <stache-column screenSmall="6" screenMedium="4" screenLarge="3" >
+            <a stacheRouterLink="{{route.path}}" fragment="{{route.fragment}}" class="stache-action-button-override sky-action-button sky-btn-default sky-rounded-corners">
+              <div>
+                <sky-action-button-icon *ngIf="route.icon" iconType="{{route.icon}}">
+                </sky-action-button-icon>
+                <sky-action-button-header>
+                  {{route.name}}
+                </sky-action-button-header>
+              </div>
+              <sky-action-button-details>
+                {{route.summary}}
+              </sky-action-button-details>
+            </a>
+          </stache-column>
+        </stache-internal>
+        </div>
+        <div *ngIf="!route.isInternal">
+          <stache-column screenSmall="6" screenMedium="4" screenLarge="3" >
+            <a stacheRouterLink="{{route.path}}" fragment="{{route.fragment}}" class="stache-action-button-override sky-action-button sky-btn-default sky-rounded-corners">
+              <div>
+                <sky-action-button-icon *ngIf="route.icon" iconType="{{route.icon}}">
+                </sky-action-button-icon>
+                <sky-action-button-header>
+                  {{route.name}}
+                </sky-action-button-header>
+              </div>
+              <sky-action-button-details>
+                {{route.summary}}
+              </sky-action-button-details>
+            </a>
+          </stache-column>
+        </div>
+    </div>
     </nav>
   </stache-row>
 </div>

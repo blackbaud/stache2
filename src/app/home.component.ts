@@ -6,12 +6,13 @@ import { StacheNavLink } from './public/src/modules/nav';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  public actionButtonRoutes = [
+  public actionButtonRoutes: StacheNavLink[] = [
     {
       name: 'Action Button 1',
       path: '/demos',
       icon: 'book',
-      summary: 'Short summary here.'
+      summary: 'Short summary here.',
+      isInternal: true
     },
     {
       name: 'Action Button 2',

@@ -7,6 +7,7 @@ import { SkySearchModule } from '@blackbaud/skyux/dist/modules/search';
 import { StacheGridModule } from '../grid';
 import { StacheActionButtonsComponent } from './action-buttons.component';
 import { StacheLinkModule } from '../link';
+import { StacheInternalModule } from '../internal';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { StacheLinkModule } from '../link';
     SkyActionButtonModule,
     SkySearchModule,
     StacheLinkModule,
-    StacheGridModule
+    StacheGridModule,
+    StacheInternalModule
   ],
   exports: [
     StacheActionButtonsComponent
