@@ -1,9 +1,11 @@
 <div class="stache-action-buttons" *ngIf="routes.length">
   <div *ngIf="showSearch" class="stache-action-buttons-search-container">
-    <sky-search expandMode="fit"
+    <sky-search
+      expandMode="fit"
       [searchText]="searchText"
       (searchApply)="searchApplied($event)"
-      (keyup)="onKeyUp($event)">
+      (keyup)="onKeyUp($event)"
+    >
     </sky-search>
   </div>
   <stache-row>
@@ -11,39 +13,53 @@
       <div *ngFor="let route of filteredRoutes">
         <div *ngIf="route.isInternal">
           <stache-internal>
-          <stache-column screenSmall="6" screenMedium="4" screenLarge="3" >
-            <a stacheRouterLink="{{route.path}}" fragment="{{route.fragment}}" class="stache-action-button-override sky-action-button sky-btn-default sky-rounded-corners">
-              <div>
-                <sky-action-button-icon *ngIf="route.icon" iconType="{{route.icon}}">
-                </sky-action-button-icon>
-                <sky-action-button-header>
-                  {{route.name}}
-                </sky-action-button-header>
-              </div>
-              <sky-action-button-details>
-                {{route.summary}}
-              </sky-action-button-details>
-            </a>
-          </stache-column>
-        </stache-internal>
+            <stache-column>
+              <a
+                stacheRouterLink="{{ route.path }}"
+                fragment="{{ route.fragment }}"
+                class="stache-action-button-override sky-action-button sky-btn-default sky-rounded-corners"
+              >
+                <div>
+                  <sky-action-button-icon
+                    *ngIf="route.icon"
+                    iconType="{{ route.icon }}"
+                  >
+                  </sky-action-button-icon>
+                  <sky-action-button-header>
+                    {{ route.name }}
+                  </sky-action-button-header>
+                </div>
+                <sky-action-button-details>
+                  {{ route.summary }}
+                </sky-action-button-details>
+              </a>
+            </stache-column>
+          </stache-internal>
         </div>
         <div *ngIf="!route.isInternal">
-          <stache-column screenSmall="6" screenMedium="4" screenLarge="3" >
-            <a stacheRouterLink="{{route.path}}" fragment="{{route.fragment}}" class="stache-action-button-override sky-action-button sky-btn-default sky-rounded-corners">
+          <stache-column>
+            <a
+              stacheRouterLink="{{ route.path }}"
+              fragment="{{ route.fragment }}"
+              class="stache-action-button-override sky-action-button sky-btn-default sky-rounded-corners"
+            >
               <div>
-                <sky-action-button-icon *ngIf="route.icon" iconType="{{route.icon}}">
+                <sky-action-button-icon
+                  *ngIf="route.icon"
+                  iconType="{{ route.icon }}"
+                >
                 </sky-action-button-icon>
                 <sky-action-button-header>
-                  {{route.name}}
+                  {{ route.name }}
                 </sky-action-button-header>
               </div>
               <sky-action-button-details>
-                {{route.summary}}
+                {{ route.summary }}
               </sky-action-button-details>
             </a>
           </stache-column>
         </div>
-    </div>
+      </div>
     </nav>
   </stache-row>
 </div>

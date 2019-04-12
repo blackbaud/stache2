@@ -24,7 +24,8 @@ export class HomeComponent {
       name: 'Action Button 3',
       path: 'http://google.com',
       icon: 'certificate',
-      summary: 'Short summary here.'
+      summary: 'Short summary here.',
+      isInternal: true
     },
     {
       name: 'Action Button 4',
