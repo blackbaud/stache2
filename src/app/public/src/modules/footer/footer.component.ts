@@ -1,5 +1,3 @@
-
-import {take} from 'rxjs/operators';
 import {
   Component,
   OnInit
@@ -8,6 +6,10 @@ import {
 import {
   SkyAppResourcesService
 } from '@skyux/i18n';
+
+import {
+  take
+} from 'rxjs/operators';
 
 import {
   StacheConfigService
@@ -55,7 +57,8 @@ export class StacheFooterComponent implements OnInit {
     });
 
     this.resourcesService.getString('stache_copyright_label').pipe(
-      take(1))
+      take(1)
+      )
       .subscribe((value) => {
         this.copyrightLabel = _get(
           this.configService,

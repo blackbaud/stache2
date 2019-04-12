@@ -6,6 +6,10 @@ import {
   SkyActionButtonModule
 } from '@skyux/layout';
 
+import {
+  SkySearchModule
+} from '@skyux/lookup';
+
 import { expect } from '@blackbaud/skyux-lib-testing';
 import { StacheWindowRef, StacheRouteService } from '../shared';
 
@@ -53,6 +57,7 @@ describe('StacheActionButtonsComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         SkyActionButtonModule,
+        SkySearchModule,
         StacheGridModule,
         RouterTestingModule,
         StacheLinkModule

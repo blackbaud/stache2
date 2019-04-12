@@ -2,11 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StacheFooterComponent } from './footer.component';
 import { StacheNavModule } from '../nav';
+import { SkyI18nModule } from '@skyux/i18n';
+import {
+  StacheResourcesModule
+} from '../shared/stache-resources.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    StacheNavModule
+    StacheResourcesModule,
+    StacheNavModule,
+    SkyI18nModule
   ],
   declarations: [
     StacheFooterComponent
@@ -14,6 +20,7 @@ import { StacheNavModule } from '../nav';
   exports: [
     StacheFooterComponent
   ],
-  providers: []
+  providers: [
+  ]
 })
 export class StacheFooterModule { }

@@ -77,6 +77,7 @@ describe('StacheLinkDirective', () => {
       providers: [
         LocationStrategy,
         StacheWindowRef,
+        { provide: LocationStrategy, useClass: PathLocationStrategy },
         { provide: StacheNavService, useValue: mockNavService },
         { provide: StacheRouteService, useValue: mockRouteService }
       ]

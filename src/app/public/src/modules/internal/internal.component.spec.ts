@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import { expect } from '@skyux-sdk/testing';
 import { StacheInternalComponent } from './internal.component';
 import { Observable } from 'rxjs';
 import { StacheAuthService } from './auth.service';

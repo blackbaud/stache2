@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import {Pipe, PipeTransform} from '@angular/core';
 
 import { expect } from '@blackbaud/skyux-lib-testing';
 import { StacheFooterComponent } from './footer.component';
+import { StacheFooterModule } from './footer.module';
 import { StacheNavModule } from '../nav';
 import { StacheConfigService, StacheWindowRef, StacheRouteService } from '../shared';
 
@@ -12,45 +12,14 @@ import {
 } from '@skyux/core';
 
 import {
-  SkyAppResourcesService
+  SkyI18nModule
 } from '@skyux/i18n';
-
-@Pipe({
-  name: 'skyAppResources'
-})
-export class MockSkyAppResourcesPipe implements PipeTransform {
-  public transform(value: number): number {
-    return value;
-  }
-}
-
-class MockSkyAppResourcesService {
-  public getString(val: string): any {
-    return {
-      subscribe: (cb: any) => {
-        cb();
-      },
-      take: () => {
-        return {
-          subscribe: (cb: any) => {
-            if (val === 'stache_copyright_label') {
-              cb('Blackbaud, Inc. All rights reserved.');
-              return;
-            }
-            cb();
-          }
-        };
-      }
-    };
-  }
-}
 
 describe('StacheFooterComponent', () => {
   let component: StacheFooterComponent;
   let fixture: ComponentFixture<StacheFooterComponent>;
   let mockConfigService: any;
   let mockRouterService: any;
-  let mockSkyAppResourcesService: any;
 
   let footerConfig = {
     nav: {
@@ -87,20 +56,17 @@ describe('StacheFooterComponent', () => {
   beforeEach(() => {
     mockConfigService = new MockConfigService();
     mockRouterService = new MockRouterService();
-    mockSkyAppResourcesService = new MockSkyAppResourcesService();
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
         SkyMediaQueryModule,
-        StacheNavModule
+        StacheFooterModule
       ],
       declarations: [
-        StacheFooterComponent,
-        MockSkyAppResourcesPipe
+
       ],
       providers: [
         StacheWindowRef,
-        { provide: SkyAppResourcesService, useValue: mockSkyAppResourcesService },
         { provide: StacheRouteService, useValue: mockRouterService },
         { provide: StacheConfigService, useValue: mockConfigService }
       ]

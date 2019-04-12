@@ -1,4 +1,4 @@
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import { expect } from '@skyux-sdk/testing';
 
 import { StacheInternalModule } from './internal.module';
 
