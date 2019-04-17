@@ -34,6 +34,7 @@ describe('StachePageAnchorTestComponent', () => {
   it('should change the value of changeable after 2 seconds from init', () => {
     spyOn(window, 'setTimeout').and.callFake((cb: any) => {
       cb();
+      return 0;
     });
     expect(component.changeable).toBe('Value One');
     component.ngOnInit();

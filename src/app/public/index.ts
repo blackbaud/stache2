@@ -1,1 +1,1 @@
-export * from './src/stache.module';
+export * from './stache.module';

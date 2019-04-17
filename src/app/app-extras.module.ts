@@ -4,7 +4,7 @@ import { StacheModule } from './public';
 
 import {
   AppSkyModule
-} from './public/src/app-sky.module';
+} from './public/app-sky.module';
 
 @NgModule({
   imports: [

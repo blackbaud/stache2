@@ -5,7 +5,8 @@
   "compileMode": "aot",
   "auth": false,
   "plugins": [
-    "@blackbaud/skyux-builder-plugin-stache"
+    "@blackbaud/skyux-builder-plugin-stache",
+    "@skyux-sdk/builder-plugin-skyux"
   ],
   "app": {
     "title": "Stache 2"
