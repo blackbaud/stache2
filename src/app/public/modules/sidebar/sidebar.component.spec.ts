@@ -1,14 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  By
+} from '@angular/platform-browser';
+
+import {
+  RouterTestingModule
+} from '@angular/router/testing';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheSidebarComponent } from './sidebar.component';
-import { StacheNavService } from '../nav/nav.service';
-import { StacheNavModule } from '../nav/nav.module';
+import {
+  SkyMediaQueryService
+} from '@skyux/core';
+
+import {
+   StacheNavService
+  } from '../nav/nav.service';
 
 import {
   StacheWindowRef,
@@ -16,34 +29,50 @@ import {
   StacheRouteService
 } from '../shared';
 
-import { RouterLinkStubDirective } from './fixtures/router-link-stub.directive';
-import { StacheLinkModule } from '../link';
-import { StacheSidebarModule } from './sidebar.module';
+import {
+  RouterLinkStubDirective
+} from './fixtures/router-link-stub.directive';
 
-describe('StacheSidebarComponent', () => {
+import {
+  StacheSidebarModule
+} from './sidebar.module';
+
+import {
+  StacheSidebarComponent
+} from './sidebar.component';
+
+import {
+  SidebarTestComponent
+} from './fixtures/sidebar-test.component.fixture';
+
+const routes = [
+  {
+    name: 'Home',
+    path: '/home',
+    children: [
+      {
+        name: 'Test',
+        path: '/test',
+        children: [
+          {
+            name: 'Test Child',
+            path: '/test/child'
+          },
+          {
+            name: 'Test Child2',
+            path: '/test/child'
+          }
+        ]
+      }
+    ]
+  }
+];
+
+describe('SidebarTestComponent', () => {
   let component: StacheSidebarComponent;
   let fixture: ComponentFixture<StacheSidebarComponent>;
   let mockRouteService: any;
   let activeUrl: string = '/';
-
-  let routes = [
-    {
-      name: 'Home',
-      path: '',
-      children: [
-        {
-          name: 'Test',
-          path: '/test',
-          children: [
-            {
-              name: 'Test Child',
-              path: '/test/child'
-            }
-          ]
-        }
-      ]
-    }
-  ];
 
   class MockRouteService {
     public getActiveUrl() {
@@ -60,18 +89,17 @@ describe('StacheSidebarComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [
+        SidebarTestComponent,
         RouterLinkStubDirective
       ],
       imports: [
         RouterTestingModule,
-        StacheNavModule,
-        StacheLinkModule,
         StacheSidebarModule
       ],
       providers: [
         StacheWindowRef,
         StacheNavService,
-        StacheRouteService,
+        SkyMediaQueryService,
         { provide: StacheRouteService, useValue: mockRouteService },
         { provide: StacheRouteMetadataService, useValue: { routes: [] } }
       ]
@@ -105,11 +133,12 @@ describe('StacheSidebarComponent', () => {
   });
 
   it('should automatically generate routes from config', () => {
-    component.routes = undefined;
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(component.routes.length).toBe(1);
-    expect(component.routes[0].children.length).toBe(1);
+    const tmpFixture = TestBed.createComponent(SidebarTestComponent);
+    tmpFixture.detectChanges();
+
+    const links = tmpFixture.debugElement.queryAll(By.css('.stache-nav-anchor'));
+
+    expect(links.length).toBe(3);
   });
 
   it('should add a \/ to a heading route when one is not present', () => {
@@ -120,7 +149,6 @@ describe('StacheSidebarComponent', () => {
         children: []
       }
     ];
-    component.ngOnInit();
     fixture.detectChanges();
     expect(component.heading).toEqual('Header');
     expect(component.headingRoute).toEqual('/');
@@ -135,8 +163,6 @@ describe('StacheSidebarComponent', () => {
       }
     ];
 
-    component.ngOnInit();
-    fixture.detectChanges();
     expect(component.heading).toEqual('Header');
     expect(component.headingRoute).toEqual('/');
   });
@@ -150,20 +176,50 @@ describe('StacheSidebarComponent', () => {
       }
     ];
 
-    component.ngOnInit();
-    fixture.detectChanges();
     expect(component.heading).toEqual('Foo');
     expect(component.headingRoute).toEqual('/home/foo');
   });
 
-  it('should add a heading for the root level route', () => {
-    fixture.detectChanges();
-    expect(component.heading).toEqual('Home');
-    expect(component.headingRoute).toEqual('/');
+  it('should use generated routes if no custom routes are provided', () => {
+    const tmpFixture = TestBed.createComponent(SidebarTestComponent);
+    tmpFixture.detectChanges();
+    const heading: HTMLAnchorElement = tmpFixture.nativeElement.querySelector('#stache-sidebar-heading');
+    expect(heading.innerHTML.trim()).toEqual('Home');
   });
 
-  it('should automatically add a link to the top-level page', () => {
-    fixture.detectChanges();
-    expect(component.routes[0].name).toBe('Home');
+  it('should not use generated routes if custom routes are provided', () => {
+    const tmpFixture = TestBed.createComponent(SidebarTestComponent);
+    const cmp = tmpFixture.componentInstance as SidebarTestComponent;
+
+    cmp.routes = [
+      {
+        name: 'Foo',
+        path: ['home', 'foo'],
+        children: []
+      }
+    ];
+
+    tmpFixture.detectChanges();
+
+    const el = tmpFixture.nativeElement as HTMLElement;
+
+    const sidebarHeading = el.querySelector('#stache-sidebar-heading').innerHTML;
+
+    expect(sidebarHeading.trim()).toEqual('Foo');
+  });
+
+  it('should get sidebar routes', () => {
+    component.routes = [
+      {
+        name: 'Header',
+        path: '/',
+        children: [
+          { name: 'Test 1', path: [] },
+          { name: 'Test 2', path: [] }
+        ]
+      }
+    ];
+
+    expect(component.routes.length).toBe(1);
   });
 });
