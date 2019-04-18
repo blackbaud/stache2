@@ -54,7 +54,7 @@
     "@skyux/http": "3.2.0",
     "@skyux/i18n": "3.5.2",
     "@skyux/indicators": "3.0.3",
-    "@skyux/layout": "3.0.0",
+    "@skyux/layout": "3.1.0",
     "@skyux/lookup": "3.0.1",
     "@skyux/modals": "3.0.1",
     "@skyux/omnibar-interop": "3.1.0",
