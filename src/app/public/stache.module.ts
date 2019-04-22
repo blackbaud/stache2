@@ -5,14 +5,6 @@ import {
 } from '@angular/core';
 
 import {
-  SkyCodeBlockModule
-} from '@blackbaud/skyux-lib-code-block';
-
-import {
-  SkyClipboardModule
-} from '@blackbaud/skyux-lib-clipboard';
-
-import {
   StacheActionButtonsModule
 } from './modules/action-buttons/action-buttons.module';
 
@@ -160,9 +152,7 @@ export * from './modules/shared';
     StacheTutorialModule,
     StacheTutorialStepModule,
     StacheVideoModule,
-    StacheWrapperModule,
-    SkyCodeBlockModule,
-    SkyClipboardModule
+    StacheWrapperModule
   ]
 })
 export class StacheModule { }
