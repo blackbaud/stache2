@@ -1,4 +1,6 @@
-import { StacheNavService } from './nav.service';
+import {
+  StacheNavService
+} from './nav.service';
 
 class MockRouter {
   public url = '/internal#element-id';

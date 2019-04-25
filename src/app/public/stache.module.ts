@@ -5,6 +5,10 @@ import {
 } from '@angular/core';
 
 import {
+  SkyImageModule
+} from '@blackbaud/skyux-lib-media';
+
+import {
   StacheActionButtonsModule
 } from './modules/action-buttons/action-buttons.module';
 
@@ -45,20 +49,12 @@ import {
 } from './modules/hero/hero.module';
 
 import {
-  StacheImageModule
-} from './modules/image/image.module';
-
-import {
   StacheIncludeModule
 } from './modules/include/include.module';
 
 import {
   StacheLayoutModule
 } from './modules/layout/layout.module';
-
-import {
-  StacheLinkModule
-} from './modules/link/link.module';
 
 import {
   StacheMarkdownModule
@@ -137,10 +133,9 @@ export * from './modules/shared';
     StacheGridModule,
     StacheHeroModule,
     StacheHideFromSearchModule,
-    StacheImageModule,
+    SkyImageModule,
     StacheIncludeModule,
     StacheLayoutModule,
-    StacheLinkModule,
     StacheMarkdownModule,
     StacheNavModule,
     StachePageAnchorModule,

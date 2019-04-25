@@ -1,9 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
 
-import { StacheNavModule } from '../nav/nav.module';
-import { StacheBreadcrumbsComponent } from './breadcrumbs.component';
-import { StacheLinkModule } from '../link/link.module';
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  StacheNavModule
+} from '../nav/nav.module';
+
+import {
+  StacheBreadcrumbsComponent
+} from './breadcrumbs.component';
+
+import {
+  StacheSharedModule
+} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +25,7 @@ import { StacheLinkModule } from '../link/link.module';
   imports: [
     CommonModule,
     StacheNavModule,
-    StacheLinkModule
+    StacheSharedModule
   ],
   exports: [
     StacheBreadcrumbsComponent

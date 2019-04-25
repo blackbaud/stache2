@@ -1,7 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
 
-import { StacheCodeComponent } from './code.component';
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  StacheCodeComponent
+} from './code.component';
 
 @NgModule({
   declarations: [

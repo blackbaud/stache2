@@ -1,5 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
 import {
   SkyAppRuntimeModule
 } from '@skyux-sdk/builder/runtime';
@@ -12,7 +18,13 @@ import {
   StacheResourcesModule
 } from '../shared/stache-resources.module';
 
-import { StacheBackToTopComponent } from './back-to-top.component';
+import {
+  StacheBackToTopComponent
+} from './back-to-top.component';
+
+import {
+  StacheSharedModule
+} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,11 +32,10 @@ import { StacheBackToTopComponent } from './back-to-top.component';
   ],
   imports: [
     CommonModule,
+    StacheSharedModule,
     SkyAppRuntimeModule,
     SkyI18nModule,
     StacheResourcesModule
-  ],
-  providers: [
   ],
   exports: [
     StacheBackToTopComponent

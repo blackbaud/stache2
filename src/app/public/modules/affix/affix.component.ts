@@ -7,10 +7,17 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import {
+  Subscription
+} from 'rxjs';
 
-import { StacheAffixTopDirective } from './affix-top.directive';
-import { StacheWindowRef } from '../shared';
+import {
+  StacheAffixTopDirective
+} from './affix-top.directive';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
 @Component({
   selector: 'stache-affix',

@@ -11,7 +11,9 @@ import {
 
 import { StacheGridModule } from '../grid/grid.module';
 import { StacheActionButtonsComponent } from './action-buttons.component';
-import { StacheLinkModule } from '../link/link.module';
+import {
+  StacheNavModule
+} from '../nav/nav.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import { StacheLinkModule } from '../link/link.module';
     CommonModule,
     SkyActionButtonModule,
     SkySearchModule,
-    StacheLinkModule,
+    StacheNavModule,
     StacheGridModule
   ],
   exports: [

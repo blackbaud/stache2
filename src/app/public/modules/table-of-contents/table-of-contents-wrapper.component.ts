@@ -1,5 +1,5 @@
 import { Component, Input, Renderer2, OnDestroy, AfterViewInit } from '@angular/core';
-import { StacheNavLink } from '../nav';
+import { StacheNavLink } from '../nav/nav-link';
 import { StacheWindowRef } from '../shared';
 
 const HAS_TOC_CLASS_NAME = 'stache-table-of-contents-enabled';

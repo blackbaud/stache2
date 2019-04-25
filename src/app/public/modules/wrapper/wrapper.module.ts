@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { StacheTitleService } from './title.service';
-import { StachePageAnchorModule } from '../page-anchor';
-import { StacheLayoutModule } from '../layout';
-import { StacheAnalyticsModule } from '../analytics';
-import { StacheFooterModule } from '../footer';
+import { StachePageAnchorModule } from '../page-anchor/page-anchor.module';
+import { StacheLayoutModule } from '../layout/layout.module';
+import { StacheAnalyticsModule } from '../analytics/analytics.module';
+import { StacheFooterModule } from '../footer/footer.module';
 import { StacheWrapperComponent } from './wrapper.component';
 
 @NgModule({

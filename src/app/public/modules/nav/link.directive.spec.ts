@@ -1,19 +1,51 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
-
-import { expect, SkyAppTestUtility } from '@skyux-sdk/testing';
-
-import { StacheRouterLinkDirective } from './link.directive';
-import { StacheRouterLinkTestComponent } from './fixtures/link.component.fixture';
-import { StacheNavService } from '../nav/nav.service';
-import { StacheRouteService } from '../shared/route.service';
 import {
-  StacheWindowRef
-} from '../shared/window-ref';
+  async,
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
-import { LocationStrategy, PathLocationStrategy, APP_BASE_HREF } from '@angular/common';
-import { StacheRouterLinkTestLocalRouteComponent } from './fixtures/link.component_localroute.fixture';
+import {
+  DebugElement
+} from '@angular/core';
+
+import {
+  LocationStrategy,
+  PathLocationStrategy,
+  APP_BASE_HREF
+} from '@angular/common';
+
+import {
+  By
+} from '@angular/platform-browser';
+
+import {
+  expect,
+  SkyAppTestUtility
+} from '@skyux-sdk/testing';
+
+import {
+  StacheRouterLinkTestComponent
+} from './fixtures/link.component.fixture';
+
+import {
+   StacheNavService
+} from './nav.service';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
+
+import {
+  StacheRouterLinkTestLocalRouteComponent
+} from './fixtures/link.component_localroute.fixture';
+
+import {
+  StacheNavModule
+} from './nav.module';
+
+import {
+  StacheRouterLinkDirective
+} from './link.directive';
 
 describe('StacheLinkDirective', () => {
   let debugElement: DebugElement;
@@ -73,14 +105,15 @@ describe('StacheLinkDirective', () => {
     mockRouteService = new MockRouteService();
 
     TestBed.configureTestingModule({
+      imports: [
+        StacheNavModule
+      ],
       declarations: [
-        StacheRouterLinkDirective,
         StacheRouterLinkTestComponent,
         StacheRouterLinkTestLocalRouteComponent
       ],
       providers: [
         LocationStrategy,
-        StacheWindowRef,
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         { provide: APP_BASE_HREF, useValue: '/' },
         { provide: StacheNavService, useValue: mockNavService },

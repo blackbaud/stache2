@@ -19,7 +19,6 @@ import {
 } from '../shared';
 
 import { RouterLinkStubDirective } from './fixtures/router-link-stub.directive';
-import { StacheLinkModule } from '../link';
 
 import {
   SkyMediaQueryModule
@@ -93,7 +92,6 @@ describe('StacheSidebarWrapperComponent', () => {
       ],
       imports: [
         RouterTestingModule,
-        StacheLinkModule,
         StacheNavModule,
         StacheSidebarModule,
         SkyMediaQueryModule,

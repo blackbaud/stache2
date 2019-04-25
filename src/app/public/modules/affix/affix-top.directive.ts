@@ -6,7 +6,13 @@ import {
   Renderer2
 } from '@angular/core';
 
-import { StacheWindowRef, StacheOmnibarAdapterService } from '../shared';
+import {
+  StacheOmnibarAdapterService
+} from '../shared/omnibar-adapter.service';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
 @Directive({
   selector: '[stacheAffixTop]'

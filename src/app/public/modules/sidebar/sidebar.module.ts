@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { StacheNavModule } from '../nav';
+import { StacheNavModule } from '../nav/nav.module';
 import { StacheSidebarComponent } from './sidebar.component';
 import { StacheSidebarWrapperComponent } from './sidebar-wrapper.component';
-import { StacheLinkModule } from '../link';
+
 import {
   StacheResourcesModule
 } from '../shared/stache-resources.module';
@@ -25,7 +25,6 @@ import {
   imports: [
     CommonModule,
     StacheNavModule,
-    StacheLinkModule,
     SkyAppRuntimeModule,
     SkyI18nModule,
     StacheResourcesModule

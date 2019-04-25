@@ -1,15 +1,46 @@
-import { By } from '@angular/platform-browser';
-import { ComponentFixture, fakeAsync, inject, tick, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  inject,
+  tick,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  By
+} from '@angular/platform-browser';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheAffixTopDirective } from './affix-top.directive';
-import { AffixTopTestComponent } from './fixtures/affix-top.component.fixture';
-import { StacheCodeModule } from '../code/code.module';
+import {
+  StacheAffixTopDirective
+} from './affix-top.directive';
 
-import { StacheWindowRef, StacheOmnibarAdapterService, TestUtility } from '../shared';
+import {
+  AffixTopTestComponent
+} from './fixtures/affix-top.component.fixture';
+
+import {
+  StacheCodeModule
+} from '../code/code.module';
+
+import {
+  StacheAffixModule
+} from './affix.module';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
+  StacheOmnibarAdapterService
+} from '../shared/omnibar-adapter.service';
+
+import {
+  TestUtility
+} from '../shared/testing/test-utility';
 
 describe('AffixTopTestDirective', () => {
   const className: string = StacheAffixTopDirective.AFFIX_CLASS_NAME;
@@ -28,10 +59,10 @@ describe('AffixTopTestDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        StacheCodeModule
+        StacheCodeModule,
+        StacheAffixModule
       ],
       declarations: [
-        StacheAffixTopDirective,
         AffixTopTestComponent
       ],
       providers: [

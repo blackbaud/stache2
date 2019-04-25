@@ -1,21 +1,36 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
 import {
-  SkyActionButtonModule
-} from '@skyux/layout';
+  By
+} from '@angular/platform-browser';
 
 import {
-  SkySearchModule
-} from '@skyux/lookup';
+  RouterTestingModule
+} from '@angular/router/testing';
 
-import { expect } from '@skyux-sdk/testing';
-import { StacheWindowRef, StacheRouteService } from '../shared';
+import {
+  expect
+} from '@skyux-sdk/testing';
 
-import { StacheGridModule } from '../grid';
-import { StacheActionButtonsComponent } from './action-buttons.component';
-import { StacheLinkModule } from '../link';
+import {
+  StacheRouteService
+} from '../shared/route.service';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
+  StacheActionButtonsComponent
+} from './action-buttons.component';
+
+import {
+  StacheActionButtonsModule
+} from './action-buttons.module';
 
 describe('StacheActionButtonsComponent', () => {
   let mockActiveUrl = '';
@@ -56,14 +71,8 @@ describe('StacheActionButtonsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        SkyActionButtonModule,
-        SkySearchModule,
-        StacheGridModule,
-        RouterTestingModule,
-        StacheLinkModule
-      ],
-      declarations: [
-        StacheActionButtonsComponent
+        StacheActionButtonsModule,
+        RouterTestingModule
       ],
       providers: [
         StacheWindowRef,

@@ -1,13 +1,35 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  By
+} from '@angular/platform-browser';
+
+import {
+  RouterTestingModule
+} from '@angular/router/testing';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheEditButtonComponent } from './edit-button.component';
-import { StacheConfigService, StacheRouteService } from '../shared';
+import {
+  StacheEditButtonComponent
+} from './edit-button.component';
+
+import {
+  StacheEditButtonModule
+} from './edit-button.module';
+
+import {
+  StacheConfigService
+} from '../shared/config.service';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
 
 describe('StacheEditButtonComponent', () => {
   let component: StacheEditButtonComponent;
@@ -37,10 +59,8 @@ describe('StacheEditButtonComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        StacheEditButtonComponent
+        RouterTestingModule,
+        StacheEditButtonModule
       ],
       providers: [
         { provide: StacheConfigService, useValue: mockConfigService },

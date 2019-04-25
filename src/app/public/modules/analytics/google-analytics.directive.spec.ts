@@ -1,18 +1,45 @@
 
-import { of as observableOf } from 'rxjs';
-import { By } from '@angular/platform-browser';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  of as observableOf
+} from 'rxjs';
+
+import {
+  By
+} from '@angular/platform-browser';
+
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  Router,
+  NavigationEnd
+} from '@angular/router';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { Router, NavigationEnd } from '@angular/router';
+import {
+  StacheConfigService
+} from '../shared/config.service';
 
-import { StacheWindowRef, StacheConfigService } from '../shared';
-import { StacheGoogleAnalyticsDirective } from './google-analytics.directive';
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
-import { StacheGoogleAnalyticsTestComponent } from './fixtures/google-analytics.component.fixture';
+import {
+  StacheGoogleAnalyticsDirective
+} from './google-analytics.directive';
+
+import {
+  StacheGoogleAnalyticsTestComponent
+} from './fixtures/google-analytics.component.fixture';
+
+import {
+  StacheAnalyticsModule
+} from './analytics.module';
 
 describe('StacheGoogleAnalyticsDirective', () => {
   let fixture: ComponentFixture<StacheGoogleAnalyticsTestComponent>;
@@ -64,8 +91,10 @@ describe('StacheGoogleAnalyticsDirective', () => {
 
     TestBed.configureTestingModule({
       declarations: [
-        StacheGoogleAnalyticsDirective,
         StacheGoogleAnalyticsTestComponent
+      ],
+      imports: [
+        StacheAnalyticsModule
       ],
       providers: [
         { provide: StacheWindowRef, useValue: mockWindowService },

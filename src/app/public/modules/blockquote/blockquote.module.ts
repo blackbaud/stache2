@@ -1,7 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
 
-import { StacheBlockquoteComponent } from './blockquote.component';
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  StacheBlockquoteComponent
+} from './blockquote.component';
 
 @NgModule({
   declarations: [

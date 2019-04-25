@@ -1,11 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  By
+} from '@angular/platform-browser';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheBlockquoteComponent } from './blockquote.component';
+import {
+  StacheBlockquoteComponent
+} from './blockquote.component';
+
+import {
+  StacheBlockquoteModule
+} from './blockquote.module';
 
 describe('StacheBlockquoteComponent', () => {
   let component: StacheBlockquoteComponent;
@@ -13,8 +25,8 @@ describe('StacheBlockquoteComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        StacheBlockquoteComponent
+      imports: [
+        StacheBlockquoteModule
       ]
     })
       .compileComponents();

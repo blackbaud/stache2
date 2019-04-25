@@ -6,7 +6,7 @@ import {
   SkyMediaQueryService
 } from '@skyux/core';
 
-import { StacheNavLink } from '../nav';
+import { StacheNavLink } from '../nav/nav-link';
 import { StacheWindowRef } from '../shared';
 
 const HAS_SIDEBAR_CLASS_NAME: string  = 'stache-sidebar-enabled';

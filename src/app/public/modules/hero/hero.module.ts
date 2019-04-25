@@ -1,9 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
 
-import { StacheHeroComponent } from './hero.component';
-import { StacheHeroHeadingComponent } from './hero-heading.component';
-import { StacheHeroSubheadingComponent } from './hero-subheading.component';
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  StacheHeroComponent
+} from './hero.component';
+
+import {
+  StacheHeroHeadingComponent
+} from './hero-heading.component';
+
+import {
+  StacheHeroSubheadingComponent
+} from './hero-subheading.component';
 
 @NgModule({
   declarations: [

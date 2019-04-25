@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 
-import { StacheConfigService, StacheRouteService } from '../shared';
+import {
+  StacheConfigService
+} from '../shared/config.service';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
 
 const _get = require('lodash.get');
 

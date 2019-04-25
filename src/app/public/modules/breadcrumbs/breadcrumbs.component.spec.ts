@@ -1,20 +1,34 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
-import { RouterTestingModule } from '@angular/router/testing';
+import {
+  By
+} from '@angular/platform-browser';
+
+import {
+  RouterTestingModule
+} from '@angular/router/testing';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheBreadcrumbsComponent } from './breadcrumbs.component';
-import { StacheNavComponent } from '../nav';
+import {
+  StacheBreadcrumbsComponent
+} from './breadcrumbs.component';
+
+import {
+  StacheBreadcrumbsModule
+} from './breadcrumbs.module';
+
 import {
   StacheConfigService,
   StacheWindowRef,
   StacheRouteService,
-  StacheRouteMetadataService } from '../shared';
-import { StacheLinkModule } from '../link';
+  StacheRouteMetadataService
+} from '../shared';
 
 describe('StacheBreadcrumbsComponent', () => {
   let component: StacheBreadcrumbsComponent;
@@ -61,12 +75,10 @@ describe('StacheBreadcrumbsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        StacheNavComponent,
-        StacheBreadcrumbsComponent
       ],
       imports: [
         RouterTestingModule,
-        StacheLinkModule
+        StacheBreadcrumbsModule
       ],
       providers: [
         StacheWindowRef,

@@ -1,11 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  NO_ERRORS_SCHEMA
+} from '@angular/core';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheLayoutSidebarComponent } from './layout-sidebar.component';
+import {
+  StacheLayoutSidebarComponent
+} from './layout-sidebar.component';
+
+import {
+  RouterTestingModule
+} from '@angular/router/testing';
+
+import {
+  StacheLayoutModule
+} from './layout.module';
 
 describe('StacheLayoutSidebarComponent', () => {
   let component: StacheLayoutSidebarComponent;
@@ -14,8 +30,9 @@ describe('StacheLayoutSidebarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        StacheLayoutSidebarComponent
+      imports: [
+        StacheLayoutModule,
+        RouterTestingModule
       ],
       schemas: [
         NO_ERRORS_SCHEMA

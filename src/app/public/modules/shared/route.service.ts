@@ -3,7 +3,7 @@ import { Router, NavigationStart } from '@angular/router';
 
 import { StacheConfigService } from './config.service';
 import { StacheRouteMetadataService } from './route-metadata.service';
-import { StacheNavLink } from '../nav';
+import { StacheNavLink } from '../nav/nav-link';
 
 @Injectable()
 export class StacheRouteService {

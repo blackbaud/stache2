@@ -1,8 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
 
-import { StacheNav } from '../nav/nav';
-import { StacheNavLink } from '../nav/nav-link';
-import { StacheRouteService } from '../shared/route.service';
+import {
+  StacheNav
+} from '../nav/nav';
+
+import {
+  StacheNavLink
+} from '../nav/nav-link';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
 
 @Component({
   selector: 'stache-breadcrumbs',
@@ -14,7 +26,8 @@ export class StacheBreadcrumbsComponent implements StacheNav, OnInit {
   public routes: StacheNavLink[];
 
   public constructor(
-    private routeService: StacheRouteService) { }
+    private routeService: StacheRouteService
+  ) { }
 
   public ngOnInit(): void {
     if (!this.routes) {

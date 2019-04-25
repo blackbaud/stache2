@@ -40,9 +40,12 @@ import {
 } from './page-anchor.service';
 
 import {
-  StacheWindowRef,
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
   StacheRouteService
-} from '../shared';
+} from '../shared/route.service';
 
 describe('StachePageAnchorComponent', () => {
   let fixtureComponent: StachePageAnchorTestComponent;

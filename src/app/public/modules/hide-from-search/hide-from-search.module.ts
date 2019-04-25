@@ -1,5 +1,10 @@
-import { NgModule } from '@angular/core';
-import { StacheHideFromSearchComponent } from './hide-from-search.component';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  StacheHideFromSearchComponent
+} from './hide-from-search.component';
 
 @NgModule({
   declarations: [

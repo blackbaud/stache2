@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {  StacheNavLink } from '../nav';
-import { InputConverter } from '../shared';
+import { StacheNavLink } from '../nav/nav-link';
+import { InputConverter } from '../shared/input-converter';
 
 @Component({
   selector: 'stache-action-buttons',

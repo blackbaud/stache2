@@ -1,24 +1,52 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { StacheNavComponent } from './nav.component';
-import { StacheLinkModule } from '../link';
-import { StacheResourcesModule } from '../shared/stache-resources.module';
+import {
+  NgModule
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  RouterModule
+} from '@angular/router';
+
+import {
+  StacheRouterLinkDirective
+} from './link.directive';
+
+import {
+  StacheNavComponent
+} from './nav.component';
+
+import {
+  StacheResourcesModule
+} from '../shared/stache-resources.module';
+
+import {
+  StacheNavService
+ } from './nav.service';
+
+import {
+  StacheSharedModule
+} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    StacheNavComponent
+    StacheNavComponent,
+    StacheRouterLinkDirective
   ],
   imports: [
     CommonModule,
     RouterModule,
-    StacheLinkModule,
+    StacheSharedModule,
     StacheResourcesModule
   ],
-  providers: [
-  ],
   exports: [
-    StacheNavComponent
+    StacheNavComponent,
+    StacheRouterLinkDirective
+  ],
+  providers: [
+    StacheNavService
   ]
 })
 export class StacheNavModule { }

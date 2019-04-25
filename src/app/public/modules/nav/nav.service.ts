@@ -1,6 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { StacheWindowRef } from '../shared';
+import {
+  Injectable
+} from '@angular/core';
+
+import {
+  Router
+} from '@angular/router';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
 @Injectable()
 export class StacheNavService {

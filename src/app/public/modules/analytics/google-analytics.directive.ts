@@ -1,7 +1,20 @@
-import { Directive, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import {
+  Directive,
+  OnInit
+} from '@angular/core';
 
-import { StacheWindowRef, StacheConfigService } from '../shared';
+import {
+  Router,
+  NavigationEnd
+} from '@angular/router';
+
+import {
+  StacheConfigService
+} from '../shared/config.service';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
 @Directive({
   selector: '[stacheGoogleAnalytics]'

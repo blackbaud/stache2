@@ -1,11 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  NO_ERRORS_SCHEMA
+} from '@angular/core';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheLayoutBlankComponent } from './layout-blank.component';
+import {
+  StacheLayoutBlankComponent
+} from './layout-blank.component';
+
+import {
+  StacheLayoutModule
+} from './layout.module';
 
 describe('StacheLayoutBlankComponent', () => {
   let component: StacheLayoutBlankComponent;
@@ -13,8 +25,8 @@ describe('StacheLayoutBlankComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        StacheLayoutBlankComponent
+      imports: [
+        StacheLayoutModule
       ],
       schemas: [
         NO_ERRORS_SCHEMA

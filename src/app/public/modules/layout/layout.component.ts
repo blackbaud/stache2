@@ -1,8 +1,24 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+  AfterViewInit
+} from '@angular/core';
 
-import { StacheLayout } from './layout';
-import { StacheNavLink } from '../nav';
-import { StacheWindowRef } from '../shared';
+import {
+  StacheLayout
+} from './layout';
+
+import {
+  StacheNavLink
+} from '../nav/nav-link';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
 @Component({
   selector: 'stache-layout',
@@ -52,9 +68,7 @@ export class StacheLayoutComponent implements OnInit, StacheLayout, AfterViewIni
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private windowRef: StacheWindowRef
-  ) {
-
-  }
+  ) { }
 
   public ngOnInit(): void {
     switch (this.layoutType) {

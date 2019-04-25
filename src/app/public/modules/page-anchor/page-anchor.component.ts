@@ -9,12 +9,27 @@ import {
   AfterViewChecked,
   AfterContentInit
 } from '@angular/core';
+
 import {
-  StacheWindowRef, StacheRouteService
-} from '../shared';
-import { StacheNavLink } from '../nav';
-import { StachePageAnchorService } from './page-anchor.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+  BehaviorSubject,
+  Subject
+ } from 'rxjs';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
+
+import {
+  StacheNavLink
+} from '../nav/nav-link';
+
+import {
+  StachePageAnchorService
+} from './page-anchor.service';
 
 @Component({
   selector: 'stache-page-anchor',

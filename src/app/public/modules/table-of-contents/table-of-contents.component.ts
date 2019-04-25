@@ -2,7 +2,7 @@ import {
   Component,
   Input,
   OnDestroy } from '@angular/core';
-import { StacheNavLink } from '../nav';
+import { StacheNavLink } from '../nav/nav-link';
 import { StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
 import { Subscription } from 'rxjs';
 

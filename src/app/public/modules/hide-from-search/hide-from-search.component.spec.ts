@@ -1,18 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheHideFromSearchComponent } from './hide-from-search.component';
+import {
+  StacheHideFromSearchComponent
+} from './hide-from-search.component';
+
+import {
+  StacheHideFromSearchModule
+} from './hide-from-search.module';
 
 describe('StacheHideFromSearchComponent', () => {
   let fixture: ComponentFixture<StacheHideFromSearchComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        StacheHideFromSearchComponent
+      imports: [
+        StacheHideFromSearchModule
       ]
     })
     .compileComponents();

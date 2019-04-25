@@ -1,17 +1,43 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
-import { By } from '@angular/platform-browser';
+import {
+  By
+} from '@angular/platform-browser';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheAffixComponent } from './affix.component';
-import { StacheAffixTestComponent } from './fixtures/affix.component.fixture';
-import { StacheAffixTopDirective } from './affix-top.directive';
-import { StacheAffixModule } from './affix.module';
-import { StacheWindowRef, StacheOmnibarAdapterService } from '../shared';
-import { Subject } from 'rxjs';
+import {
+  Subject
+} from 'rxjs';
+
+import {
+  StacheAffixComponent
+} from './affix.component';
+
+import {
+  StacheAffixTestComponent
+} from './fixtures/affix.component.fixture';
+
+import {
+  StacheAffixTopDirective
+} from './affix-top.directive';
+
+import {
+  StacheAffixModule
+} from './affix.module';
+
+import {
+  StacheOmnibarAdapterService
+} from '../shared/omnibar-adapter.service';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
 class MockOmnibarService {
   public getHeight(): number {

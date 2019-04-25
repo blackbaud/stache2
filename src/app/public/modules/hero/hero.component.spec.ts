@@ -1,12 +1,27 @@
-import { DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import {
+  DebugElement
+} from '@angular/core';
+
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  By
+} from '@angular/platform-browser';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheHeroComponent } from './hero.component';
+import {
+  StacheHeroComponent
+} from './hero.component';
+
+import {
+  StacheHeroModule
+} from './hero.module';
 
 describe('StacheHeroComponent', () => {
   let component: StacheHeroComponent;
@@ -15,7 +30,9 @@ describe('StacheHeroComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ StacheHeroComponent ]
+      imports: [
+        StacheHeroModule
+      ]
     })
     .compileComponents();
 

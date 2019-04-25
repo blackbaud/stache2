@@ -1,18 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheHeroSubheadingComponent } from './hero-subheading.component';
+import {
+  StacheHeroSubheadingComponent
+} from './hero-subheading.component';
+
+import {
+  StacheHeroModule
+} from './hero.module';
 
 describe('StacheHeroSubheadingComponent', () => {
   let fixture: ComponentFixture<StacheHeroSubheadingComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        StacheHeroSubheadingComponent
+      imports: [
+        StacheHeroModule
       ]
     })
     .compileComponents();

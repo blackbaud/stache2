@@ -7,7 +7,7 @@ import {
 } from '@skyux-sdk/testing';
 
 import { StacheTableOfContentsComponent } from './table-of-contents.component';
-import { StacheNavLink } from '../nav';
+import { StacheNavLink } from '../nav/nav-link';
 import { Observable } from 'rxjs';
 import { StacheWindowRef, StacheOmnibarAdapterService } from '../shared';
 

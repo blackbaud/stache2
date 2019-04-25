@@ -28,7 +28,7 @@ import {
 
 import {
   SkyClipboardModule
-} from '@blackbaud/skyux-lib-clipboard'
+} from '@blackbaud/skyux-lib-clipboard';
 
 @NgModule({
   exports: [

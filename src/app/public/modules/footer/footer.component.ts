@@ -17,7 +17,7 @@ import {
 
 import {
   StacheNavLink
-} from '../nav';
+} from '../nav/nav-link';
 
 const _get = require('lodash.get');
 

@@ -9,11 +9,17 @@ import {
   AfterViewInit
 } from '@angular/core';
 
-import { LocationStrategy } from '@angular/common';
+import {
+  LocationStrategy
+} from '@angular/common';
 
-import { StacheNavService } from '../nav/nav.service';
+import {
+  StacheNavService
+} from '../nav/nav.service';
 
-import { StacheRouteService } from '../shared';
+import {
+  StacheRouteService
+} from '../shared/route.service';
 
 @Directive({
   selector: '[stacheRouterLink]'

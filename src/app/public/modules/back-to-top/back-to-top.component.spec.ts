@@ -1,13 +1,39 @@
-import { async, ComponentFixture, fakeAsync, inject, tick, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import {
+  async,
+  ComponentFixture,
+  fakeAsync,
+  inject,
+  tick,
+  TestBed
+} from '@angular/core/testing';
 
-import { expect } from '@skyux-sdk/testing';
-import { SkyI18nModule } from '@skyux/i18n';
+import {
+  DebugElement
+} from '@angular/core';
 
-import { StacheWindowRef } from '../shared/window-ref';
-import { TestUtility } from '../shared/testing/test-utility';
-import { StacheBackToTopComponent } from './back-to-top.component';
-import { StacheBackToTopModule } from './back-to-top.module';
+import {
+  expect
+} from '@skyux-sdk/testing';
+
+import {
+  SkyI18nModule
+} from '@skyux/i18n';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
+  TestUtility
+} from '../shared/testing/test-utility';
+
+import {
+  StacheBackToTopComponent
+} from './back-to-top.component';
+
+import {
+  StacheBackToTopModule
+} from './back-to-top.module';
 
 describe('StacheBackToTopComponent', () => {
   let component: StacheBackToTopComponent;
@@ -20,9 +46,6 @@ describe('StacheBackToTopComponent', () => {
       imports: [
         StacheBackToTopModule,
         SkyI18nModule
-      ],
-      providers: [
-        StacheWindowRef
       ]
     })
     .compileComponents();

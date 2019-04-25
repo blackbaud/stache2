@@ -1,8 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
 
-import { StacheAffixComponent } from './affix.component';
-import { StacheAffixTopDirective } from './affix-top.directive';
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  StacheAffixComponent
+} from './affix.component';
+
+import {
+  StacheAffixTopDirective
+} from './affix-top.directive';
+
+import {
+  StacheSharedModule
+} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -10,6 +24,7 @@ import { StacheAffixTopDirective } from './affix-top.directive';
     StacheAffixTopDirective
   ],
   imports: [
+    StacheSharedModule,
     CommonModule
   ],
   exports: [

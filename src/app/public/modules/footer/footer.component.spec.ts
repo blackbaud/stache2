@@ -1,11 +1,35 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  async } from '@angular/core/testing';
 
-import { expect } from '@skyux-sdk/testing';
+import {
+  RouterTestingModule
+} from '@angular/router/testing';
 
-import { StacheFooterComponent } from './footer.component';
-import { StacheFooterModule } from './footer.module';
-import { StacheConfigService, StacheWindowRef, StacheRouteService } from '../shared';
+import {
+  expect
+} from '@skyux-sdk/testing';
+
+import {
+  StacheFooterComponent
+} from './footer.component';
+
+import {
+  StacheFooterModule
+} from './footer.module';
+
+import {
+  StacheConfigService
+} from '../shared/config.service';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
 
 import {
   SkyMediaQueryModule
@@ -57,9 +81,6 @@ describe('StacheFooterComponent', () => {
         RouterTestingModule,
         SkyMediaQueryModule,
         StacheFooterModule
-      ],
-      declarations: [
-
       ],
       providers: [
         StacheWindowRef,

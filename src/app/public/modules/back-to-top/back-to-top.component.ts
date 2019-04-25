@@ -1,6 +1,16 @@
-import { Component, HostListener, Input } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Input
+} from '@angular/core';
 
-import { StacheWindowRef, InputConverter } from '../shared';
+import {
+  InputConverter
+} from '../shared/input-converter';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
 @Component({
   selector: 'stache-back-to-top',

@@ -1,7 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
 
-import { StacheEditButtonComponent } from './edit-button.component';
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  StacheEditButtonComponent
+} from './edit-button.component';
+
+import {
+  StacheSharedModule
+} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -11,6 +22,7 @@ import { StacheEditButtonComponent } from './edit-button.component';
     CommonModule
   ],
   exports: [
+    StacheSharedModule,
     StacheEditButtonComponent
   ]
 })

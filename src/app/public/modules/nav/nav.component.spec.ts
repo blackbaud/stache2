@@ -1,15 +1,35 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
-import { RouterTestingModule } from '@angular/router/testing';
+import {
+  RouterTestingModule
+} from '@angular/router/testing';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheNavComponent } from './nav.component';
-import { StacheNavTestComponent } from './fixtures/nav.component.fixture';
-import { StacheWindowRef, StacheRouteService } from '../shared';
-import { StacheLinkModule } from '../link';
+import {
+  StacheNavComponent
+} from './nav.component';
+
+import {
+  StacheNavTestComponent
+} from './fixtures/nav.component.fixture';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
+
+import {
+  StacheNavModule
+} from './nav.module';
 
 describe('StacheNavComponent', () => {
   let component: StacheNavComponent;
@@ -52,12 +72,11 @@ describe('StacheNavComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [
-        StacheNavComponent,
         StacheNavTestComponent
       ],
       imports: [
         RouterTestingModule,
-        StacheLinkModule
+        StacheNavModule
       ],
       providers: [
         { provide: StacheRouteService, useValue: mockRouteService },

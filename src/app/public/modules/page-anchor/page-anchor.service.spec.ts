@@ -1,6 +1,15 @@
-import { StachePageAnchorService } from './page-anchor.service';
-import { StacheNavLink } from '../nav';
-import { BehaviorSubject, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  Subject
+} from 'rxjs';
+
+import {
+  StachePageAnchorService
+} from './page-anchor.service';
+
+import {
+  StacheNavLink
+} from '../nav/nav-link';
 
 class MockWindowRef {
   private mockPageAnchors: StacheNavLink[] = [

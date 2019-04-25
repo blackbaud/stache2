@@ -1,35 +1,38 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  NO_ERRORS_SCHEMA
+} from '@angular/core';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheLayoutComponent } from './layout.component';
-import { StacheWindowRef } from '../shared';
+import {
+  StacheLayoutComponent
+} from './layout.component';
+
+import {
+  StacheLayoutModule
+} from './layout.module';
+
+import {
+  RouterTestingModule
+} from '@angular/router/testing';
 
 describe('StacheLayoutComponent', () => {
   let component: StacheLayoutComponent;
   let fixture: ComponentFixture<StacheLayoutComponent>;
   let sampleRoutes = [{ name: 'test', path: '/test' }];
-  let mockWindowRef: any;
-
-  class MockWindowRef {
-    public nativeWindow = {
-      document: {
-        body: document.createElement('div')
-      }
-    };
-  }
 
   beforeEach(() => {
-    mockWindowRef = new MockWindowRef;
     TestBed.configureTestingModule({
-      declarations: [
-        StacheLayoutComponent
-      ],
-      providers: [
-        { provide: StacheWindowRef, useValue: mockWindowRef }
+      imports: [
+        StacheLayoutModule,
+        RouterTestingModule
       ],
       schemas: [
         NO_ERRORS_SCHEMA

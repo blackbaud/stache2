@@ -19,9 +19,9 @@ import {
 import { StacheWrapperTestComponent } from './fixtures/wrapper.component.fixture';
 import { StacheWrapperComponent } from './wrapper.component';
 import { StacheWrapperModule } from './wrapper.module';
-import { StacheFooterModule } from '../footer';
+import { StacheFooterModule } from '../footer/footer.module';
 import { StacheTitleService } from './title.service';
-import { StacheNavLink } from '../nav';
+import { StacheNavLink } from '../nav/nav-link';
 import { StacheNavService } from '../nav/nav.service';
 import {
   StacheWindowRef,
@@ -31,8 +31,14 @@ import {
   StacheJsonDataService,
   STACHE_ROUTE_METADATA_PROVIDERS
 } from '../shared';
-import { StacheLayoutModule } from '../layout';
-import { StachePageAnchorModule, StachePageAnchorService } from '../page-anchor';
+
+import { StacheLayoutModule } from '../layout/layout.module';
+
+import {
+  StachePageAnchorModule
+} from '../page-anchor/page-anchor.module';
+
+import { StachePageAnchorService } from '../page-anchor/page-anchor.service';
 
 describe('StacheWrapperComponent', () => {
   let component: StacheWrapperComponent;
