@@ -1,7 +1,14 @@
-import { Title } from '@angular/platform-browser';
+import {
+  Title
+} from '@angular/platform-browser';
 
-import { StacheTitleService } from './title.service';
-import { StacheConfigService } from '../shared';
+import {
+  StacheTitleService
+} from './title.service';
+
+import {
+  StacheConfigService
+} from '../shared/config.service';
 
 class MockStacheConfigService {
   public skyux = {

@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
 
-import { StachePageSummaryComponent } from './page-summary.component';
+import {
+  StachePageSummaryComponent
+} from './page-summary.component';
 
 @NgModule({
   declarations: [
     StachePageSummaryComponent
-  ],
-  imports: [
-    CommonModule
   ],
   exports: [
     StachePageSummaryComponent

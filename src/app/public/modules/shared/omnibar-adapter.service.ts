@@ -1,6 +1,12 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import {
+  Injectable,
+  Renderer2,
+  RendererFactory2
+} from '@angular/core';
 
-import { StacheWindowRef } from './window-ref';
+import {
+  StacheWindowRef
+} from './window-ref';
 
 @Injectable()
 export class StacheOmnibarAdapterService {
@@ -11,9 +17,10 @@ export class StacheOmnibarAdapterService {
 
   constructor(
     private windowRef: StacheWindowRef,
-    private rendererFactory: RendererFactory2) {
-      this.renderer = this.rendererFactory.createRenderer(undefined, undefined);
-    }
+    private rendererFactory: RendererFactory2
+  ) {
+    this.renderer = this.rendererFactory.createRenderer(undefined, undefined);
+  }
 
   public checkForOmnibar(): void {
     if (this.omnibarEnabled()) {

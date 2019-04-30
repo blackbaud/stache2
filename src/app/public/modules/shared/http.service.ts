@@ -1,5 +1,10 @@
-import { Injectable } from '@angular/core';
-import { RequestOptionsArgs } from '@angular/http';
+import {
+  Injectable
+} from '@angular/core';
+
+import {
+  RequestOptionsArgs
+} from '@angular/http';
 
 @Injectable()
 export class StacheHttpService {

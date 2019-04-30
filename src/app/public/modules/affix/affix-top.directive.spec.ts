@@ -15,6 +15,10 @@ import {
 } from '@skyux-sdk/testing';
 
 import {
+  SkyAppTestUtility
+} from '@skyux-sdk/testing/test-utility/test-utility';
+
+import {
   StacheAffixTopDirective
 } from './affix-top.directive';
 
@@ -37,10 +41,6 @@ import {
 import {
   StacheOmnibarAdapterService
 } from '../shared/omnibar-adapter.service';
-
-import {
-  TestUtility
-} from '../shared/testing/test-utility';
 
 describe('AffixTopTestDirective', () => {
   const className: string = StacheAffixTopDirective.AFFIX_CLASS_NAME;
@@ -94,7 +94,7 @@ describe('AffixTopTestDirective', () => {
       tick();
 
       spyOn(directiveInstance, 'onWindowScroll').and.callThrough();
-      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
 
       expect(directiveInstance.onWindowScroll).toHaveBeenCalled();
     })
@@ -109,11 +109,11 @@ describe('AffixTopTestDirective', () => {
       fixture.detectChanges();
       tick();
 
-      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
       expect(element).toHaveCssClass(className);
 
       windowRef.scrollTo(0, 0);
-      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
       expect(element).not.toHaveCssClass(className);
     })
   );
@@ -127,11 +127,11 @@ describe('AffixTopTestDirective', () => {
       fixture.detectChanges();
       tick();
 
-      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
       expect(element).not.toHaveCssClass(className);
 
       testOmnibarHeight = 50;
-      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
       expect(element).toHaveCssClass(className);
 
       testOmnibarHeight = 0;
@@ -146,11 +146,11 @@ describe('AffixTopTestDirective', () => {
       fixture.detectChanges();
       tick();
 
-      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
       expect(element).toHaveCssClass(className);
 
       windowRef.scrollTo(0, 0);
-      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
       expect(element).not.toHaveCssClass(className);
     })
   );
@@ -163,10 +163,10 @@ describe('AffixTopTestDirective', () => {
       fixture.detectChanges();
       tick();
 
-      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
       expect(element).not.toHaveCssClass(className);
 
-      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
       expect(element).not.toHaveCssClass(className);
     })
   );
@@ -191,7 +191,7 @@ describe('AffixTopTestDirective', () => {
       windowRef.scrollBy(0, 350);
       testOmnibarHeight = 50;
 
-      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
       expect(element.style.height).toEqual('50px');
     })
   );

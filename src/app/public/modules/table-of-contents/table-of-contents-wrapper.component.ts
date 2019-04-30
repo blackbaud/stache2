@@ -1,6 +1,18 @@
-import { Component, Input, Renderer2, OnDestroy, AfterViewInit } from '@angular/core';
-import { StacheNavLink } from '../nav/nav-link';
-import { StacheWindowRef } from '../shared';
+import {
+  Component,
+  Input,
+  Renderer2,
+  OnDestroy,
+  AfterViewInit
+} from '@angular/core';
+
+import {
+  StacheNavLink
+} from '../nav/nav-link';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
 const HAS_TOC_CLASS_NAME = 'stache-table-of-contents-enabled';
 
@@ -16,7 +28,7 @@ export class StacheTableOfContentsWrapperComponent implements AfterViewInit, OnD
   constructor(
     private renderer: Renderer2,
     private windowRef: StacheWindowRef
-  ) {}
+  ) { }
 
   public ngAfterViewInit(): void {
     this.addClassToBody();

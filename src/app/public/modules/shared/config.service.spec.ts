@@ -1,4 +1,6 @@
-import { StacheConfigService } from '../shared/config.service';
+import {
+  StacheConfigService
+} from '../shared/config.service';
 
 describe('StacheConfigService', () => {
   it('should return configuration', () => {

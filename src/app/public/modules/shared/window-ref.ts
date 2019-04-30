@@ -1,9 +1,22 @@
-import { Injectable } from '@angular/core';
-import { EventManager } from '@angular/platform-browser';
+import {
+  Injectable
+} from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { fromEvent } from 'rxjs/observable/fromEvent';
+import {
+  EventManager
+} from '@angular/platform-browser';
+
+import {
+  Observable
+} from 'rxjs/Observable';
+
+import {
+  ReplaySubject
+} from 'rxjs/ReplaySubject';
+
+import {
+  fromEvent
+} from 'rxjs/observable/fromEvent';
 
 function getWindow(): any {
   return window;
@@ -16,7 +29,7 @@ export class StacheWindowRef {
     return getWindow();
   }
 
-  get onResize$(): Observable<Window> {
+  get onResizeStream(): Observable<Window> {
     return this.resizeSubject.asObservable();
   }
 
@@ -24,7 +37,9 @@ export class StacheWindowRef {
 
   private resizeSubject: ReplaySubject<Window>;
 
-  constructor(private eventManager: EventManager) {
+  constructor(
+    private eventManager: EventManager
+  ) {
     this.resizeSubject = new ReplaySubject();
     this.eventManager.addGlobalEventListener('window', 'resize', (event: UIEvent) => {
       this.onResize(event);

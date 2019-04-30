@@ -1,11 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  DebugElement
+} from '@angular/core';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheVideoComponent } from './video.component';
+import {
+   StacheVideoComponent
+  } from './video.component';
+
+import {
+  StacheVideoModule
+} from './video.module';
 
 describe('StacheVideoComponent', () => {
   let component: StacheVideoComponent;
@@ -15,8 +27,8 @@ describe('StacheVideoComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        StacheVideoComponent
+      imports: [
+        StacheVideoModule
       ]
     })
     .compileComponents();

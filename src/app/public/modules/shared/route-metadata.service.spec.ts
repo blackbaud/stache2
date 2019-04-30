@@ -1,4 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {
+  TestBed
+} from '@angular/core/testing';
 
 import {
   expect
@@ -7,7 +9,7 @@ import {
 import {
   StacheRouteMetadataService,
   STACHE_ROUTE_METADATA_SERVICE_CONFIG
-} from '../shared';
+} from '../shared/route-metadata.service';
 
 describe('StacheRouteMetadataService', () => {
   let routeMetadataService: StacheRouteMetadataService;
@@ -37,8 +39,14 @@ describe('StacheRouteMetadataService', () => {
     TestBed.configureTestingModule({
       declarations: [],
       providers: [
-        { provide: STACHE_ROUTE_METADATA_SERVICE_CONFIG, useValue: config },
-        { provide: StacheRouteMetadataService, useClass: StacheRouteMetadataService }
+        {
+          provide: STACHE_ROUTE_METADATA_SERVICE_CONFIG,
+          useValue: config
+        },
+        {
+          provide: StacheRouteMetadataService,
+          useClass: StacheRouteMetadataService
+        }
       ]
     })
     .compileComponents();

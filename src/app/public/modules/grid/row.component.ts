@@ -4,7 +4,7 @@
 
 import { Component, Input } from '@angular/core';
 
-import { InputConverter } from '../shared';
+import { InputConverter } from '../shared/input-converter';
 
 @Component({
   selector: 'stache-row',

@@ -24,11 +24,20 @@ import {
 } from './breadcrumbs.module';
 
 import {
-  StacheConfigService,
-  StacheWindowRef,
-  StacheRouteService,
+  StacheConfigService
+} from '../shared/config.service';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
   StacheRouteMetadataService
-} from '../shared';
+} from '../shared/route-metadata.service';
 
 describe('StacheBreadcrumbsComponent', () => {
   let component: StacheBreadcrumbsComponent;

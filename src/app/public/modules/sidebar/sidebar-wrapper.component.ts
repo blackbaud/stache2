@@ -1,13 +1,27 @@
-import { Component, Input, Renderer2, OnDestroy, AfterViewInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {
+  Component,
+  Input,
+  Renderer2,
+  OnDestroy,
+  AfterViewInit
+} from '@angular/core';
+
+import {
+  Subscription
+} from 'rxjs';
 
 import {
   SkyMediaBreakpoints,
   SkyMediaQueryService
 } from '@skyux/core';
 
-import { StacheNavLink } from '../nav/nav-link';
-import { StacheWindowRef } from '../shared';
+import {
+  StacheNavLink
+} from '../nav/nav-link';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
 const HAS_SIDEBAR_CLASS_NAME: string  = 'stache-sidebar-enabled';
 let nextUniqueId = 0;

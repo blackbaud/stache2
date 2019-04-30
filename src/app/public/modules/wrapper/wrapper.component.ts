@@ -7,14 +7,50 @@ import {
   OnDestroy,
   ChangeDetectorRef
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
-import { StacheTitleService } from './title.service';
-import { StacheConfigService, StacheJsonDataService, StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
-import { StacheNavLink } from '../nav/nav-link';
-import { StacheNavService } from '../nav/nav.service';
-import { StachePageAnchorService } from '../page-anchor/page-anchor.service';
-import { InputConverter } from '../shared';
+
+import {
+  ActivatedRoute
+} from '@angular/router';
+
+import {
+  Subject
+} from 'rxjs';
+
+import {
+  StacheTitleService
+} from './title.service';
+
+import {
+  StacheConfigService
+} from '../shared/config.service';
+
+import {
+  StacheJsonDataService
+} from '../shared/json-data.service';
+
+import {
+  StacheOmnibarAdapterService
+} from '../shared/omnibar-adapter.service';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
+  StacheNavLink
+} from '../nav/nav-link';
+
+import {
+  StacheNavService
+} from '../nav/nav.service';
+
+import {
+  StachePageAnchorService
+} from '../page-anchor/page-anchor.service';
+
+import {
+  InputConverter
+} from '../shared/input-converter';
 
 const _get = require('lodash.get');
 
@@ -76,7 +112,8 @@ export class StacheWrapperComponent implements OnInit, AfterViewInit, OnDestroy 
     private navService: StacheNavService,
     private windowRef: StacheWindowRef,
     private changeDetectorRef: ChangeDetectorRef,
-    private omnibarService: StacheOmnibarAdapterService) { }
+    private omnibarService: StacheOmnibarAdapterService
+  ) { }
 
   public ngOnInit(): void {
     this.omnibarService.checkForOmnibar();

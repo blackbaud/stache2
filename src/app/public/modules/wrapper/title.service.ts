@@ -1,13 +1,21 @@
-import { Injectable } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import {
+  Injectable
+} from '@angular/core';
 
-import { StacheConfigService } from '../shared';
+import {
+  Title
+} from '@angular/platform-browser';
+
+import {
+  StacheConfigService
+} from '../shared/config.service';
 
 @Injectable()
 export class StacheTitleService {
   constructor(
     private title: Title,
-    private configService: StacheConfigService) { }
+    private configService: StacheConfigService
+  ) { }
 
   public setTitle(...parts: string[]) {
     let windowTitle = this.configService.skyux.app.title;

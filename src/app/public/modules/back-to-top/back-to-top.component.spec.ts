@@ -16,16 +16,16 @@ import {
 } from '@skyux-sdk/testing';
 
 import {
+  SkyAppTestUtility
+} from '@skyux-sdk/testing/test-utility/test-utility';
+
+import {
   SkyI18nModule
 } from '@skyux/i18n';
 
 import {
   StacheWindowRef
 } from '../shared/window-ref';
-
-import {
-  TestUtility
-} from '../shared/testing/test-utility';
 
 import {
   StacheBackToTopComponent
@@ -79,7 +79,7 @@ describe('StacheBackToTopComponent', () => {
 
   it('should show when the window y offset is greater than the specified offset', fakeAsync(() => {
     component.offset = 0;
-    TestUtility.triggerDomEvent(windowRef, 'scroll');
+    SkyAppTestUtility.fireDomEvent(windowRef, 'scroll');
     tick();
     expect(component.isHidden).toBe(false);
   }));

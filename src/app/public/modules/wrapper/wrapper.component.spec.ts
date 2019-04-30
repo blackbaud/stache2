@@ -1,8 +1,16 @@
+import {
+  async,
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
-import {of as observableOf,  Observable, Subject } from 'rxjs';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import {
+  ActivatedRoute
+} from '@angular/router';
+
+import {
+  RouterTestingModule
+} from '@angular/router/testing';
 
 import {
   expect
@@ -16,23 +24,67 @@ import {
   SkyI18nModule
 } from '@skyux/i18n';
 
-import { StacheWrapperTestComponent } from './fixtures/wrapper.component.fixture';
-import { StacheWrapperComponent } from './wrapper.component';
-import { StacheWrapperModule } from './wrapper.module';
-import { StacheFooterModule } from '../footer/footer.module';
-import { StacheTitleService } from './title.service';
-import { StacheNavLink } from '../nav/nav-link';
-import { StacheNavService } from '../nav/nav.service';
 import {
-  StacheWindowRef,
-  StacheRouteService,
-  StacheConfigService,
-  StacheOmnibarAdapterService,
-  StacheJsonDataService,
-  STACHE_ROUTE_METADATA_PROVIDERS
-} from '../shared';
+  of as observableOf,
+  Observable,
+  Subject
+} from 'rxjs';
 
-import { StacheLayoutModule } from '../layout/layout.module';
+import {
+  StacheWrapperTestComponent
+} from './fixtures/wrapper.component.fixture';
+
+import {
+  StacheWrapperComponent
+} from './wrapper.component';
+
+import {
+  StacheWrapperModule
+} from './wrapper.module';
+
+import {
+  StacheFooterModule
+} from '../footer/footer.module';
+
+import {
+  StacheTitleService
+} from './title.service';
+
+import {
+  StacheNavLink
+} from '../nav/nav-link';
+
+import {
+  StacheNavService
+} from '../nav/nav.service';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
+
+import {
+  StacheConfigService
+} from '../shared/config.service';
+
+import {
+  StacheOmnibarAdapterService
+} from '../shared/omnibar-adapter.service';
+
+import {
+  StacheJsonDataService
+} from '../shared/json-data.service';
+
+import {
+  STACHE_ROUTE_METADATA_PROVIDERS
+} from '../shared/route-metadata.service';
+
+import {
+  StacheLayoutModule
+} from '../layout/layout.module';
 
 import {
   StachePageAnchorModule

@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
 
-import { StacheVideoComponent } from './video.component';
+import {
+  StacheVideoComponent
+} from './video.component';
 
 @NgModule({
   declarations: [
     StacheVideoComponent
-  ],
-  imports: [
-    CommonModule
   ],
   exports: [
     StacheVideoComponent

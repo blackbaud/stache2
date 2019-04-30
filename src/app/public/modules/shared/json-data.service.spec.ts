@@ -1,4 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {
+  TestBed
+} from '@angular/core/testing';
 
 import {
   expect
@@ -7,7 +9,7 @@ import {
 import {
   StacheJsonDataService,
   STACHE_JSON_DATA_SERVICE_CONFIG
-} from '../shared/json-data.service';
+} from './json-data.service';
 
 describe('StacheJsonDataService', () => {
   let dataService: StacheJsonDataService;

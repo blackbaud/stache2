@@ -1,4 +1,8 @@
-import { Directive, Input, HostListener } from '@angular/core';
+import {
+  Directive,
+  Input,
+  HostListener
+} from '@angular/core';
 
 @Directive({
   selector: '[routerLink]'

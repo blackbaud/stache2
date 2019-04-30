@@ -1,6 +1,12 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import {
+  Inject,
+  Injectable,
+  InjectionToken
+} from '@angular/core';
 
-import { numberConverter } from './input-converter';
+import {
+  numberConverter
+} from './input-converter';
 
 export interface StacheRouteMetadataConfig {
   path: string;

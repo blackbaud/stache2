@@ -1,25 +1,35 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StachePageSummaryComponent } from './page-summary.component';
-import { StachePageSummaryTestComponent } from './fixtures/page-summary.component.fixture';
+import {
+  StachePageSummaryModule
+} from './page-summary.module';
+
+import {
+  StachePageSummaryTestComponent
+} from './fixtures/page-summary.component.fixture';
 
 describe('StachePageSummaryComponent', () => {
-  let fixture: ComponentFixture<StachePageSummaryComponent>;
+  let fixture: ComponentFixture<StachePageSummaryTestComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        StachePageSummaryModule
+      ],
       declarations: [
-        StachePageSummaryComponent,
         StachePageSummaryTestComponent
       ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(StachePageSummaryComponent);
+    fixture = TestBed.createComponent(StachePageSummaryTestComponent);
   });
 
   it('should render the component', () => {
@@ -28,9 +38,9 @@ describe('StachePageSummaryComponent', () => {
 
   it('should transclude the content', () => {
     const text = 'Test summary.';
-    let testFixture = TestBed.createComponent(StachePageSummaryTestComponent);
-    let testElement = testFixture.nativeElement;
-    testFixture.detectChanges();
+    fixture.componentInstance.pageSummaryText = text;
+    let testElement = fixture.nativeElement;
+    fixture.detectChanges();
     expect(testElement.querySelector('.stache-page-summary')).toHaveText(text);
   });
 });

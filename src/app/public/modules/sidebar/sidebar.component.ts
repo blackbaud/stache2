@@ -1,12 +1,19 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input
+} from '@angular/core';
 
-import { StacheNavLink } from '../nav/nav-link';
+import {
+  StacheNavLink
+} from '../nav/nav-link';
 
 import {
   StacheNav
 } from '../nav/nav';
 
-import { StacheRouteService } from '../shared';
+import {
+  StacheRouteService
+} from '../shared/route.service';
 
 @Component({
   selector: 'stache-sidebar',

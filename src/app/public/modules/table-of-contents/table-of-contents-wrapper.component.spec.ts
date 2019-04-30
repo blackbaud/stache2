@@ -37,10 +37,16 @@ import {
 } from '../nav/nav.module';
 
 import {
-  StacheOmnibarAdapterService,
-  StacheRouteService,
+  StacheOmnibarAdapterService
+} from '../shared/omnibar-adapter.service';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
+
+import {
   StacheWindowRef
-} from '../shared';
+} from '../shared/window-ref';
 
 class MockWindowService {
   public nativeWindow = {

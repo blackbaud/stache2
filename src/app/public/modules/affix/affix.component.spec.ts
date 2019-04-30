@@ -46,7 +46,7 @@ class MockOmnibarService {
 }
 
 class MockWindowRef {
-  public onResize$ = new Subject();
+  public onResizeStream = new Subject();
   public nativeWindow = {
     document: {
       body: document.createElement('div'),
@@ -145,14 +145,14 @@ describe('StacheAffixComponent', () => {
         offsetWidth: 20
       }
     };
-    mockWindowRef.onResize$.next();
+    mockWindowRef.onResizeStream.next();
     expect(component.minHeightFormatted).toEqual('10px');
     expect(component.maxWidthFormatted).toEqual('20px');
   });
 
   it('should not update the minHeight and maxWidth if no wrapper exists', () => {
     component.wrapper = undefined;
-    mockWindowRef.onResize$.next();
+    mockWindowRef.onResizeStream.next();
     expect(component.minHeightFormatted).toEqual(undefined);
     expect(component.maxWidthFormatted).toEqual(undefined);
   });

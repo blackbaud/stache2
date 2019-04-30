@@ -1,5 +1,10 @@
-import { EventManager } from '@angular/platform-browser';
-import { StacheWindowRef } from './window-ref';
+import {
+  EventManager
+} from '@angular/platform-browser';
+
+import {
+  StacheWindowRef
+} from './window-ref';
 
 describe('StacheWindowRef', () => {
   class MockEventManager {
@@ -27,7 +32,7 @@ describe('StacheWindowRef', () => {
     let resized = false;
     const eventManager = new MockEventManager();
     const windowRef = new StacheWindowRef(eventManager as EventManager);
-    windowRef.onResize$.subscribe((event) => {
+    windowRef.onResizeStream.subscribe((event) => {
       resized = true;
     });
 

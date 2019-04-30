@@ -24,10 +24,16 @@ import {
   } from '../nav/nav.service';
 
 import {
-  StacheWindowRef,
-  StacheRouteMetadataService,
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
+  StacheRouteMetadataService
+} from '../shared/route-metadata.service';
+
+import {
   StacheRouteService
-} from '../shared';
+} from '../shared/route.service';
 
 import {
   RouterLinkStubDirective

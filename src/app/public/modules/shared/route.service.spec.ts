@@ -1,10 +1,25 @@
 
-import { of as observableOf } from 'rxjs';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import {
+  of as observableOf
+} from 'rxjs';
 
-import { StacheRouteService } from './route.service';
-import { StacheConfigService } from './config.service';
-import { StacheRouteMetadataService } from './route-metadata.service';
+import {
+  Router,
+  NavigationStart,
+  NavigationEnd
+} from '@angular/router';
+
+import {
+  StacheRouteService
+} from './route.service';
+
+import {
+  StacheConfigService
+} from './config.service';
+
+import {
+  StacheRouteMetadataService
+} from './route-metadata.service';
 
 class MockStacheConfigService {
   public runtime: any = {

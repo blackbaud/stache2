@@ -13,7 +13,7 @@ import {
 
 import {
   StacheConfigService
-} from '../shared';
+} from '../shared/config.service';
 
 import {
   StacheNavLink

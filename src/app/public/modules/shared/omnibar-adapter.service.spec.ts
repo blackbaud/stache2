@@ -1,6 +1,14 @@
-import { RendererFactory2 } from '@angular/core';
-import { StacheWindowRef } from '../shared/window-ref';
-import { StacheOmnibarAdapterService } from '../shared/omnibar-adapter.service';
+import {
+  RendererFactory2
+} from '@angular/core';
+
+import {
+  StacheWindowRef
+} from './window-ref';
+
+import {
+  StacheOmnibarAdapterService
+} from './omnibar-adapter.service';
 
 let mockEnabled: boolean = false;
 

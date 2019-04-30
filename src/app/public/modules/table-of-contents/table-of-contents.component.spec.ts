@@ -1,15 +1,43 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import {
+  NO_ERRORS_SCHEMA
+} from '@angular/core';
+
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  RouterTestingModule
+} from '@angular/router/testing';
 
 import {
   expect
 } from '@skyux-sdk/testing';
 
-import { StacheTableOfContentsComponent } from './table-of-contents.component';
-import { StacheNavLink } from '../nav/nav-link';
-import { Observable } from 'rxjs';
-import { StacheWindowRef, StacheOmnibarAdapterService } from '../shared';
+import {
+  Observable
+} from 'rxjs';
+
+import {
+  StacheTableOfContentsComponent
+} from './table-of-contents.component';
+
+import {
+  StacheTableOfContentsModule
+} from './table-of-contents.module';
+
+import {
+  StacheNavLink
+} from '../nav/nav-link';
+
+import {
+  StacheOmnibarAdapterService
+} from '../shared/omnibar-adapter.service';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
 
 class MockWindowService {
   public testElement = {
@@ -71,10 +99,8 @@ describe('StacheTableOfContentsComponent', () => {
     mockOmnibarService = new MockOmnibarService();
 
     TestBed.configureTestingModule({
-      declarations: [
-        StacheTableOfContentsComponent
-      ],
       imports: [
+        StacheTableOfContentsModule,
         RouterTestingModule
       ],
       providers: [

@@ -116,7 +116,14 @@ import {
   AppSkyModule
 } from './app-sky.module';
 
-export * from './modules/shared';
+export * from './modules/shared/input-converter';
+export * from './modules/shared/config.service';
+export * from './modules/shared/window-ref';
+export * from './modules/shared/json-data.service';
+export * from './modules/shared/route.service';
+export * from './modules/shared/route-metadata.service';
+export * from './modules/shared/omnibar-adapter.service';
+export * from './modules/shared/http.service';
 
 @NgModule({
   exports: [

@@ -1,4 +1,6 @@
-import { StacheHttpService } from './http.service';
+import {
+  StacheHttpService
+} from './http.service';
 
 describe('Http Service', () => {
   it('should have a post method', () => {

@@ -1,28 +1,64 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-
-import { expect } from '@skyux-sdk/testing';
-import { SkyI18nModule } from '@skyux/i18n';
-
-import { StacheSidebarWrapperComponent } from './sidebar-wrapper.component';
-import { StacheSidebarModule } from './sidebar.module';
-import { StacheNavModule } from '../nav/nav.module';
-import { StacheNavService } from '../nav/nav.service';
-
-import { Subject } from 'rxjs';
+import {
+  ComponentFixture,
+  TestBed,
+  async
+} from '@angular/core/testing';
 
 import {
-  StacheWindowRef,
-  StacheRouteMetadataService,
-  StacheRouteService,
-  StacheOmnibarAdapterService
-} from '../shared';
+  RouterTestingModule
+} from '@angular/router/testing';
 
-import { RouterLinkStubDirective } from './fixtures/router-link-stub.directive';
+import {
+  expect
+} from '@skyux-sdk/testing';
+
+import {
+  SkyI18nModule
+} from '@skyux/i18n';
 
 import {
   SkyMediaQueryModule
 } from '@skyux/core';
+
+import {
+  Subject
+} from 'rxjs';
+
+import {
+  StacheSidebarWrapperComponent
+} from './sidebar-wrapper.component';
+
+import {
+  StacheSidebarModule
+} from './sidebar.module';
+
+import {
+  StacheNavModule
+} from '../nav/nav.module';
+
+import {
+  StacheNavService
+} from '../nav/nav.service';
+
+import {
+  StacheWindowRef
+} from '../shared/window-ref';
+
+import {
+  StacheRouteMetadataService
+} from '../shared/route-metadata.service';
+
+import {
+  StacheRouteService
+} from '../shared/route.service';
+
+import {
+  StacheOmnibarAdapterService
+} from '../shared/omnibar-adapter.service';
+
+import {
+  RouterLinkStubDirective
+} from './fixtures/router-link-stub.directive';
 
 describe('StacheSidebarWrapperComponent', () => {
   const CONTAINER_SIDEBAR_CLASSNAME = 'stache-sidebar-enabled';
@@ -72,7 +108,7 @@ describe('StacheSidebarWrapperComponent', () => {
       }
     };
 
-    public onResize$ = new Subject();
+    public onResizeStream = new Subject();
 }
 
   class MockOmnibarService {
@@ -127,7 +163,7 @@ describe('StacheSidebarWrapperComponent', () => {
   it('should call the check the window width on window resize', () => {
     component.sidebarOpen = false;
     mockWindowRef.nativeWindow.innerWidth = 10;
-    mockWindowRef.onResize$.next();
+    mockWindowRef.onResizeStream.next();
     fixture.detectChanges();
     expect(component.sidebarOpen).toBe(false);
   });

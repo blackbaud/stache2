@@ -1,10 +1,26 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  NgModule
+} from '@angular/core';
 
-import { StachePageAnchorModule } from '../page-anchor/page-anchor.module';
-import { StacheTutorialStepComponent } from './tutorial-step.component';
-import { StacheTutorialStepBodyComponent } from './tutorial-step-body.component';
-import { StacheTutorialStepHeadingComponent } from './tutorial-step-heading.component';
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  StachePageAnchorModule
+} from '../page-anchor/page-anchor.module';
+
+import {
+  StacheTutorialStepComponent
+} from './tutorial-step.component';
+
+import {
+  StacheTutorialStepBodyComponent
+} from './tutorial-step-body.component';
+
+import {
+  StacheTutorialStepHeadingComponent
+} from './tutorial-step-heading.component';
 
 @NgModule({
   declarations: [

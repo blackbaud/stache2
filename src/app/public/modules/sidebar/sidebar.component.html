@@ -1,11 +1,22 @@
 <div class="stache-sidebar">
-  <span role="navigation" *ngIf="heading" [attr.aria-labelledby]="'stache-sidebar-heading'">
-    <h1 [ngClass]="{ 'active': isHeadingActive() }" class="stache-sidebar-heading">
-      <a id="stache-sidebar-heading" class="stach-sidebar-heading-link" [stacheRouterLink]="headingRoute" [attr.aria-current]="isHeadingActive() ? 'page' : false">
+  <span *ngIf="heading"
+    role="navigation"
+    [attr.aria-labelledby]="'stache-sidebar-heading'"
+  >
+    <h1 [ngClass]="{ 'active': isHeadingActive() }"
+      class="stache-sidebar-heading"
+    >
+      <a [stacheRouterLink]="headingRoute"
+        [attr.aria-current]="isHeadingActive() ? 'page' : false"
+        id="stache-sidebar-heading"
+        class="stach-sidebar-heading-link"
+      >
         {{heading}}
       </a>
     </h1>
   </span>
-  <stache-nav navType="sidebar" [routes]="childRoutes">
+  <stache-nav [routes]="childRoutes"
+    navType="sidebar"
+  >
   </stache-nav>
 </div>
