@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import { StacheNavLink } from './public/modules/nav/nav-link';
+import {
+  Component
+} from '@angular/core';
+
+import {
+  StacheNavLink
+} from './public/modules/nav/nav-link';
 
 @Component({
   selector: 'app-home',
