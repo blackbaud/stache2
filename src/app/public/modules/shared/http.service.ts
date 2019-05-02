@@ -4,7 +4,7 @@ import {
 
 import {
   RequestOptionsArgs
-} from '@angular/http';
+} from '@angular/common/http';
 
 @Injectable()
 export class StacheHttpService {

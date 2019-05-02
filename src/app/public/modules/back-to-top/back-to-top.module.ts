@@ -7,10 +7,6 @@ import {
 } from '@angular/common';
 
 import {
-  SkyAppRuntimeModule
-} from '@skyux-sdk/builder/runtime';
-
-import {
   SkyI18nModule
 } from '@skyux/i18n';
 
@@ -33,7 +29,6 @@ import {
   imports: [
     CommonModule,
     StacheSharedModule,
-    SkyAppRuntimeModule,
     SkyI18nModule,
     StacheResourcesModule
   ],

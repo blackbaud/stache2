@@ -11,10 +11,6 @@ import {
 } from '@skyux/i18n';
 
 import {
-  SkyAlertModule
-} from '@skyux/indicators';
-
-import {
   SkyActionButtonModule
 } from '@skyux/layout';
 
@@ -22,20 +18,10 @@ import {
   SkySearchModule
 } from '@skyux/lookup';
 
-import {
-  SkyCodeBlockModule
-} from '@blackbaud/skyux-lib-code-block';
-
-import {
-  SkyClipboardModule
-} from '@blackbaud/skyux-lib-clipboard';
 
 @NgModule({
   exports: [
     SkyActionButtonModule,
-    SkyAlertModule,
-    SkyClipboardModule,
-    SkyCodeBlockModule,
     SkyI18nModule,
     SkyMediaQueryModule,
     SkySearchModule

@@ -11,10 +11,6 @@ import {
 } from '@skyux/i18n';
 
 import {
-  SkyAppRuntimeModule
-} from '@skyux-sdk/builder/runtime';
-
-import {
   StacheNavModule
 } from '../nav/nav.module';
 
@@ -38,7 +34,6 @@ import {
   imports: [
     CommonModule,
     StacheNavModule,
-    SkyAppRuntimeModule,
     SkyI18nModule,
     StacheResourcesModule
   ],

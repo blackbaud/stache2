@@ -5,10 +5,6 @@ import {
 } from '@angular/core';
 
 import {
-  SkyImageModule
-} from '@blackbaud/skyux-lib-media';
-
-import {
   StacheActionButtonsModule
 } from './modules/action-buttons/action-buttons.module';
 
@@ -140,7 +136,6 @@ export * from './modules/shared/http.service';
     StacheGridModule,
     StacheHeroModule,
     StacheHideFromSearchModule,
-    SkyImageModule,
     StacheIncludeModule,
     StacheLayoutModule,
     StacheMarkdownModule,

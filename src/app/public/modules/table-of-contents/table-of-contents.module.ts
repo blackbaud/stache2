@@ -11,10 +11,6 @@ import {
 } from '@skyux/i18n';
 
 import {
-  SkyAppRuntimeModule
-} from '@skyux-sdk/builder/runtime';
-
-import {
   StacheAffixModule
 } from '../affix/affix.module';
 
@@ -42,7 +38,6 @@ import {
   imports: [
     CommonModule,
     StacheNavModule,
-    SkyAppRuntimeModule,
     StacheAffixModule,
     SkyI18nModule,
     StacheResourcesModule
