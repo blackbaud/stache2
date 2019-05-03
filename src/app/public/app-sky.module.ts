@@ -18,7 +18,6 @@ import {
   SkySearchModule
 } from '@skyux/lookup';
 
-
 @NgModule({
   exports: [
     SkyActionButtonModule,
