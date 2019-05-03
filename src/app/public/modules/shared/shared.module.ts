@@ -5,7 +5,7 @@ import {
 
 import {
   HttpModule
-} from '@angular/common/http';
+} from '@angular/http';
 
 import {
   StacheWindowRef
