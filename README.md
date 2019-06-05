@@ -1,3 +1,5 @@
+**Stache has moved to a new repo at https://github.com/blackbaud/skyux-lib-stache. Please contribute and file issues at our new home.**
+
 # Stache 2
 
 [![npm](https://img.shields.io/npm/v/@blackbaud/stache.svg)](https://www.npmjs.com/package/@blackbaud/stache)
